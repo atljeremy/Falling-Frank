@@ -6,50 +6,15 @@
 //  Copyright jeremyfox 2013. All rights reserved.
 //
 
-#import "cocos2d.h"
-
 #import "AppDelegate.h"
 #import "IntroLayer.h"
 
 @implementation MyNavigationController
 
-// The available orientations should be defined in the Info.plist file.
-// And in iOS 6+ only, you can override it in the Root View controller in the "supportedInterfaceOrientations" method.
-// Only valid for iOS 6+. NOT VALID for iOS 4 / 5.
 -(NSUInteger)supportedInterfaceOrientations {
-	
-	// iPhone only
-	if( [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone )
-		return UIInterfaceOrientationMaskLandscape;
-	
-	// iPad only
-	return UIInterfaceOrientationMaskLandscape;
+    return UIInterfaceOrientationMaskPortrait;
 }
 
-// Supported orientations. Customize it for your own needs
-// Only valid on iOS 4 / 5. NOT VALID for iOS 6.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-	// iPhone only
-	if( [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone )
-		return UIInterfaceOrientationIsLandscape(interfaceOrientation);
-	
-	// iPad only
-	// iPhone only
-	return UIInterfaceOrientationIsLandscape(interfaceOrientation);
-}
-
-// This is needed for iOS4 and iOS5 in order to ensure
-// that the 1st scene has the correct dimensions
-// This is not needed on iOS6 and could be added to the application:didFinish...
--(void) directorDidReshapeProjection:(CCDirector*)director
-{
-	if(director.runningScene == nil) {
-		// Add the first scene to the stack. The director will draw it immediately into the framebuffer. (Animation is started automatically when the view is displayed.)
-		// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
-		[director runWithScene: [IntroLayer scene]];
-	}
-}
 @end
 
 
@@ -59,7 +24,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-	// Create the main window
 	window_ = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	
 	
@@ -102,8 +66,9 @@
 	//	[director setProjection:kCCDirectorProjection3D];
 	
 	// Enables High Res mode (Retina Display) on iPhone 4 and maintains low res on all other devices
-	if( ! [director_ enableRetinaDisplay:YES] )
+	if (![director_ enableRetinaDisplay:YES]) {
 		CCLOG(@"Retina Display Not supported");
+    }
 	
 	// Default texture format for PNG/BMP/TIFF/JPEG/GIF images
 	// It can be RGBA8888, RGBA4444, RGB5_A1, RGB565
@@ -129,6 +94,11 @@
 
 	// for rotation and other messages
 	[director_ setDelegate:navController_];
+    
+    if (director_.runningScene == nil) {
+		// Add the first scene to the stack. The director will draw it immediately into the framebuffer. (Animation is started automatically when the view is displayed.)
+		[director_ runWithScene: [IntroLayer scene]];
+	}
 	
 	// set the Navigation Controller as the root view controller
 	[window_ setRootViewController:navController_];
@@ -140,30 +110,34 @@
 }
 
 // getting a call, pause the game
--(void) applicationWillResignActive:(UIApplication *)application
+- (void)applicationWillResignActive:(UIApplication *)application
 {
-	if( [navController_ visibleViewController] == director_ )
+	if ([navController_ visibleViewController] == director_) {
 		[director_ pause];
+    }
 }
 
 // call got rejected
--(void) applicationDidBecomeActive:(UIApplication *)application
+- (void)applicationDidBecomeActive:(UIApplication *)application
 {
 	[[CCDirector sharedDirector] setNextDeltaTimeZero:YES];	
-	if( [navController_ visibleViewController] == director_ )
+	if ([navController_ visibleViewController] == director_) {
 		[director_ resume];
+    }
 }
 
--(void) applicationDidEnterBackground:(UIApplication*)application
+- (void)applicationDidEnterBackground:(UIApplication*)application
 {
-	if( [navController_ visibleViewController] == director_ )
+	if ([navController_ visibleViewController] == director_) {
 		[director_ stopAnimation];
+    }
 }
 
--(void) applicationWillEnterForeground:(UIApplication*)application
+- (void)applicationWillEnterForeground:(UIApplication*)application
 {
-	if( [navController_ visibleViewController] == director_ )
+	if ([navController_ visibleViewController] == director_) {
 		[director_ startAnimation];
+    }
 }
 
 // application will be killed
@@ -179,12 +153,12 @@
 }
 
 // next delta time will be zero
--(void) applicationSignificantTimeChange:(UIApplication *)application
+- (void)applicationSignificantTimeChange:(UIApplication *)application
 {
 	[[CCDirector sharedDirector] setNextDeltaTimeZero:YES];
 }
 
-- (void) dealloc
+- (void)dealloc
 {
 	[window_ release];
 	[navController_ release];

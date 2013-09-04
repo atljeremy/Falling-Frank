@@ -1,54 +1,38 @@
 //
-//  HelloWorldLayer.m
+//  MainMenuLayer.m
 //  Falling Frank
 //
 //  Created by Jeremy Fox on 9/3/13.
 //  Copyright jeremyfox 2013. All rights reserved.
 //
 
-
-// Import the interfaces
-#import "HelloWorldLayer.h"
-
-// Needed to obtain the Navigation Controller
+#import "MainMenuLayer.h"
 #import "AppDelegate.h"
 
-#pragma mark - HelloWorldLayer
+#pragma mark - MainMenuLayer
 
-// HelloWorldLayer implementation
-@implementation HelloWorldLayer
+@implementation MainMenuLayer
 
-// Helper class method that creates a Scene with the HelloWorldLayer as the only child.
-+(CCScene *) scene
++ (CCScene *)scene
 {
-	// 'scene' is an autorelease object.
 	CCScene *scene = [CCScene node];
-	
-	// 'layer' is an autorelease object.
-	HelloWorldLayer *layer = [HelloWorldLayer node];
-	
-	// add layer as a child to scene
+	MainMenuLayer *layer = [MainMenuLayer node];
 	[scene addChild: layer];
-	
-	// return the scene
 	return scene;
 }
 
-// on "init" you need to initialize your instance
--(id) init
+- (id)init
 {
-	// always call "super" init
-	// Apple recommends to re-assign "self" with the "super's" return value
-	if( (self=[super init]) ) {
+	if(self = [super init]) {
 		
 		// create and initialize a Label
-		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Hello World" fontName:@"Marker Felt" fontSize:64];
+		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Falling Frank" fontName:@"Marker Felt" fontSize:64];
 
 		// ask director for the window size
 		CGSize size = [[CCDirector sharedDirector] winSize];
 	
 		// position the label on the center of the screen
-		label.position =  ccp( size.width /2 , size.height/2 );
+		label.position = ccp( size.width /2 , size.height/2 );
 		
 		// add the label as a child to this Layer
 		[self addChild: label];
@@ -68,13 +52,12 @@
 		// Achievement Menu Item using blocks
 		CCMenuItem *itemAchievement = [CCMenuItemFont itemWithString:@"Achievements" block:^(id sender) {
 			
-			
 			GKAchievementViewController *achivementViewController = [[GKAchievementViewController alloc] init];
 			achivementViewController.achievementDelegate = copy_self;
 			
 			AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
 			
-			[[app navController] presentModalViewController:achivementViewController animated:YES];
+			[[app navController] presentViewController:achivementViewController animated:YES completion:nil];
 			
 			[achivementViewController release];
 		}];
@@ -82,17 +65,15 @@
 		// Leaderboard Menu Item using blocks
 		CCMenuItem *itemLeaderboard = [CCMenuItemFont itemWithString:@"Leaderboard" block:^(id sender) {
 			
-			
 			GKLeaderboardViewController *leaderboardViewController = [[GKLeaderboardViewController alloc] init];
 			leaderboardViewController.leaderboardDelegate = copy_self;
 			
 			AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
 			
-			[[app navController] presentModalViewController:leaderboardViewController animated:YES];
+			[[app navController] presentViewController:leaderboardViewController animated:YES completion:nil];
 			
 			[leaderboardViewController release];
 		}];
-
 		
 		CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemLeaderboard, nil];
 		
@@ -106,7 +87,6 @@
 	return self;
 }
 
-// on "dealloc" you need to release all your retained objects
 - (void) dealloc
 {
 	// in case you have something to dealloc, do it in this method
@@ -122,12 +102,12 @@
 -(void) achievementViewControllerDidFinish:(GKAchievementViewController *)viewController
 {
 	AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-	[[app navController] dismissModalViewControllerAnimated:YES];
+	[[app navController] dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void) leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)viewController
 {
 	AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-	[[app navController] dismissModalViewControllerAnimated:YES];
+	[[app navController] dismissViewControllerAnimated:YES completion:nil];
 }
 @end

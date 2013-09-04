@@ -139,7 +139,7 @@
 		1AC771B117D6C54F00DEF7AA /* vec4.c in Sources */ = {isa = PBXBuildFile; fileRef = 1AC771B017D6C54F00DEF7AA /* vec4.c */; };
 		1AC771B617D6C54F00DEF7AA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC771B517D6C54F00DEF7AA /* main.m */; };
 		1AC771B917D6C54F00DEF7AA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC771B817D6C54F00DEF7AA /* AppDelegate.m */; };
-		1AC771BC17D6C54F00DEF7AA /* HelloWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC771BB17D6C54F00DEF7AA /* HelloWorldLayer.m */; };
+		1AC771BC17D6C54F00DEF7AA /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC771BB17D6C54F00DEF7AA /* MainMenuLayer.m */; };
 		1AC771BF17D6C54F00DEF7AA /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC771BE17D6C54F00DEF7AA /* IntroLayer.m */; };
 /* End PBXBuildFile section */
 
@@ -421,8 +421,8 @@
 		1AC771B517D6C54F00DEF7AA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1AC771B717D6C54F00DEF7AA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1AC771B817D6C54F00DEF7AA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		1AC771BA17D6C54F00DEF7AA /* HelloWorldLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloWorldLayer.h; sourceTree = "<group>"; };
-		1AC771BB17D6C54F00DEF7AA /* HelloWorldLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloWorldLayer.m; sourceTree = "<group>"; };
+		1AC771BA17D6C54F00DEF7AA /* MainMenuLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainMenuLayer.h; sourceTree = "<group>"; };
+		1AC771BB17D6C54F00DEF7AA /* MainMenuLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainMenuLayer.m; sourceTree = "<group>"; };
 		1AC771BD17D6C54F00DEF7AA /* IntroLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntroLayer.h; sourceTree = "<group>"; };
 		1AC771BE17D6C54F00DEF7AA /* IntroLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntroLayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -487,8 +487,8 @@
 			children = (
 				1AC771B717D6C54F00DEF7AA /* AppDelegate.h */,
 				1AC771B817D6C54F00DEF7AA /* AppDelegate.m */,
-				1AC771BA17D6C54F00DEF7AA /* HelloWorldLayer.h */,
-				1AC771BB17D6C54F00DEF7AA /* HelloWorldLayer.m */,
+				1AC771BA17D6C54F00DEF7AA /* MainMenuLayer.h */,
+				1AC771BB17D6C54F00DEF7AA /* MainMenuLayer.m */,
 				1AC771BD17D6C54F00DEF7AA /* IntroLayer.h */,
 				1AC771BE17D6C54F00DEF7AA /* IntroLayer.m */,
 				1AC7702717D6C54D00DEF7AA /* Resources */,
@@ -1062,7 +1062,7 @@
 				1AC771B117D6C54F00DEF7AA /* vec4.c in Sources */,
 				1AC771B617D6C54F00DEF7AA /* main.m in Sources */,
 				1AC771B917D6C54F00DEF7AA /* AppDelegate.m in Sources */,
-				1AC771BC17D6C54F00DEF7AA /* HelloWorldLayer.m in Sources */,
+				1AC771BC17D6C54F00DEF7AA /* MainMenuLayer.m in Sources */,
 				1AC771BF17D6C54F00DEF7AA /* IntroLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1122,6 +1122,7 @@
 					"\"Falling Frank/libs/kazmath/include\"",
 				);
 				INFOPLIST_FILE = "Falling Frank/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lsqlite3",
@@ -1143,6 +1144,7 @@
 					"\"Falling Frank/libs/kazmath/include\"",
 				);
 				INFOPLIST_FILE = "Falling Frank/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lsqlite3",
