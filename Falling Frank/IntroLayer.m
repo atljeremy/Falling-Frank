@@ -25,7 +25,12 @@
 {
 	if( (self=[super init])) {
 		CGSize size = [[CCDirector sharedDirector] winSize];
-		CCSprite *background = [CCSprite spriteWithFile:@"Default.png"];
+        CCSprite *background;
+        if (IS_RETINA_568) {
+            background = [CCSprite spriteWithFile:@"Default-568h@2x.png"];
+        } else {
+            background = [CCSprite spriteWithFile:@"Default.png"];
+        }
 		background.position = ccp(size.width/2, size.height/2);
 		[self addChild: background];
 	}

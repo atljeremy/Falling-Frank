@@ -8,15 +8,18 @@
 
 #import "MainMenuLayer.h"
 #import "AppDelegate.h"
-#import "SimpleAudioEngine.h"
-
-#define IS_RETINA_568 ([[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] &&([UIScreen mainScreen].scale == 2.0))
 
 #pragma mark - MainMenuLayer
 
-CCSprite *cloudOne;
-CCSprite *cloudTwo;
-ClickableSprite *frank;
+@interface MainMenuLayer()
+@property (nonatomic, strong) ClickableSprite *cloudOne;
+@property (nonatomic, strong) ClickableSprite *cloudTwo;
+@property (nonatomic, strong) ClickableSprite *bird;
+@property (nonatomic, strong) CCAction *flyAction;
+@property (nonatomic, strong) CCSpriteBatchNode *birdSheet;
+@property (nonatomic, strong) ClickableSprite *frank;
+@property (nonatomic, assign) BOOL collision;
+@end
 
 @implementation MainMenuLayer
 
@@ -31,13 +34,15 @@ ClickableSprite *frank;
 - (id)init
 {
 	if(self = [super init]) {
+        [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"8_Bit_Adventurer.mp3" loop:YES];
+        
 		CGSize size = [[CCDirector sharedDirector] winSize];
         
-        frank = [ClickableSprite spriteWithFile:@"frank.png"];
+        _frank = [ClickableSprite spriteWithFile:@"frank.png"];
         CCSprite *background;
         if (IS_RETINA_568) {
             background = [CCSprite spriteWithFile:@"Default-568h@2x.png"];
-            frank.scale = 2.0;
+            _frank.scale = 2.0;
         } else {
             background = [CCSprite spriteWithFile:@"Default.png"];
         }
@@ -45,19 +50,27 @@ ClickableSprite *frank;
 		background.position = ccp(size.width/2, size.height/2);
 		[self addChild: background];
         
-        cloudOne = [CCSprite spriteWithFile:@"cloud1.png"];
-        cloudTwo = [CCSprite spriteWithFile:@"cloud2.png"];
-        cloudOne.scale = 0.5;
-        cloudTwo.scale = 0.8;
-        cloudOne.position = ccp(size.width/2.6, -331);
-        cloudTwo.position = ccp(size.width/1.5, -331);
-        [self addChild: cloudOne];
-        [self addChild: cloudTwo];
+        _cloudOne = [ClickableSprite spriteWithFile:@"cloud1.png"];
+        _cloudOne.scale = 0.5;
+        _cloudOne.position = ccp(size.width/2.6, -331);
+        _cloudOne.target = self;
+        _cloudOne.selector = @selector(cloudTapped);
         
-        frank.position = ccp(size.width/2, size.height/1.3);
-        frank.target = self;
-        frank.selector = @selector(spriteClicked);
-        [self addChild: frank];
+        _cloudTwo = [ClickableSprite spriteWithFile:@"cloud2.png"];
+        _cloudTwo.scale = 0.8;
+        _cloudTwo.position = ccp(size.width/1.5, -331);
+        _cloudTwo.target = self;
+        _cloudTwo.selector = @selector(cloudTapped);
+        
+        [self addChild: _cloudOne];
+        [self addChild: _cloudTwo];
+        
+        _frank.position = ccp(size.width/2, size.height/1.3);
+        _frank.target = self;
+        _frank.selector = @selector(frankTapped);
+        [self addChild: _frank];
+        
+        [self createBirdAnim];
         
         [self schedule:@selector(nextFrame:)];
 		
@@ -76,23 +89,82 @@ ClickableSprite *frank;
 	[super dealloc];
 }
 
-- (void)spriteClicked {
+- (void)createBirdAnim {
+    CGSize size = [[CCDirector sharedDirector] winSize];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"bird.plist"];
+    _birdSheet = [CCSpriteBatchNode batchNodeWithFile:@"bird.png"];
+    _birdSheet.position = ccp(size.width, size.height/2);
+    [self addChild: _birdSheet];
+    
+    NSMutableArray *birdFlyingAnim = [NSMutableArray array];
+    for (int i=1; i<=5; i++) {
+        [birdFlyingAnim addObject:
+         [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:
+          [NSString stringWithFormat:@"bird%d.png",i]]];
+    }
+    
+    CCAnimation *flyAnim = [CCAnimation animationWithSpriteFrames:birdFlyingAnim delay:0.1f];
+    _bird = [ClickableSprite spriteWithSpriteFrameName:@"bird1.png"];
+    _bird.target = self;
+    _bird.selector = @selector(birdTapped);
+    if (IS_RETINA_568) {
+        _bird.scale = 2.0;
+    }
+    
+    _flyAction = [CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation:flyAnim]];
+    
+    [_bird runAction: _flyAction];
+    [_birdSheet addChild: _bird];
+}
+
+- (void)frankTapped {
     [[SimpleAudioEngine sharedEngine] playEffect:@"frank_yell.mp3"];
+}
+
+- (void)cloudTapped {
+    [[SimpleAudioEngine sharedEngine] playEffect:@"wind1-short.mp3"];
+}
+
+- (void)birdTapped {
+    [[SimpleAudioEngine sharedEngine] playEffect:@"crow1.mp3"];
 }
 
 - (void)nextFrame:(ccTime)dt {
     CGSize size = [[CCDirector sharedDirector] winSize];
-    cloudOne.position = ccp( cloudOne.position.x, cloudOne.position.y + 150*dt );
-    if (cloudOne.position.y > size.height+400) {
-        cloudOne.position = ccp( cloudOne.position.x, -300 );
+    self.cloudOne.position = ccp( self.cloudOne.position.x, self.cloudOne.position.y + 150*dt );
+    if (self.cloudOne.position.y > size.height+400) {
+        self.cloudOne.position = ccp( self.cloudOne.position.x, -300 );
     }
     
-    cloudTwo.position = ccp( cloudTwo.position.x, cloudTwo.position.y + 120*dt );
-    if (cloudTwo.position.y > size.height+300) {
-        cloudTwo.position = ccp( cloudTwo.position.x, -300 );
+    self.cloudTwo.position = ccp( self.cloudTwo.position.x, self.cloudTwo.position.y + 120*dt );
+    if (self.cloudTwo.position.y > size.height+300) {
+        self.cloudTwo.position = ccp( self.cloudTwo.position.x, -300 );
     }
     
-    [frank runAction:[CCShake actionWithDuration:dt amplitude:ccp(2,2) dampening:true]];
+    if (self.collision) {
+        self.birdSheet.rotation = 180;
+        [self.flyAction stop];
+        self.birdSheet.position = ccp(self.birdSheet.position.x, self.birdSheet.position.y - 250*dt);
+        if (self.birdSheet.position.y < -32) {
+            self.birdSheet.rotation = 0;
+            [self.flyAction startWithTarget:self.bird];
+            self.collision = NO;
+            self.birdSheet.position = ccp( size.width + 100, [self randomFloatBetween:size.height/2 and:size.height] );
+        }
+    } else {
+        self.birdSheet.position = ccp(self.birdSheet.position.x - 100*dt, self.birdSheet.position.y);
+        if (self.birdSheet.position.x < -32) {
+            self.collision = NO;
+            self.birdSheet.position = ccp( size.width + 100, [self randomFloatBetween:size.height/2 and:size.height] );
+        }
+    }
+    
+    [self.frank runAction:[CCShake actionWithDuration:dt amplitude:ccp(2,2) dampening:true]];
+    
+    if (CGRectContainsRect(self.frank.boundingBox, self.birdSheet.boundingBox) && !self.collision) {
+        self.collision = YES;
+        [[SimpleAudioEngine sharedEngine] playEffect:@"oowh.mp3"];
+    }
 }
 
 - (void)constructMenu
@@ -138,6 +210,12 @@ ClickableSprite *frank;
     
     // Add the menu to the layer
     [self addChild:menu];
+}
+
+- (float)randomFloatBetween:(float)smallNumber and:(float)bigNumber {
+    float diff = bigNumber - smallNumber;
+    float retVal = (((float) (arc4random() % ((unsigned)RAND_MAX + 1)) / RAND_MAX) * diff) + smallNumber;
+    return retVal;
 }
 
 #pragma mark GameKit delegate

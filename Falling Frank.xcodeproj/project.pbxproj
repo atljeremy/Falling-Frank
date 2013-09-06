@@ -153,6 +153,12 @@
 		1AE8E5C317D95CEA00854703 /* CCShake.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE8E5C217D95CEA00854703 /* CCShake.m */; };
 		1AE8E5C617D9619500854703 /* ClickableSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE8E5C517D9619500854703 /* ClickableSprite.m */; };
 		1AE8E5C817D9688600854703 /* frank_yell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1AE8E5C717D9688600854703 /* frank_yell.mp3 */; };
+		1AE8E5CB17DA081700854703 /* bird.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1AE8E5C917DA081600854703 /* bird.plist */; };
+		1AE8E5CC17DA081700854703 /* bird.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AE8E5CA17DA081600854703 /* bird.png */; };
+		1AE8E5CE17DA286900854703 /* oowh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1AE8E5CD17DA286900854703 /* oowh.mp3 */; };
+		1AE8E5D017DA41EF00854703 /* wind1-short.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1AE8E5CF17DA41EF00854703 /* wind1-short.mp3 */; };
+		1AE8E5D217DA43D100854703 /* crow1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1AE8E5D117DA43D100854703 /* crow1.mp3 */; };
+		1AE8E5D417DA473A00854703 /* 8_Bit_Adventurer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1AE8E5D317DA473A00854703 /* 8_Bit_Adventurer.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -451,6 +457,12 @@
 		1AE8E5C417D9619500854703 /* ClickableSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClickableSprite.h; path = libs/cocos2d/ClickableSprite.h; sourceTree = "<group>"; };
 		1AE8E5C517D9619500854703 /* ClickableSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClickableSprite.m; path = libs/cocos2d/ClickableSprite.m; sourceTree = "<group>"; };
 		1AE8E5C717D9688600854703 /* frank_yell.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = frank_yell.mp3; path = Resources/frank_yell.mp3; sourceTree = "<group>"; };
+		1AE8E5C917DA081600854703 /* bird.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = bird.plist; path = Resources/bird.plist; sourceTree = "<group>"; };
+		1AE8E5CA17DA081600854703 /* bird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bird.png; path = Resources/bird.png; sourceTree = "<group>"; };
+		1AE8E5CD17DA286900854703 /* oowh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = oowh.mp3; path = Resources/oowh.mp3; sourceTree = "<group>"; };
+		1AE8E5CF17DA41EF00854703 /* wind1-short.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "wind1-short.mp3"; path = "Resources/wind1-short.mp3"; sourceTree = "<group>"; };
+		1AE8E5D117DA43D100854703 /* crow1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = crow1.mp3; path = Resources/crow1.mp3; sourceTree = "<group>"; };
+		1AE8E5D317DA473A00854703 /* 8_Bit_Adventurer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = 8_Bit_Adventurer.mp3; path = Resources/8_Bit_Adventurer.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -527,6 +539,12 @@
 		1AC7702717D6C54D00DEF7AA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1AE8E5D317DA473A00854703 /* 8_Bit_Adventurer.mp3 */,
+				1AE8E5D117DA43D100854703 /* crow1.mp3 */,
+				1AE8E5CF17DA41EF00854703 /* wind1-short.mp3 */,
+				1AE8E5CD17DA286900854703 /* oowh.mp3 */,
+				1AE8E5C917DA081600854703 /* bird.plist */,
+				1AE8E5CA17DA081600854703 /* bird.png */,
 				1AE8E5C717D9688600854703 /* frank_yell.mp3 */,
 				1AE8E5BD17D9575000854703 /* frank.png */,
 				1AE8E5BE17D9575000854703 /* frank@2x.png */,
@@ -992,6 +1010,12 @@
 				1AE8E5BF17D9575000854703 /* frank.png in Resources */,
 				1AE8E5C017D9575000854703 /* frank@2x.png in Resources */,
 				1AE8E5C817D9688600854703 /* frank_yell.mp3 in Resources */,
+				1AE8E5CB17DA081700854703 /* bird.plist in Resources */,
+				1AE8E5CC17DA081700854703 /* bird.png in Resources */,
+				1AE8E5CE17DA286900854703 /* oowh.mp3 in Resources */,
+				1AE8E5D017DA41EF00854703 /* wind1-short.mp3 in Resources */,
+				1AE8E5D217DA43D100854703 /* crow1.mp3 in Resources */,
+				1AE8E5D417DA473A00854703 /* 8_Bit_Adventurer.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
