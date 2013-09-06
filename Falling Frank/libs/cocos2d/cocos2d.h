@@ -62,6 +62,7 @@
 #import "CCActionProgressTimer.h"
 #import "CCActionPageTurn3D.h"
 #import "CCActionCatmullRom.h"
+#import "CCShake.h"
 
 #import "CCAnimation.h"
 #import "CCAnimationCache.h"
@@ -69,6 +70,7 @@
 #import "CCSpriteFrame.h"
 #import "CCSpriteBatchNode.h"
 #import "CCSpriteFrameCache.h"
+#import "ClickableSprite.h"
 
 #import "CCLabelTTF.h"
 #import "CCLabelBMFont.h"
