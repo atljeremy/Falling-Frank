@@ -10,6 +10,8 @@
 #import "AppDelegate.h"
 #import "SimpleAudioEngine.h"
 
+#define IS_RETINA_568 ([[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] &&([UIScreen mainScreen].scale == 2.0))
+
 #pragma mark - MainMenuLayer
 
 CCSprite *cloudOne;
@@ -30,7 +32,16 @@ ClickableSprite *frank;
 {
 	if(self = [super init]) {
 		CGSize size = [[CCDirector sharedDirector] winSize];
-		CCSprite *background = [CCSprite spriteWithFile:@"Default.png"];
+        
+        frank = [ClickableSprite spriteWithFile:@"frank.png"];
+        CCSprite *background;
+        if (IS_RETINA_568) {
+            background = [CCSprite spriteWithFile:@"Default-568h@2x.png"];
+            frank.scale = 2.0;
+        } else {
+            background = [CCSprite spriteWithFile:@"Default.png"];
+        }
+		
 		background.position = ccp(size.width/2, size.height/2);
 		[self addChild: background];
         
@@ -43,7 +54,6 @@ ClickableSprite *frank;
         [self addChild: cloudOne];
         [self addChild: cloudTwo];
         
-        frank = [ClickableSprite spriteWithFile:@"frank.png"];
         frank.position = ccp(size.width/2, size.height/1.3);
         frank.target = self;
         frank.selector = @selector(spriteClicked);
