@@ -8,6 +8,7 @@
 
 #import "MainMenuLayer.h"
 #import "AppDelegate.h"
+#import "LevelOneLayer.h"
 
 #pragma mark - MainMenuLayer
 
@@ -15,9 +16,11 @@
 @property (nonatomic, strong) ClickableSprite *cloudOne;
 @property (nonatomic, strong) ClickableSprite *cloudTwo;
 @property (nonatomic, strong) ClickableSprite *bird;
-@property (nonatomic, strong) CCAction *flyAction;
 @property (nonatomic, strong) CCSpriteBatchNode *birdSheet;
+@property (nonatomic, strong) CCAction *flyAction;
 @property (nonatomic, strong) ClickableSprite *frank;
+@property (nonatomic, strong) CCSpriteBatchNode *frankSheet;
+@property (nonatomic, strong) CCAction *fallAction;
 @property (nonatomic, assign) BOOL collision;
 @end
 
@@ -31,18 +34,22 @@
 	return scene;
 }
 
+- (void)cleanup
+{
+    [self unloadAssets];
+}
+
 - (id)init
 {
 	if(self = [super init]) {
+        [self preloadAssets];
         [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"8_Bit_Adventurer.mp3" loop:YES];
         
 		CGSize size = [[CCDirector sharedDirector] winSize];
         
-        _frank = [ClickableSprite spriteWithFile:@"frank.png"];
         CCSprite *background;
         if (IS_RETINA_568) {
             background = [CCSprite spriteWithFile:@"Default-568h@2x.png"];
-            _frank.scale = 2.0;
         } else {
             background = [CCSprite spriteWithFile:@"Default.png"];
         }
@@ -65,14 +72,11 @@
         [self addChild: _cloudOne];
         [self addChild: _cloudTwo];
         
-        _frank.position = ccp(size.width/2, size.height/1.3);
-        _frank.target = self;
-        _frank.selector = @selector(frankTapped);
-        [self addChild: _frank];
-        
+        [self createFrankAnim];
         [self createBirdAnim];
         
         [self schedule:@selector(nextFrame:)];
+        [self schedule:@selector(checkForCollision) interval:0.4];
 		
 		[self constructMenu];
 	}
@@ -88,6 +92,57 @@
 	// don't forget to call "super dealloc"
 	[super dealloc];
 }
+
+#pragma mark -----------------------------
+#pragma mark Asset Preloading/Unloading
+#pragma mark -----------------------------
+
+- (void)preloadAssets {
+    [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"8_Bit_Adventurer.mp3"];
+    [[SimpleAudioEngine sharedEngine] preloadEffect:@"frank_yell.mp3"];
+    [[SimpleAudioEngine sharedEngine] preloadEffect:@"wind1-short.mp3"];
+    [[SimpleAudioEngine sharedEngine] preloadEffect:@"crow1.mp3"];
+    [[SimpleAudioEngine sharedEngine] preloadEffect:@"oowh.mp3"];
+}
+
+- (void)unloadAssets {
+    [[SimpleAudioEngine sharedEngine] unloadEffect:@"8_Bit_Adventurer.mp3"];
+    [[SimpleAudioEngine sharedEngine] unloadEffect:@"frank_yell.mp3"];
+    [[SimpleAudioEngine sharedEngine] unloadEffect:@"wind1-short.mp3"];
+    [[SimpleAudioEngine sharedEngine] unloadEffect:@"crow1.mp3"];
+    [[SimpleAudioEngine sharedEngine] unloadEffect:@"oowh.mp3"];
+    self.cloudOne.target = nil;
+    self.cloudOne = nil;
+    self.cloudTwo.target = nil;
+    self.cloudTwo = nil;
+    self.birdSheet = nil;
+    self.bird.target = nil;
+    self.bird = nil;
+    [self.flyAction stop];
+    self.flyAction = nil;
+    self.frank.target = nil;
+    self.frank = nil;
+}
+
+#pragma mark -----------------------------
+#pragma mark Sound Effects
+#pragma mark -----------------------------
+
+- (void)frankTapped {
+    [[SimpleAudioEngine sharedEngine] playEffect:@"frank_yell.mp3"];
+}
+
+- (void)cloudTapped {
+    [[SimpleAudioEngine sharedEngine] playEffect:@"wind1-short.mp3"];
+}
+
+- (void)birdTapped {
+    [[SimpleAudioEngine sharedEngine] playEffect:@"crow1.mp3"];
+}
+
+#pragma mark -----------------------------
+#pragma mark Animations
+#pragma mark -----------------------------
 
 - (void)createBirdAnim {
     CGSize size = [[CCDirector sharedDirector] winSize];
@@ -117,16 +172,32 @@
     [_birdSheet addChild: _bird];
 }
 
-- (void)frankTapped {
-    [[SimpleAudioEngine sharedEngine] playEffect:@"frank_yell.mp3"];
-}
-
-- (void)cloudTapped {
-    [[SimpleAudioEngine sharedEngine] playEffect:@"wind1-short.mp3"];
-}
-
-- (void)birdTapped {
-    [[SimpleAudioEngine sharedEngine] playEffect:@"crow1.mp3"];
+- (void)createFrankAnim {
+    CGSize size = [[CCDirector sharedDirector] winSize];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"frank.plist"];
+    _frankSheet = [CCSpriteBatchNode batchNodeWithFile:@"frank.png"];
+    [self addChild: _frankSheet];
+    
+    NSMutableArray *frankFallingAnim = [NSMutableArray array];
+    for (int i=1; i<=3; i++) {
+        [frankFallingAnim addObject:
+         [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:
+          [NSString stringWithFormat:@"frank%d.png",i]]];
+    }
+    
+    CCAnimation *fallAnim = [CCAnimation animationWithSpriteFrames:frankFallingAnim delay:0.1f];
+    _frank = [ClickableSprite spriteWithSpriteFrameName:@"frank1.png"];
+    _frank.position = ccp(size.width/2, size.height/1.3);
+    _frank.target = self;
+    _frank.selector = @selector(frankTapped);
+    if (IS_RETINA_568) {
+        _frank.scale = 2.0;
+    }
+    
+    _fallAction = [CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation:fallAnim]];
+    
+    [_frank runAction: _fallAction];
+    [_frankSheet addChild: _frank];
 }
 
 - (void)nextFrame:(ccTime)dt {
@@ -159,13 +230,26 @@
         }
     }
     
-    [self.frank runAction:[CCShake actionWithDuration:dt amplitude:ccp(2,2) dampening:true]];
-    
-    if (CGRectContainsRect(self.frank.boundingBox, self.birdSheet.boundingBox) && !self.collision) {
-        self.collision = YES;
-        [[SimpleAudioEngine sharedEngine] playEffect:@"oowh.mp3"];
+    [self.frank runAction:[CCShake actionWithDuration:dt amplitude:ccp(1,1) dampening:true]];
+}
+
+#pragma mark -----------------------------
+#pragma mark Collision Detection
+#pragma mark -----------------------------
+
+- (void)checkForCollision
+{
+    if (!self.collision) {
+        if (CGRectContainsRect(self.frank.boundingBox, self.birdSheet.boundingBox)) {
+            self.collision = YES;
+            [[SimpleAudioEngine sharedEngine] playEffect:@"oowh.mp3"];
+        }
     }
 }
+
+#pragma mark -----------------------------
+#pragma mark Menu
+#pragma mark -----------------------------
 
 - (void)constructMenu
 {
@@ -176,7 +260,8 @@
     __block id copy_self = self;
     
     CCMenuItem *itemNewGame = [CCMenuItemFont itemWithString:@"New Game" block:^(id sender) {
-        // Do something
+        [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[LevelOneLayer scene]]];
     }];
     
     CCMenuItem *itemContinueGame = [CCMenuItemFont itemWithString:@"Continue Game" block:^(id sender) {
@@ -212,13 +297,20 @@
     [self addChild:menu];
 }
 
-- (float)randomFloatBetween:(float)smallNumber and:(float)bigNumber {
+#pragma mark -----------------------------
+#pragma mark Helpers
+#pragma mark -----------------------------
+
+- (float)randomFloatBetween:(float)smallNumber and:(float)bigNumber
+{
     float diff = bigNumber - smallNumber;
     float retVal = (((float) (arc4random() % ((unsigned)RAND_MAX + 1)) / RAND_MAX) * diff) + smallNumber;
     return retVal;
 }
 
+#pragma mark -----------------------------
 #pragma mark GameKit delegate
+#pragma mark -----------------------------
 
 -(void) achievementViewControllerDidFinish:(GKAchievementViewController *)viewController
 {
@@ -231,4 +323,5 @@
 	AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
 	[[app navController] dismissViewControllerAnimated:YES completion:nil];
 }
+
 @end

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A312CC717DCC3AD007E0D16 /* LevelOneLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A312CC617DCC3AD007E0D16 /* LevelOneLayer.m */; };
+		1A312CCE17DCE138007E0D16 /* frank.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1A312CCC17DCE138007E0D16 /* frank.plist */; };
+		1A312CCF17DCE138007E0D16 /* frank.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A312CCD17DCE138007E0D16 /* frank.png */; };
+		1A312CD117DCEDEB007E0D16 /* wind-strong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1A312CD017DCEDEB007E0D16 /* wind-strong.mp3 */; };
 		1AC7701317D6C54D00DEF7AA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC7701217D6C54D00DEF7AA /* QuartzCore.framework */; };
 		1AC7701517D6C54D00DEF7AA /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC7701417D6C54D00DEF7AA /* OpenGLES.framework */; };
 		1AC7701717D6C54D00DEF7AA /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC7701617D6C54D00DEF7AA /* OpenAL.framework */; };
@@ -148,8 +152,6 @@
 		1AE8E5BA17D94F2200854703 /* sky-568h@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1AE8E5B317D94F2200854703 /* sky-568h@2x.jpg */; };
 		1AE8E5BB17D94F2200854703 /* sky.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1AE8E5B417D94F2200854703 /* sky.jpg */; };
 		1AE8E5BC17D94F2200854703 /* sky@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1AE8E5B517D94F2200854703 /* sky@2x.jpg */; };
-		1AE8E5BF17D9575000854703 /* frank.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AE8E5BD17D9575000854703 /* frank.png */; };
-		1AE8E5C017D9575000854703 /* frank@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AE8E5BE17D9575000854703 /* frank@2x.png */; };
 		1AE8E5C317D95CEA00854703 /* CCShake.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE8E5C217D95CEA00854703 /* CCShake.m */; };
 		1AE8E5C617D9619500854703 /* ClickableSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE8E5C517D9619500854703 /* ClickableSprite.m */; };
 		1AE8E5C817D9688600854703 /* frank_yell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1AE8E5C717D9688600854703 /* frank_yell.mp3 */; };
@@ -162,6 +164,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A312CC517DCC3AD007E0D16 /* LevelOneLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelOneLayer.h; sourceTree = "<group>"; };
+		1A312CC617DCC3AD007E0D16 /* LevelOneLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelOneLayer.m; sourceTree = "<group>"; };
+		1A312CCC17DCE138007E0D16 /* frank.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = frank.plist; path = Resources/frank.plist; sourceTree = "<group>"; };
+		1A312CCD17DCE138007E0D16 /* frank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = frank.png; path = Resources/frank.png; sourceTree = "<group>"; };
+		1A312CD017DCEDEB007E0D16 /* wind-strong.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "wind-strong.mp3"; path = "Resources/wind-strong.mp3"; sourceTree = "<group>"; };
 		1AC7700F17D6C54D00DEF7AA /* Falling Frank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Falling Frank.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AC7701217D6C54D00DEF7AA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		1AC7701417D6C54D00DEF7AA /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -450,8 +457,6 @@
 		1AE8E5B317D94F2200854703 /* sky-568h@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "sky-568h@2x.jpg"; path = "Resources/sky-568h@2x.jpg"; sourceTree = "<group>"; };
 		1AE8E5B417D94F2200854703 /* sky.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = sky.jpg; path = Resources/sky.jpg; sourceTree = "<group>"; };
 		1AE8E5B517D94F2200854703 /* sky@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "sky@2x.jpg"; path = "Resources/sky@2x.jpg"; sourceTree = "<group>"; };
-		1AE8E5BD17D9575000854703 /* frank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = frank.png; path = Resources/frank.png; sourceTree = "<group>"; };
-		1AE8E5BE17D9575000854703 /* frank@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "frank@2x.png"; path = "Resources/frank@2x.png"; sourceTree = "<group>"; };
 		1AE8E5C117D95CEA00854703 /* CCShake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCShake.h; path = libs/cocos2d/CCShake.h; sourceTree = "<group>"; };
 		1AE8E5C217D95CEA00854703 /* CCShake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCShake.m; path = libs/cocos2d/CCShake.m; sourceTree = "<group>"; };
 		1AE8E5C417D9619500854703 /* ClickableSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClickableSprite.h; path = libs/cocos2d/ClickableSprite.h; sourceTree = "<group>"; };
@@ -486,6 +491,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A312CC117DCC356007E0D16 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				1A312CC417DCC37B007E0D16 /* Level 1 */,
+				1A312CC317DCC371007E0D16 /* Main Menu */,
+				1A312CC217DCC369007E0D16 /* Intro */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
+		1A312CC217DCC369007E0D16 /* Intro */ = {
+			isa = PBXGroup;
+			children = (
+				1AC771BD17D6C54F00DEF7AA /* IntroLayer.h */,
+				1AC771BE17D6C54F00DEF7AA /* IntroLayer.m */,
+			);
+			name = Intro;
+			sourceTree = "<group>";
+		};
+		1A312CC317DCC371007E0D16 /* Main Menu */ = {
+			isa = PBXGroup;
+			children = (
+				1AC771BA17D6C54F00DEF7AA /* MainMenuLayer.h */,
+				1AC771BB17D6C54F00DEF7AA /* MainMenuLayer.m */,
+			);
+			name = "Main Menu";
+			sourceTree = "<group>";
+		};
+		1A312CC417DCC37B007E0D16 /* Level 1 */ = {
+			isa = PBXGroup;
+			children = (
+				1A312CC517DCC3AD007E0D16 /* LevelOneLayer.h */,
+				1A312CC617DCC3AD007E0D16 /* LevelOneLayer.m */,
+			);
+			name = "Level 1";
+			sourceTree = "<group>";
+		};
 		1AC7700617D6C54D00DEF7AA = {
 			isa = PBXGroup;
 			children = (
@@ -523,12 +565,9 @@
 		1AC7702617D6C54D00DEF7AA /* Falling Frank */ = {
 			isa = PBXGroup;
 			children = (
+				1A312CC117DCC356007E0D16 /* Scenes */,
 				1AC771B717D6C54F00DEF7AA /* AppDelegate.h */,
 				1AC771B817D6C54F00DEF7AA /* AppDelegate.m */,
-				1AC771BA17D6C54F00DEF7AA /* MainMenuLayer.h */,
-				1AC771BB17D6C54F00DEF7AA /* MainMenuLayer.m */,
-				1AC771BD17D6C54F00DEF7AA /* IntroLayer.h */,
-				1AC771BE17D6C54F00DEF7AA /* IntroLayer.m */,
 				1AC7702717D6C54D00DEF7AA /* Resources */,
 				1AC7703F17D6C54D00DEF7AA /* libs */,
 				1AC771B317D6C54F00DEF7AA /* Supporting Files */,
@@ -539,6 +578,9 @@
 		1AC7702717D6C54D00DEF7AA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1A312CD017DCEDEB007E0D16 /* wind-strong.mp3 */,
+				1A312CCC17DCE138007E0D16 /* frank.plist */,
+				1A312CCD17DCE138007E0D16 /* frank.png */,
 				1AE8E5D317DA473A00854703 /* 8_Bit_Adventurer.mp3 */,
 				1AE8E5D117DA43D100854703 /* crow1.mp3 */,
 				1AE8E5CF17DA41EF00854703 /* wind1-short.mp3 */,
@@ -546,8 +588,6 @@
 				1AE8E5C917DA081600854703 /* bird.plist */,
 				1AE8E5CA17DA081600854703 /* bird.png */,
 				1AE8E5C717D9688600854703 /* frank_yell.mp3 */,
-				1AE8E5BD17D9575000854703 /* frank.png */,
-				1AE8E5BE17D9575000854703 /* frank@2x.png */,
 				1AE8E5AF17D94F2200854703 /* cloud1.png */,
 				1AE8E5B017D94F2200854703 /* cloud1@2x.png */,
 				1AE8E5B117D94F2200854703 /* cloud2.png */,
@@ -1007,8 +1047,6 @@
 				1AE8E5BA17D94F2200854703 /* sky-568h@2x.jpg in Resources */,
 				1AE8E5BB17D94F2200854703 /* sky.jpg in Resources */,
 				1AE8E5BC17D94F2200854703 /* sky@2x.jpg in Resources */,
-				1AE8E5BF17D9575000854703 /* frank.png in Resources */,
-				1AE8E5C017D9575000854703 /* frank@2x.png in Resources */,
 				1AE8E5C817D9688600854703 /* frank_yell.mp3 in Resources */,
 				1AE8E5CB17DA081700854703 /* bird.plist in Resources */,
 				1AE8E5CC17DA081700854703 /* bird.png in Resources */,
@@ -1016,6 +1054,9 @@
 				1AE8E5D017DA41EF00854703 /* wind1-short.mp3 in Resources */,
 				1AE8E5D217DA43D100854703 /* crow1.mp3 in Resources */,
 				1AE8E5D417DA473A00854703 /* 8_Bit_Adventurer.mp3 in Resources */,
+				1A312CCE17DCE138007E0D16 /* frank.plist in Resources */,
+				1A312CCF17DCE138007E0D16 /* frank.png in Resources */,
+				1A312CD117DCEDEB007E0D16 /* wind-strong.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1140,6 +1181,7 @@
 				1AC771BF17D6C54F00DEF7AA /* IntroLayer.m in Sources */,
 				1AE8E5C317D95CEA00854703 /* CCShake.m in Sources */,
 				1AE8E5C617D9619500854703 /* ClickableSprite.m in Sources */,
+				1A312CC717DCC3AD007E0D16 /* LevelOneLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
