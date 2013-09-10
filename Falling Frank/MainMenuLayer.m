@@ -97,7 +97,8 @@
 #pragma mark Asset Preloading/Unloading
 #pragma mark -----------------------------
 
-- (void)preloadAssets {
+- (void)preloadAssets
+{
     [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"8_Bit_Adventurer.mp3"];
     [[SimpleAudioEngine sharedEngine] preloadEffect:@"frank_yell.mp3"];
     [[SimpleAudioEngine sharedEngine] preloadEffect:@"wind1-short.mp3"];
@@ -105,7 +106,8 @@
     [[SimpleAudioEngine sharedEngine] preloadEffect:@"oowh.mp3"];
 }
 
-- (void)unloadAssets {
+- (void)unloadAssets
+{
     [[SimpleAudioEngine sharedEngine] unloadEffect:@"8_Bit_Adventurer.mp3"];
     [[SimpleAudioEngine sharedEngine] unloadEffect:@"frank_yell.mp3"];
     [[SimpleAudioEngine sharedEngine] unloadEffect:@"wind1-short.mp3"];
@@ -128,15 +130,18 @@
 #pragma mark Sound Effects
 #pragma mark -----------------------------
 
-- (void)frankTapped {
+- (void)frankTapped
+{
     [[SimpleAudioEngine sharedEngine] playEffect:@"frank_yell.mp3"];
 }
 
-- (void)cloudTapped {
+- (void)cloudTapped
+{
     [[SimpleAudioEngine sharedEngine] playEffect:@"wind1-short.mp3"];
 }
 
-- (void)birdTapped {
+- (void)birdTapped
+{
     [[SimpleAudioEngine sharedEngine] playEffect:@"crow1.mp3"];
 }
 
@@ -144,7 +149,8 @@
 #pragma mark Animations
 #pragma mark -----------------------------
 
-- (void)createBirdAnim {
+- (void)createBirdAnim
+{
     CGSize size = [[CCDirector sharedDirector] winSize];
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"bird.plist"];
     _birdSheet = [CCSpriteBatchNode batchNodeWithFile:@"bird.png"];
@@ -172,7 +178,8 @@
     [_birdSheet addChild: _bird];
 }
 
-- (void)createFrankAnim {
+- (void)createFrankAnim
+{
     CGSize size = [[CCDirector sharedDirector] winSize];
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"frank.plist"];
     _frankSheet = [CCSpriteBatchNode batchNodeWithFile:@"frank.png"];
@@ -200,7 +207,8 @@
     [_frankSheet addChild: _frank];
 }
 
-- (void)nextFrame:(ccTime)dt {
+- (void)nextFrame:(ccTime)dt
+{
     CGSize size = [[CCDirector sharedDirector] winSize];
     self.cloudOne.position = ccp( self.cloudOne.position.x, self.cloudOne.position.y + 150*dt );
     if (self.cloudOne.position.y > size.height+400) {

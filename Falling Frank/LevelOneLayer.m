@@ -10,15 +10,34 @@
 #import "CCTouchDispatcher.h"
 
 @interface LevelOneLayer()
+// Clouds
 @property (nonatomic, strong) ClickableSprite *cloudOne;
 @property (nonatomic, strong) ClickableSprite *cloudTwo;
-@property (nonatomic, strong) ClickableSprite *bird;
+// Bird 1
 @property (nonatomic, strong) CCSpriteBatchNode *birdSheet;
-@property (nonatomic, strong) CCAction *flyAction;
+@property (nonatomic, strong) ClickableSprite *bird;
+@property (nonatomic, strong) CCAction *birdFlyAction;
+// Bird 2
+@property (nonatomic, strong) CCSpriteBatchNode *birdTwoSheet;
+@property (nonatomic, strong) ClickableSprite *birdTwo;
+@property (nonatomic, strong) CCAction *birdTwoFlyAction;
+// Bird 3
+@property (nonatomic, strong) CCSpriteBatchNode *birdThreeSheet;
+@property (nonatomic, strong) ClickableSprite *birdThree;
+@property (nonatomic, strong) CCAction *birdThreeFlyAction;
+// Frank
 @property (nonatomic, strong) ClickableSprite *frank;
 @property (nonatomic, strong) CCSpriteBatchNode *frankSheet;
 @property (nonatomic, strong) CCAction *fallAction;
-@property (nonatomic, assign) BOOL collision;
+
+@property (nonatomic, strong) CCLabelTTF *hitCountNumLabel;
+@property (nonatomic, assign) int hitCount;
+@property (nonatomic, assign) float time;
+@property (nonatomic, assign) BOOL birdCollision;
+@property (nonatomic, assign) BOOL birdTwoCollision;
+@property (nonatomic, assign) BOOL birdThreeCollision;
+@property (nonatomic, assign) BOOL showBirdTwo;
+@property (nonatomic, assign) BOOL showBirdThree;
 @end
 
 @implementation LevelOneLayer
@@ -34,7 +53,14 @@
 
 - (void)cleanup
 {
-    
+    [self unloadAssets];
+}
+
+- (void)onEnter
+{
+    [super onEnter];
+    CGSize size = [[CCDirector sharedDirector] winSize];
+    [self.frank runAction:[CCMoveTo actionWithDuration:2.0 position:ccp(size.width/2, size.height/1.5)]];
 }
 
 - (id)init
@@ -57,13 +83,9 @@
         
         _cloudOne = [ClickableSprite spriteWithFile:@"cloud1.png"]; 
         _cloudOne.position = ccp(size.width/2.6, -331);
-        _cloudOne.target = self;
-        _cloudOne.selector = @selector(cloudTapped);
         
         _cloudTwo = [ClickableSprite spriteWithFile:@"cloud2.png"];
         _cloudTwo.position = ccp(size.width/1.5, -331);
-        _cloudTwo.target = self;
-        _cloudTwo.selector = @selector(cloudTapped);
         
         [self addChild: _cloudOne];
         [self addChild: _cloudTwo];
@@ -71,10 +93,27 @@
         [self createFrankAnim];
         [self createBirdAnim];
         
+        CCLabelTTF *hitCountLabel = [CCLabelTTF labelWithString:@"Hit Count: " fontName:@"Marker Felt" fontSize:24];
+        _hitCountNumLabel = [CCLabelTTF labelWithString:@"0" fontName:@"Marker Felt" fontSize:24];
+        hitCountLabel.position = ccp(CGRectGetWidth(hitCountLabel.boundingBox) - 40, size.height-24);
+        _hitCountNumLabel.position = ccp(CGRectGetMaxX(hitCountLabel.boundingBox) + 8, size.height-24);
+        [self addChild: hitCountLabel];
+        [self addChild: _hitCountNumLabel];
+        
         [self schedule:@selector(nextFrame:)];
         [self schedule:@selector(checkForCollision) interval:0.2];
+        [self schedule:@selector(incrementTime) interval:1.0];
         
-        _touchEnabled = YES;
+        _touchEnabled       = YES;
+        _time               = 0;
+        _hitCount           = 0;
+        _birdCollision      = NO;
+        _birdTwoCollision   = NO;
+        _birdThreeCollision = NO;
+        _showBirdTwo        = NO;
+        _showBirdThree      = NO;
+        
+        [self constructMenu];
     }
     return self;
 }
@@ -102,7 +141,8 @@
 #pragma mark Asset Preloading/Unloading
 #pragma mark -----------------------------
 
-- (void)preloadAssets {
+- (void)preloadAssets
+{
     [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"wind-strong.mp3"];
     [[SimpleAudioEngine sharedEngine] preloadEffect:@"frank_yell.mp3"];
     [[SimpleAudioEngine sharedEngine] preloadEffect:@"wind1-short.mp3"];
@@ -110,28 +150,31 @@
     [[SimpleAudioEngine sharedEngine] preloadEffect:@"oowh.mp3"];
 }
 
-- (void)unloadAssets {
+- (void)unloadAssets
+{
     [[SimpleAudioEngine sharedEngine] unloadEffect:@"wind-strong.mp3"];
     [[SimpleAudioEngine sharedEngine] unloadEffect:@"frank_yell.mp3"];
     [[SimpleAudioEngine sharedEngine] unloadEffect:@"wind1-short.mp3"];
     [[SimpleAudioEngine sharedEngine] unloadEffect:@"crow1.mp3"];
     [[SimpleAudioEngine sharedEngine] unloadEffect:@"oowh.mp3"];
-    
 }
 
 #pragma mark -----------------------------
 #pragma mark Sound Effects
 #pragma mark -----------------------------
 
-- (void)frankTapped {
+- (void)frankTapped
+{
     [[SimpleAudioEngine sharedEngine] playEffect:@"frank_yell.mp3"];
 }
 
-- (void)cloudTapped {
+- (void)cloudTapped
+{
     [[SimpleAudioEngine sharedEngine] playEffect:@"wind1-short.mp3"];
 }
 
-- (void)birdTapped {
+- (void)birdTapped
+{
     [[SimpleAudioEngine sharedEngine] playEffect:@"crow1.mp3"];
 }
 
@@ -139,21 +182,14 @@
 #pragma mark Animations
 #pragma mark -----------------------------
 
-- (void)createBirdAnim {
+- (void)createBirdAnim
+{
     CGSize size = [[CCDirector sharedDirector] winSize];
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"bird.plist"];
     _birdSheet = [CCSpriteBatchNode batchNodeWithFile:@"bird.png"];
     _birdSheet.position = ccp(size.width, size.height/2);
     [self addChild: _birdSheet];
     
-    NSMutableArray *birdFlyingAnim = [NSMutableArray array];
-    for (int i=1; i<=5; i++) {
-        [birdFlyingAnim addObject:
-         [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:
-          [NSString stringWithFormat:@"bird%d.png",i]]];
-    }
-    
-    CCAnimation *flyAnim = [CCAnimation animationWithSpriteFrames:birdFlyingAnim delay:0.1f];
     _bird = [ClickableSprite spriteWithSpriteFrameName:@"bird1.png"];
     _bird.target = self;
     _bird.selector = @selector(birdTapped);
@@ -161,13 +197,87 @@
         _bird.scale = 2.0;
     }
     
-    _flyAction = [CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation:flyAnim]];
+    if (!_birdFlyAction) {
+        NSMutableArray *birdFlyingAnim = [NSMutableArray array];
+        for (int i=1; i<=5; i++) {
+            [birdFlyingAnim addObject:
+             [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:
+              [NSString stringWithFormat:@"bird%d.png",i]]];
+        }
+        
+        CCAnimation *flyAnim = [CCAnimation animationWithSpriteFrames:birdFlyingAnim delay:0.1f];
+        _birdFlyAction = [CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation:flyAnim]];
+    }
     
-    [_bird runAction: _flyAction];
+    [_bird runAction: _birdFlyAction];
     [_birdSheet addChild: _bird];
 }
 
-- (void)createFrankAnim {
+- (void)createBirdTwoAnim
+{
+    CGSize size = [[CCDirector sharedDirector] winSize];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"bird.plist"];
+    _birdTwoSheet = [CCSpriteBatchNode batchNodeWithFile:@"bird.png"];
+    _birdTwoSheet.position = ccp(size.width, size.height/2);
+    [self addChild: _birdTwoSheet];
+    
+    _birdTwo = [ClickableSprite spriteWithSpriteFrameName:@"bird1.png"];
+    _birdTwo.target = self;
+    _birdTwo.selector = @selector(birdTapped);
+    if (IS_RETINA_568) {
+        _birdTwo.scale = 2.0;
+    }
+    
+    if (!_birdTwoFlyAction) {
+        NSMutableArray *birdFlyingAnim = [NSMutableArray array];
+        for (int i=1; i<=5; i++) {
+            [birdFlyingAnim addObject:
+             [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:
+              [NSString stringWithFormat:@"bird%d.png",i]]];
+        }
+        
+        CCAnimation *flyAnim = [CCAnimation animationWithSpriteFrames:birdFlyingAnim delay:0.1f];
+        _birdTwoFlyAction = [CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation:flyAnim]];
+    }
+    
+    [_birdTwo runAction: _birdTwoFlyAction];
+    [_birdTwoSheet addChild: _birdTwo];
+}
+
+- (void)createBirdThreeAnim
+{
+    CGSize size = [[CCDirector sharedDirector] winSize];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"bird.plist"];
+    _birdThreeSheet = [CCSpriteBatchNode batchNodeWithFile:@"bird.png"];
+    _birdThreeSheet.position = ccp(size.width, size.height/2);
+    [self addChild: _birdThreeSheet];
+    
+    _birdThree = [ClickableSprite spriteWithSpriteFrameName:@"bird1.png"];
+    _birdThree.target = self;
+    _birdThree.selector = @selector(birdTapped);
+    if (IS_RETINA_568) {
+        _birdThree.scale = 2.0;
+    }
+    
+    if (!_birdThreeFlyAction) {
+        NSMutableArray *birdFlyingAnim = [NSMutableArray array];
+        for (int i=1; i<=5; i++) {
+            [birdFlyingAnim addObject:
+             [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:
+              [NSString stringWithFormat:@"bird%d.png",i]]];
+        }
+        
+        CCAnimation *flyAnim = [CCAnimation animationWithSpriteFrames:birdFlyingAnim delay:0.1f];
+        _birdThreeFlyAction = [CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation:flyAnim]];
+    }
+    
+    [_birdThree runAction: _birdThreeFlyAction];
+    [_birdThreeSheet addChild: _birdThree];
+}
+
+
+- (void)createFrankAnim
+{
     CGSize size = [[CCDirector sharedDirector] winSize];
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"frank.plist"];
     _frankSheet = [CCSpriteBatchNode batchNodeWithFile:@"frank.png"];
@@ -182,7 +292,7 @@
     
     CCAnimation *fallAnim = [CCAnimation animationWithSpriteFrames:frankFallingAnim delay:0.1f];
     _frank = [ClickableSprite spriteWithSpriteFrameName:@"frank1.png"];
-    _frank.position = ccp(size.width/2, size.height/1.3);
+    _frank.position = ccp(size.width/2, size.height + CGRectGetHeight(_frank.boundingBox));
     _frank.target = self;
     _frank.selector = @selector(frankTapped);
     if (IS_RETINA_568) {
@@ -199,7 +309,27 @@
 #pragma mark Scheduled Selectors
 #pragma mark -----------------------------
 
-- (void)nextFrame:(ccTime)dt {
+- (void)incrementTime
+{
+    ++self.time;
+    
+    if (self.time >= 15) {
+        if (!self.showBirdTwo) {
+            [self createBirdTwoAnim];
+        }
+        self.showBirdTwo = YES;
+    }
+    
+    if (self.time >= 30) {
+        if (!self.showBirdThree) {
+            [self createBirdThreeAnim];
+        }
+        self.showBirdThree = YES;
+    }
+}
+
+- (void)nextFrame:(ccTime)dt
+{
     CGSize size = [[CCDirector sharedDirector] winSize];
     self.cloudOne.position = ccp( self.cloudOne.position.x, self.cloudOne.position.y + 150*dt );
     if (self.cloudOne.position.y > size.height+400) {
@@ -211,23 +341,70 @@
         self.cloudTwo.position = ccp( self.cloudTwo.position.x, -300 );
     }
     
-    if (self.collision) {
+    // Bird 1 animation
+    if (self.birdCollision) {
         self.birdSheet.rotation = 180;
-        [self.flyAction stop];
+        [self.birdFlyAction stop];
         self.birdSheet.position = ccp(self.birdSheet.position.x, self.birdSheet.position.y - 250*dt);
         if (self.birdSheet.position.y < -32) {
             self.birdSheet.rotation = 0;
             [self birdTapped];
-            [self.flyAction startWithTarget:self.bird];
-            self.collision = NO;
-            self.birdSheet.position = ccp( size.width + 100, [self randomFloatBetween:size.height/2 and:size.height] );
+            [self.birdFlyAction startWithTarget:self.bird];
+            self.birdCollision = NO;
+            self.birdSheet.position = ccp( size.width + 100, [self randomFloatBetween:size.height/3 and:size.height - 32] );
         }
     } else {
         self.birdSheet.position = ccp(self.birdSheet.position.x - 100*dt, self.birdSheet.position.y);
         if (self.birdSheet.position.x < -32) {
-            self.collision = NO;
+            self.birdCollision = NO;
             [self birdTapped];
-            self.birdSheet.position = ccp( size.width + 100, [self randomFloatBetween:size.height/2 and:size.height] );
+            self.birdSheet.position = ccp( size.width + 100, [self randomFloatBetween:size.height/3 and:size.height - 32] );
+        }
+    }
+    
+    // Bird 2 animation
+    if (self.showBirdTwo) {
+        if (self.birdTwoCollision) {
+            self.birdTwoSheet.rotation = 180;
+            [self.birdTwoFlyAction stop];
+            self.birdTwoSheet.position = ccp(self.birdTwoSheet.position.x, self.birdTwoSheet.position.y - 250*dt);
+            if (self.birdTwoSheet.position.y < -32) {
+                self.birdTwoSheet.rotation = 0;
+                [self birdTapped];
+                [self.birdTwoFlyAction startWithTarget:self.birdTwo];
+                self.birdTwoCollision = NO;
+                self.birdTwoSheet.position = ccp( size.width + 100, [self randomFloatBetween:size.height/3 and:size.height - 32] );
+            }
+        } else {
+            self.birdTwoSheet.position = ccp(self.birdTwoSheet.position.x - 150*dt, self.birdTwoSheet.position.y);
+            if (self.birdTwoSheet.position.x < -32) {
+                self.birdTwoCollision = NO;
+                [self birdTapped];
+                self.birdTwoSheet.position = ccp( size.width + 100, [self randomFloatBetween:size.height/3 and:size.height - 32] );
+            }
+        }
+    }
+    
+    // Bird 3 animation
+    if (self.showBirdThree) {
+        if (self.birdThreeCollision) {
+            self.birdThreeSheet.rotation = 180;
+            [self.birdThreeFlyAction stop];
+            self.birdThreeSheet.position = ccp(self.birdThreeSheet.position.x, self.birdThreeSheet.position.y - 250*dt);
+            if (self.birdThreeSheet.position.y < -32) {
+                self.birdThreeSheet.rotation = 0;
+                [self birdTapped];
+                [self.birdThreeFlyAction startWithTarget:self.birdThree];
+                self.birdThreeCollision = NO;
+                self.birdThreeSheet.position = ccp( size.width + 100, [self randomFloatBetween:size.height/3 and:size.height - 32] );
+            }
+        } else {
+            self.birdThreeSheet.position = ccp(self.birdThreeSheet.position.x - 200*dt, self.birdThreeSheet.position.y);
+            if (self.birdThreeSheet.position.x < -32) {
+                self.birdThreeCollision = NO;
+                [self birdTapped];
+                self.birdThreeSheet.position = ccp( size.width + 100, [self randomFloatBetween:size.height/3 and:size.height - 32] );
+            }
         }
     }
     
@@ -236,12 +413,53 @@
 
 - (void)checkForCollision
 {
-    if (!self.collision) {
+    if (!self.birdCollision) {
         if (CGRectContainsRect(self.frank.boundingBox, self.birdSheet.boundingBox)) {
-            self.collision = YES;
+            self.birdCollision = YES;
             [[SimpleAudioEngine sharedEngine] playEffect:@"oowh.mp3"];
+            ++self.hitCount;
+            NSString* newLabel = [NSString stringWithFormat:@"%d", self.hitCount];
+            [self.hitCountNumLabel setString:newLabel];
         }
     }
+    
+    if (!self.birdTwoCollision) {
+        if (CGRectContainsRect(self.frank.boundingBox, self.birdTwoSheet.boundingBox)) {
+            self.birdTwoCollision = YES;
+            [[SimpleAudioEngine sharedEngine] playEffect:@"oowh.mp3"];
+            ++self.hitCount;
+            NSString* newLabel = [NSString stringWithFormat:@"%d", self.hitCount];
+            [self.hitCountNumLabel setString:newLabel];
+        }
+    }
+    
+    if (!self.birdThreeCollision) {
+        if (CGRectContainsRect(self.frank.boundingBox, self.birdThreeSheet.boundingBox)) {
+            self.birdThreeCollision = YES;
+            [[SimpleAudioEngine sharedEngine] playEffect:@"oowh.mp3"];
+            ++self.hitCount;
+            NSString* newLabel = [NSString stringWithFormat:@"%d", self.hitCount];
+            [self.hitCountNumLabel setString:newLabel];
+        }
+    }
+}
+
+#pragma mark -----------------------------
+#pragma mark Menu
+#pragma mark -----------------------------
+
+- (void)constructMenu
+{
+    CCMenuItem *pauseMenuItem = [CCMenuItemFont itemWithString:@"Pause" block:^(id sender) {
+        [[SimpleAudioEngine sharedEngine] pauseBackgroundMusic];
+        [[CCDirector sharedDirector] stopAnimation];
+        [[CCDirector sharedDirector] pause];
+    }];
+    pauseMenuItem.position = CGPointZero;
+    CCMenu *starMenu = [CCMenu menuWithItems:pauseMenuItem, nil];
+    CGSize size = [[CCDirector sharedDirector] winSize];
+    starMenu.position = ccp(size.width/2, 20);
+    [self addChild:starMenu];
 }
 
 #pragma mark -----------------------------
@@ -259,11 +477,13 @@
 #pragma mark CCTouchOneByOneDelegate
 #pragma mark -----------------------------
 
-- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
+{
     return YES;
 }
 
-- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
+- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
+{
 	CGPoint location = [self convertTouchToNodeSpace: touch];
     
 	[self.frank runAction:[CCMoveTo actionWithDuration:0.3 position:location]];
