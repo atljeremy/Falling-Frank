@@ -298,6 +298,7 @@
     
     CCMenu *menu = [CCMenu menuWithItems:itemNewGame, itemContinueGame, itemSettings, itemAchievement, itemLeaderboard, nil];
     
+    menu.color = ccBLACK;
     [menu alignItemsVerticallyWithPadding:12];
     [menu setPosition:ccp( size.width/2, size.height/2 - 70)];
     

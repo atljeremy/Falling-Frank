@@ -8,6 +8,10 @@
 
 #import "LevelOneLayer.h"
 #import "CCTouchDispatcher.h"
+#import "ContextMenu.h"
+#import "MainMenuLayer.h"
+
+static const int MAX_HIT_COUNT = 20;
 
 @interface LevelOneLayer()
 // Clouds
@@ -38,6 +42,7 @@
 @property (nonatomic, assign) BOOL birdThreeCollision;
 @property (nonatomic, assign) BOOL showBirdTwo;
 @property (nonatomic, assign) BOOL showBirdThree;
+@property (nonatomic, assign) BOOL gameOver;
 @end
 
 @implementation LevelOneLayer
@@ -92,6 +97,8 @@
         
         [self createFrankAnim];
         [self createBirdAnim];
+        [self createBirdTwoAnim];
+        [self createBirdThreeAnim];
         
         CCLabelTTF *hitCountLabel = [CCLabelTTF labelWithString:@"Hit Count: " fontName:@"Marker Felt" fontSize:24];
         _hitCountNumLabel = [CCLabelTTF labelWithString:@"0" fontName:@"Marker Felt" fontSize:24];
@@ -218,7 +225,7 @@
     CGSize size = [[CCDirector sharedDirector] winSize];
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"bird.plist"];
     _birdTwoSheet = [CCSpriteBatchNode batchNodeWithFile:@"bird.png"];
-    _birdTwoSheet.position = ccp(size.width, size.height/2);
+    _birdTwoSheet.position = ccp(size.width + 32, size.height/2);
     [self addChild: _birdTwoSheet];
     
     _birdTwo = [ClickableSprite spriteWithSpriteFrameName:@"bird1.png"];
@@ -249,7 +256,7 @@
     CGSize size = [[CCDirector sharedDirector] winSize];
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"bird.plist"];
     _birdThreeSheet = [CCSpriteBatchNode batchNodeWithFile:@"bird.png"];
-    _birdThreeSheet.position = ccp(size.width, size.height/2);
+    _birdThreeSheet.position = ccp(size.width + 32, size.height/2);
     [self addChild: _birdThreeSheet];
     
     _birdThree = [ClickableSprite spriteWithSpriteFrameName:@"bird1.png"];
@@ -314,16 +321,10 @@
     ++self.time;
     
     if (self.time >= 15) {
-        if (!self.showBirdTwo) {
-            [self createBirdTwoAnim];
-        }
         self.showBirdTwo = YES;
     }
     
     if (self.time >= 30) {
-        if (!self.showBirdThree) {
-            [self createBirdThreeAnim];
-        }
         self.showBirdThree = YES;
     }
 }
@@ -408,6 +409,17 @@
         }
     }
     
+    if (self.hitCount >= MAX_HIT_COUNT && !self.gameOver) {
+        self.gameOver = YES;
+        [self frankTapped];
+        [self.frank runAction:[CCMoveTo actionWithDuration:1.0 position:ccp(self.frank.position.x, 0 - CGRectGetHeight(self.frank.boundingBox))]];
+        double delayInSeconds = 1.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [self showGameOverMenu];
+        });
+    }
+    
     [self.frank runAction:[CCShake actionWithDuration:dt amplitude:ccp(2,2) dampening:true]];
 }
 
@@ -450,16 +462,73 @@
 
 - (void)constructMenu
 {
+    CGSize size = [[CCDirector sharedDirector] winSize];
     CCMenuItem *pauseMenuItem = [CCMenuItemFont itemWithString:@"Pause" block:^(id sender) {
-        [[SimpleAudioEngine sharedEngine] pauseBackgroundMusic];
-        [[CCDirector sharedDirector] stopAnimation];
+        [self showPausedMenu];
         [[CCDirector sharedDirector] pause];
     }];
     pauseMenuItem.position = CGPointZero;
     CCMenu *starMenu = [CCMenu menuWithItems:pauseMenuItem, nil];
-    CGSize size = [[CCDirector sharedDirector] winSize];
+    starMenu.color = ccBLACK;
     starMenu.position = ccp(size.width/2, 20);
     [self addChild:starMenu];
+}
+
+- (void)showGameOverMenu
+{
+    CGSize size = [[CCDirector sharedDirector] winSize];
+    [[SimpleAudioEngine sharedEngine] pauseBackgroundMusic];
+    __block ContextMenu* menu = [ContextMenu node];
+    CGPoint position = ccp(size.width/2, size.height/2);
+    position = ccpSub(position, self.position);
+    [menu setMenuPosition:position];
+    [menu setTitle:@"Game Over"];
+    
+    [menu addLabel:@"Start Over" withBlock:^(id sender) {
+        [[SimpleAudioEngine sharedEngine] resumeBackgroundMusic];
+        [[CCDirector sharedDirector] resume];
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[LevelOneLayer scene]]];
+    }];
+    
+    [menu addLabel:@"Quit Game" withBlock:^(id sender) {
+        [[SimpleAudioEngine sharedEngine] resumeBackgroundMusic];
+        [[CCDirector sharedDirector] resume];
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[MainMenuLayer scene]]];
+    }];
+    
+    [menu show];
+    [self addChild:menu];
+}
+
+- (void)showPausedMenu
+{
+    CGSize size = [[CCDirector sharedDirector] winSize];
+    [[SimpleAudioEngine sharedEngine] pauseBackgroundMusic];
+    __block ContextMenu* menu = [ContextMenu node];
+    CGPoint position = ccp(size.width/2, size.height/2);
+    position = ccpSub(position, self.position);
+    [menu setMenuPosition:position];
+    
+    [menu addLabel:@"Start Over" withBlock:^(id sender) {
+        [[SimpleAudioEngine sharedEngine] resumeBackgroundMusic];
+        [[CCDirector sharedDirector] resume];
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[LevelOneLayer scene]]];
+    }];
+    
+    [menu addLabel:@"Quit Game" withBlock:^(id sender) {
+        [[SimpleAudioEngine sharedEngine] resumeBackgroundMusic];
+        [[CCDirector sharedDirector] resume];
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[MainMenuLayer scene]]];
+    }];
+    
+    [menu addLabel:@"Resume Game" withBlock:^(id sender) {
+        [[SimpleAudioEngine sharedEngine] resumeBackgroundMusic];
+        [[CCDirector sharedDirector] resume];
+        [menu removeFromParentAndCleanup:YES];
+    }];
+    
+    [menu show];
+    [self addChild:menu];
 }
 
 #pragma mark -----------------------------
@@ -479,7 +548,7 @@
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
-    return YES;
+    return (self.gameOver) ? NO : YES;
 }
 
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event

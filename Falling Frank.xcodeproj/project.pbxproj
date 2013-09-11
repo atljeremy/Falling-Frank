@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A0E31C517DFEFDC004DB907 /* ContextMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A0E31C417DFEFDC004DB907 /* ContextMenu.m */; };
 		1A312CC717DCC3AD007E0D16 /* LevelOneLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A312CC617DCC3AD007E0D16 /* LevelOneLayer.m */; };
 		1A312CCE17DCE138007E0D16 /* frank.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1A312CCC17DCE138007E0D16 /* frank.plist */; };
 		1A312CCF17DCE138007E0D16 /* frank.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A312CCD17DCE138007E0D16 /* frank.png */; };
 		1A312CD117DCEDEB007E0D16 /* wind-strong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1A312CD017DCEDEB007E0D16 /* wind-strong.mp3 */; };
+		1AB270E417E00B4900EE476B /* context_menu_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AB270E217E00B4900EE476B /* context_menu_bg.png */; };
+		1AB270E517E00B4900EE476B /* context_menu_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AB270E317E00B4900EE476B /* context_menu_bg@2x.png */; };
 		1AC7701317D6C54D00DEF7AA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC7701217D6C54D00DEF7AA /* QuartzCore.framework */; };
 		1AC7701517D6C54D00DEF7AA /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC7701417D6C54D00DEF7AA /* OpenGLES.framework */; };
 		1AC7701717D6C54D00DEF7AA /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC7701617D6C54D00DEF7AA /* OpenAL.framework */; };
@@ -164,11 +167,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A0E31C317DFEFDC004DB907 /* ContextMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContextMenu.h; path = libs/cocos2d/ContextMenu.h; sourceTree = "<group>"; };
+		1A0E31C417DFEFDC004DB907 /* ContextMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContextMenu.m; path = libs/cocos2d/ContextMenu.m; sourceTree = "<group>"; };
 		1A312CC517DCC3AD007E0D16 /* LevelOneLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelOneLayer.h; sourceTree = "<group>"; };
 		1A312CC617DCC3AD007E0D16 /* LevelOneLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelOneLayer.m; sourceTree = "<group>"; };
 		1A312CCC17DCE138007E0D16 /* frank.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = frank.plist; path = Resources/frank.plist; sourceTree = "<group>"; };
 		1A312CCD17DCE138007E0D16 /* frank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = frank.png; path = Resources/frank.png; sourceTree = "<group>"; };
 		1A312CD017DCEDEB007E0D16 /* wind-strong.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "wind-strong.mp3"; path = "Resources/wind-strong.mp3"; sourceTree = "<group>"; };
+		1AB270E217E00B4900EE476B /* context_menu_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = context_menu_bg.png; path = Resources/context_menu_bg.png; sourceTree = "<group>"; };
+		1AB270E317E00B4900EE476B /* context_menu_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "context_menu_bg@2x.png"; path = "Resources/context_menu_bg@2x.png"; sourceTree = "<group>"; };
 		1AC7700F17D6C54D00DEF7AA /* Falling Frank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Falling Frank.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AC7701217D6C54D00DEF7AA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		1AC7701417D6C54D00DEF7AA /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -578,6 +585,8 @@
 		1AC7702717D6C54D00DEF7AA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1AB270E217E00B4900EE476B /* context_menu_bg.png */,
+				1AB270E317E00B4900EE476B /* context_menu_bg@2x.png */,
 				1A312CD017DCEDEB007E0D16 /* wind-strong.mp3 */,
 				1A312CCC17DCE138007E0D16 /* frank.plist */,
 				1A312CCD17DCE138007E0D16 /* frank.png */,
@@ -788,6 +797,8 @@
 				1AE8E5C217D95CEA00854703 /* CCShake.m */,
 				1AE8E5C417D9619500854703 /* ClickableSprite.h */,
 				1AE8E5C517D9619500854703 /* ClickableSprite.m */,
+				1A0E31C317DFEFDC004DB907 /* ContextMenu.h */,
+				1A0E31C417DFEFDC004DB907 /* ContextMenu.m */,
 			);
 			name = cocos2d;
 			sourceTree = "<group>";
@@ -1057,6 +1068,8 @@
 				1A312CCE17DCE138007E0D16 /* frank.plist in Resources */,
 				1A312CCF17DCE138007E0D16 /* frank.png in Resources */,
 				1A312CD117DCEDEB007E0D16 /* wind-strong.mp3 in Resources */,
+				1AB270E417E00B4900EE476B /* context_menu_bg.png in Resources */,
+				1AB270E517E00B4900EE476B /* context_menu_bg@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1182,6 +1195,7 @@
 				1AE8E5C317D95CEA00854703 /* CCShake.m in Sources */,
 				1AE8E5C617D9619500854703 /* ClickableSprite.m in Sources */,
 				1A312CC717DCC3AD007E0D16 /* LevelOneLayer.m in Sources */,
+				1A0E31C517DFEFDC004DB907 /* ContextMenu.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1240,13 +1254,14 @@
 					"\"Falling Frank/libs/kazmath/include\"",
 				);
 				INFOPLIST_FILE = "Falling Frank/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lsqlite3",
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1262,13 +1277,14 @@
 					"\"Falling Frank/libs/kazmath/include\"",
 				);
 				INFOPLIST_FILE = "Falling Frank/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lsqlite3",
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
