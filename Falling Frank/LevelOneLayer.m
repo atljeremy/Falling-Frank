@@ -12,9 +12,13 @@
 #import "MainMenuLayer.h"
 
 static const int MAX_HIT_COUNT = 20;
+static const int FEET_TILL_GROUND = 8000;
+static const int FEET_TILL_GROUND_ORANGE = 4000;
+static const int FEET_TILL_GROUND_RED = 1000;
+static const int FEET_TILL_GROUND_SUCCESSED = 100;
 
 @interface LevelOneLayer()
-// Clouds
+// Clouds 
 @property (nonatomic, strong) ClickableSprite *cloudOne;
 @property (nonatomic, strong) ClickableSprite *cloudTwo;
 // Bird 1
@@ -35,7 +39,11 @@ static const int MAX_HIT_COUNT = 20;
 @property (nonatomic, strong) CCAction *fallAction;
 
 @property (nonatomic, strong) CCLabelTTF *hitCountNumLabel;
+@property (nonatomic, strong) CCLabelTTF *ftTillGroundLabel;
+@property (nonatomic, strong) __block ContextMenu *menu;
+
 @property (nonatomic, assign) int hitCount;
+@property (nonatomic, assign) int ftTillGround;
 @property (nonatomic, assign) float time;
 @property (nonatomic, assign) BOOL birdCollision;
 @property (nonatomic, assign) BOOL birdTwoCollision;
@@ -43,6 +51,8 @@ static const int MAX_HIT_COUNT = 20;
 @property (nonatomic, assign) BOOL showBirdTwo;
 @property (nonatomic, assign) BOOL showBirdThree;
 @property (nonatomic, assign) BOOL gameOver;
+@property (nonatomic, assign) BOOL levelComplete;
+
 @end
 
 @implementation LevelOneLayer
@@ -76,50 +86,70 @@ static const int MAX_HIT_COUNT = 20;
         
 		CGSize size = [[CCDirector sharedDirector] winSize];
         
-        CCSprite *background;
-        if (IS_RETINA_568) {
-            background = [CCSprite spriteWithFile:@"sky-568h@2x.jpg"];
-        } else {
-            background = [CCSprite spriteWithFile:@"sky.jpg"];
-        }
-		
-		background.position = ccp(size.width/2, size.height/2);
-		[self addChild: background];
-        
-        _cloudOne = [ClickableSprite spriteWithFile:@"cloud1.png"]; 
+        _cloudOne = [ClickableSprite spriteWithFile:@"cloud1.png"];
         _cloudOne.position = ccp(size.width/2.6, -331);
         
         _cloudTwo = [ClickableSprite spriteWithFile:@"cloud2.png"];
         _cloudTwo.position = ccp(size.width/1.5, -331);
         
-        [self addChild: _cloudOne];
-        [self addChild: _cloudTwo];
-        
-        [self createFrankAnim];
-        [self createBirdAnim];
-        [self createBirdTwoAnim];
-        [self createBirdThreeAnim];
-        
-        CCLabelTTF *hitCountLabel = [CCLabelTTF labelWithString:@"Hit Count: " fontName:@"Marker Felt" fontSize:24];
-        _hitCountNumLabel = [CCLabelTTF labelWithString:@"0" fontName:@"Marker Felt" fontSize:24];
-        hitCountLabel.position = ccp(CGRectGetWidth(hitCountLabel.boundingBox) - 40, size.height-24);
-        _hitCountNumLabel.position = ccp(CGRectGetMaxX(hitCountLabel.boundingBox) + 8, size.height-24);
-        [self addChild: hitCountLabel];
-        [self addChild: _hitCountNumLabel];
-        
-        [self schedule:@selector(nextFrame:)];
-        [self schedule:@selector(checkForCollision) interval:0.2];
-        [self schedule:@selector(incrementTime) interval:1.0];
+        CCSprite *background;
+        if (IS_RETINA_568) {
+            background = [CCSprite spriteWithFile:@"sky-568h@2x.jpg"];
+            _cloudOne.scale = 1.0;
+            _cloudTwo.scale = 1.0;
+        } else {
+            background = [CCSprite spriteWithFile:@"sky.jpg"];
+            _cloudOne.scale = 0.5;
+            _cloudTwo.scale = 0.5;
+        }
+		background.position = ccp(size.width/2, size.height/2);
         
         _touchEnabled       = YES;
         _time               = 0;
         _hitCount           = 0;
+        _ftTillGround       = FEET_TILL_GROUND;
         _birdCollision      = NO;
         _birdTwoCollision   = NO;
         _birdThreeCollision = NO;
         _showBirdTwo        = NO;
         _showBirdThree      = NO;
+        _gameOver           = NO;
+        _levelComplete      = NO;
         
+        CCLabelTTF *hitCountLabel = [CCLabelTTF labelWithString:@"Hit Count: " fontName:@"Marker Felt" fontSize:24];
+        _hitCountNumLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", _hitCount] fontName:@"Marker Felt" fontSize:24];
+        hitCountLabel.position = ccp(CGRectGetWidth(hitCountLabel.boundingBox) - 40, size.height-24);
+        _hitCountNumLabel.position = ccp(CGRectGetMaxX(hitCountLabel.boundingBox) + 8, size.height-24);
+        hitCountLabel.color = ccBLACK;
+        _hitCountNumLabel.color = ccBLACK;
+        
+        NSString* ftTillGrndString = [NSString stringWithFormat:@"%d ft", _ftTillGround];
+        CGSize labelSize = CGSizeMake(80, 26.5);
+        _ftTillGroundLabel =[CCLabelTTF labelWithString:ftTillGrndString fontName:@"Marker Felt" fontSize:24 dimensions:labelSize hAlignment:NSTextAlignmentRight];
+        _ftTillGroundLabel.position = ccp(size.width - CGRectGetWidth(_ftTillGroundLabel.boundingBox) + 35, size.height-24);
+        _ftTillGroundLabel.color = ccBLACK;
+        
+        // Add Children
+        [self addChild: background];
+        [self addChild: _cloudOne];
+        [self addChild: _cloudTwo];
+        [self addChild: hitCountLabel];
+        [self addChild: _hitCountNumLabel];
+        [self addChild: _ftTillGroundLabel];
+        
+        // Create animations
+        [self createFrankAnim];
+        [self createBirdAnim];
+        [self createBirdTwoAnim];
+        [self createBirdThreeAnim];
+        
+        // Schedule selectors to handle animations, collison checks and timers
+        [self schedule:@selector(nextFrame:)];
+        [self schedule:@selector(checkForCollision) interval:0.2];
+        [self schedule:@selector(incrementTime) interval:1.0];
+        [self schedule:@selector(decrementFtTillGround) interval:0.01];
+        
+        // Construct the pause menu
         [self constructMenu];
     }
     return self;
@@ -329,6 +359,22 @@ static const int MAX_HIT_COUNT = 20;
     }
 }
 
+- (void)decrementFtTillGround
+{
+    --self.ftTillGround;
+    if (self.ftTillGround <= FEET_TILL_GROUND_SUCCESSED && !self.levelComplete) {
+        self.levelComplete = YES;
+        [self showLevelCompleteMenu];
+    } else {
+        if (self.ftTillGround < FEET_TILL_GROUND_ORANGE && self.ftTillGround > FEET_TILL_GROUND_RED) {
+            self.ftTillGroundLabel.color = ccORANGE;
+        } else if (self.ftTillGround < FEET_TILL_GROUND_RED) {
+            self.ftTillGroundLabel.color = ccRED;
+        }
+        self.ftTillGroundLabel.string = [NSString stringWithFormat:@"%d ft", self.ftTillGround];
+    }
+}
+
 - (void)nextFrame:(ccTime)dt
 {
     CGSize size = [[CCDirector sharedDirector] winSize];
@@ -463,12 +509,15 @@ static const int MAX_HIT_COUNT = 20;
 - (void)constructMenu
 {
     CGSize size = [[CCDirector sharedDirector] winSize];
+    __block LevelOneLayer* _self = self;
     CCMenuItem *pauseMenuItem = [CCMenuItemFont itemWithString:@"Pause" block:^(id sender) {
-        [self showPausedMenu];
-        [[CCDirector sharedDirector] pause];
+        if (!_self.gameOver && ![_self.children containsObject:_self.menu]) {
+            [self showPausedMenu];
+            [[CCDirector sharedDirector] pause];
+        }
     }];
     pauseMenuItem.position = CGPointZero;
-    CCMenu *starMenu = [CCMenu menuWithItems:pauseMenuItem, nil];
+    CCMenu* starMenu = [CCMenu menuWithItems:pauseMenuItem, nil];
     starMenu.color = ccBLACK;
     starMenu.position = ccp(size.width/2, 20);
     [self addChild:starMenu];
@@ -478,57 +527,86 @@ static const int MAX_HIT_COUNT = 20;
 {
     CGSize size = [[CCDirector sharedDirector] winSize];
     [[SimpleAudioEngine sharedEngine] pauseBackgroundMusic];
-    __block ContextMenu* menu = [ContextMenu node];
+    self.menu = [ContextMenu node];
     CGPoint position = ccp(size.width/2, size.height/2);
     position = ccpSub(position, self.position);
-    [menu setMenuPosition:position];
-    [menu setTitle:@"Game Over"];
+    [self.menu setMenuPosition:position];
+    [self.menu setTitle:@"Game Over"];
+    [self.menu setTitleColor:ccRED];
     
-    [menu addLabel:@"Start Over" withBlock:^(id sender) {
+    [self.menu addLabel:@"Start Over" withBlock:^(id sender) {
         [[SimpleAudioEngine sharedEngine] resumeBackgroundMusic];
         [[CCDirector sharedDirector] resume];
         [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[LevelOneLayer scene]]];
     }];
     
-    [menu addLabel:@"Quit Game" withBlock:^(id sender) {
+    [self.menu addLabel:@"Quit Game" withBlock:^(id sender) {
         [[SimpleAudioEngine sharedEngine] resumeBackgroundMusic];
         [[CCDirector sharedDirector] resume];
         [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[MainMenuLayer scene]]];
     }];
     
-    [menu show];
-    [self addChild:menu];
+    [self.menu build];
+    [self addChild:self.menu];
+}
+
+- (void)showLevelCompleteMenu
+{
+    CGSize size = [[CCDirector sharedDirector] winSize];
+    [[SimpleAudioEngine sharedEngine] pauseBackgroundMusic];
+    self.menu = [ContextMenu node];
+    CGPoint position = ccp(size.width/2, size.height/2);
+    position = ccpSub(position, self.position);
+    [self.menu setMenuPosition:position];
+    [self.menu setTitle:@"You Won!"];
+    [self.menu setTitleColor:ccGREEN];
+    
+    [self.menu addLabel:@"Start Over" withBlock:^(id sender) {
+        [[SimpleAudioEngine sharedEngine] resumeBackgroundMusic];
+        [[CCDirector sharedDirector] resume];
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[LevelOneLayer scene]]];
+    }];
+    
+    [self.menu addLabel:@"Quit Game" withBlock:^(id sender) {
+        [[SimpleAudioEngine sharedEngine] resumeBackgroundMusic];
+        [[CCDirector sharedDirector] resume];
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[MainMenuLayer scene]]];
+    }];
+    
+    [self.menu build];
+    [self addChild:self.menu];
 }
 
 - (void)showPausedMenu
 {
     CGSize size = [[CCDirector sharedDirector] winSize];
     [[SimpleAudioEngine sharedEngine] pauseBackgroundMusic];
-    __block ContextMenu* menu = [ContextMenu node];
+    self.menu = [ContextMenu node];
     CGPoint position = ccp(size.width/2, size.height/2);
     position = ccpSub(position, self.position);
-    [menu setMenuPosition:position];
+    [self.menu setMenuPosition:position];
+    [self.menu setTitleColor:ccWHITE];
     
-    [menu addLabel:@"Start Over" withBlock:^(id sender) {
+    [self.menu addLabel:@"Start Over" withBlock:^(id sender) {
         [[SimpleAudioEngine sharedEngine] resumeBackgroundMusic];
         [[CCDirector sharedDirector] resume];
         [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[LevelOneLayer scene]]];
     }];
     
-    [menu addLabel:@"Quit Game" withBlock:^(id sender) {
+    [self.menu addLabel:@"Quit Game" withBlock:^(id sender) {
         [[SimpleAudioEngine sharedEngine] resumeBackgroundMusic];
         [[CCDirector sharedDirector] resume];
         [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[MainMenuLayer scene]]];
     }];
     
-    [menu addLabel:@"Resume Game" withBlock:^(id sender) {
+    [self.menu addLabel:@"Resume Game" withBlock:^(id sender) {
         [[SimpleAudioEngine sharedEngine] resumeBackgroundMusic];
         [[CCDirector sharedDirector] resume];
-        [menu removeFromParentAndCleanup:YES];
+        [self.menu removeFromParentAndCleanup:YES];
     }];
     
-    [menu show];
-    [self addChild:menu];
+    [self.menu build];
+    [self addChild:self.menu];
 }
 
 #pragma mark -----------------------------

@@ -10,8 +10,9 @@
 
 @interface ContextMenu : CCLayer
 
-- (void)show;
+- (void)build;
 - (void)setTitle:(NSString *)title;
+- (void)setTitleColor:(ccColor3B)titleColor;
 - (void)setMenuPosition:(CGPoint)position;
 - (void)addLabel:(NSString*)label withBlock:(void(^)(id sender))block;
 

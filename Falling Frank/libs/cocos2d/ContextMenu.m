@@ -16,6 +16,7 @@ static const int MENU_TAG = 1;
 @property (nonatomic, strong) NSMutableArray* menuItems;
 @property (nonatomic, strong) NSString* title;
 @property (nonatomic, assign) CGPoint menuPosition;
+@property (nonatomic, assign) ccColor3B titleColor;
 @end
 
 @implementation ContextMenu
@@ -24,6 +25,7 @@ static const int MENU_TAG = 1;
 {
     if (self = [super init]) {
         _menuItems = [@[] mutableCopy];
+        _titleColor = ccWHITE;
         [self setTouchEnabled:YES];
     }
     return self;
@@ -43,7 +45,12 @@ static const int MENU_TAG = 1;
     _title = title;
 }
 
-- (void)show
+- (void)setTitleColor:(ccColor3B)titleColor
+{
+    _titleColor = titleColor;
+}
+
+- (void)build
 {
     BOOL hasCustomPosition = !CGPointEqualToPoint(self.menuPosition, CGPointZero);
     
@@ -56,7 +63,7 @@ static const int MENU_TAG = 1;
     if (self.title) {
         CCLabelTTF* titleLabel = [CCLabelTTF labelWithString:self.title fontName:@"Courier" fontSize:30];
         titleLabel.position = ccp(self.menuPosition.x, self.menuPosition.y + 60);
-        titleLabel.color = ccRED;
+        titleLabel.color = self.titleColor;
         [self addChild:titleLabel];
     }
     
@@ -65,7 +72,7 @@ static const int MENU_TAG = 1;
         self.menu.position = self.menuPosition;
     }
     self.menu.color = ccWHITE;
-    [self.menu alignItemsVertically];
+    [self.menu alignItemsVerticallyWithPadding:20];
     
     [self addChild:self.menu];
 }
