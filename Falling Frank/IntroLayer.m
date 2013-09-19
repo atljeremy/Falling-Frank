@@ -28,6 +28,9 @@
         CCSprite *background;
         if (IS_RETINA_568) {
             background = [CCSprite spriteWithFile:@"Default-568h@2x.png"];
+        } else if (IS_IPAD) {
+            background = [CCSprite spriteWithFile:@"Default-568h@2x.png"];
+            background.scale = 1.3;
         } else {
             background = [CCSprite spriteWithFile:@"Default.png"];
         }

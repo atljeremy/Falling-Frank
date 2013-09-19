@@ -50,6 +50,9 @@
         CCSprite *background;
         if (IS_RETINA_568) {
             background = [CCSprite spriteWithFile:@"Default-568h@2x.png"];
+        } else if (IS_IPAD) {
+            background = [CCSprite spriteWithFile:@"Default-568h@2x.png"];
+            background.scale = 1.3;
         } else {
             background = [CCSprite spriteWithFile:@"Default.png"];
         }
@@ -58,13 +61,13 @@
 		[self addChild: background];
         
         _cloudOne = [ClickableSprite spriteWithFile:@"cloud1.png"];
-        _cloudOne.scale = 0.5;
+        _cloudOne.scale = (IS_IPAD || IS_RETINA_568) ? 1.0 : 0.5;
         _cloudOne.position = ccp(size.width/2.6, -331);
         _cloudOne.target = self;
         _cloudOne.selector = @selector(cloudTapped);
         
         _cloudTwo = [ClickableSprite spriteWithFile:@"cloud2.png"];
-        _cloudTwo.scale = 0.8;
+        _cloudTwo.scale = (IS_IPAD || IS_RETINA_568) ? 1.0 : 0.8;
         _cloudTwo.position = ccp(size.width/1.5, -331);
         _cloudTwo.target = self;
         _cloudTwo.selector = @selector(cloudTapped);
@@ -168,7 +171,7 @@
     _bird = [ClickableSprite spriteWithSpriteFrameName:@"bird1.png"];
     _bird.target = self;
     _bird.selector = @selector(birdTapped);
-    if (IS_RETINA_568) {
+    if (IS_RETINA_568 || IS_IPAD) {
         _bird.scale = 2.0;
     }
     
@@ -197,7 +200,7 @@
     _frank.position = ccp(size.width/2, size.height/1.3);
     _frank.target = self;
     _frank.selector = @selector(frankTapped);
-    if (IS_RETINA_568) {
+    if (IS_RETINA_568 || IS_IPAD) {
         _frank.scale = 2.0;
     }
     

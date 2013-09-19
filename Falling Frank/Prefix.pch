@@ -15,5 +15,6 @@
 #import "SimpleAudioEngine.h"
 
 #define IS_RETINA_568 ([[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] &&([UIScreen mainScreen].scale == 2.0))
+#define IS_IPAD [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad
 
 #endif

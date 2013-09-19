@@ -97,6 +97,11 @@ static const int FEET_TILL_GROUND_SUCCEEDED = 100;
             background = [CCSprite spriteWithFile:@"sky-568h@2x.jpg"];
             _cloudOne.scale = 1.0;
             _cloudTwo.scale = 1.0;
+        } else if (IS_IPAD) {
+            background = [CCSprite spriteWithFile:@"sky-568h@2x.jpg"];
+            background.scale = 1.3;
+            _cloudOne.scale = 1.3;
+            _cloudTwo.scale = 1.3;
         } else {
             background = [CCSprite spriteWithFile:@"sky.jpg"];
             _cloudOne.scale = 0.5;
@@ -124,9 +129,10 @@ static const int FEET_TILL_GROUND_SUCCEEDED = 100;
         _hitCountNumLabel.color = ccBLACK;
         
         NSString* ftTillGrndString = [NSString stringWithFormat:@"%d ft", _ftTillGround];
-        CGSize labelSize = CGSizeMake(80, 26.5);
+        CGSize labelSize = CGSizeMake((IS_IPAD) ? 90 : 80, 26.5);
         _ftTillGroundLabel =[CCLabelTTF labelWithString:ftTillGrndString fontName:@"Marker Felt" fontSize:24 dimensions:labelSize hAlignment:NSTextAlignmentRight];
-        _ftTillGroundLabel.position = ccp(size.width - CGRectGetWidth(_ftTillGroundLabel.boundingBox) + 35, size.height-24);
+        float x = size.width - CGRectGetWidth(_ftTillGroundLabel.boundingBox);
+        _ftTillGroundLabel.position = ccp((IS_IPAD) ? x+20 : x+35, size.height-24);
         _ftTillGroundLabel.color = ccBLACK;
         
         // Add Children
@@ -230,7 +236,7 @@ static const int FEET_TILL_GROUND_SUCCEEDED = 100;
     _bird = [ClickableSprite spriteWithSpriteFrameName:@"bird1.png"];
     _bird.target = self;
     _bird.selector = @selector(birdTapped);
-    if (IS_RETINA_568) {
+    if (IS_RETINA_568 || IS_IPAD) {
         _bird.scale = 2.0;
     }
     
@@ -261,7 +267,7 @@ static const int FEET_TILL_GROUND_SUCCEEDED = 100;
     _birdTwo = [ClickableSprite spriteWithSpriteFrameName:@"bird1.png"];
     _birdTwo.target = self;
     _birdTwo.selector = @selector(birdTapped);
-    if (IS_RETINA_568) {
+    if (IS_RETINA_568 || IS_IPAD) {
         _birdTwo.scale = 2.0;
     }
     
@@ -292,7 +298,7 @@ static const int FEET_TILL_GROUND_SUCCEEDED = 100;
     _birdThree = [ClickableSprite spriteWithSpriteFrameName:@"bird1.png"];
     _birdThree.target = self;
     _birdThree.selector = @selector(birdTapped);
-    if (IS_RETINA_568) {
+    if (IS_RETINA_568 || IS_IPAD) {
         _birdThree.scale = 2.0;
     }
     
@@ -332,7 +338,7 @@ static const int FEET_TILL_GROUND_SUCCEEDED = 100;
     _frank.position = ccp(size.width/2, size.height + CGRectGetHeight(_frank.boundingBox));
     _frank.target = self;
     _frank.selector = @selector(frankTapped);
-    if (IS_RETINA_568) {
+    if (IS_RETINA_568 || IS_IPAD) {
         _frank.scale = 2.0;
     }
     
