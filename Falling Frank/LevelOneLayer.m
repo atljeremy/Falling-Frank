@@ -15,7 +15,7 @@ static const int MAX_HIT_COUNT = 20;
 static const int FEET_TILL_GROUND = 8000;
 static const int FEET_TILL_GROUND_ORANGE = 4000;
 static const int FEET_TILL_GROUND_RED = 1000;
-static const int FEET_TILL_GROUND_SUCCESSED = 100;
+static const int FEET_TILL_GROUND_SUCCEEDED = 100;
 
 @interface LevelOneLayer()
 // Clouds 
@@ -362,16 +362,18 @@ static const int FEET_TILL_GROUND_SUCCESSED = 100;
 - (void)decrementFtTillGround
 {
     --self.ftTillGround;
-    if (self.ftTillGround <= FEET_TILL_GROUND_SUCCESSED && !self.levelComplete) {
-        self.levelComplete = YES;
-        [self showLevelCompleteMenu];
-    } else {
-        if (self.ftTillGround < FEET_TILL_GROUND_ORANGE && self.ftTillGround > FEET_TILL_GROUND_RED) {
-            self.ftTillGroundLabel.color = ccORANGE;
-        } else if (self.ftTillGround < FEET_TILL_GROUND_RED) {
-            self.ftTillGroundLabel.color = ccRED;
+    if (!self.levelComplete) {
+        if (self.ftTillGround < FEET_TILL_GROUND_SUCCEEDED) {
+            self.levelComplete = YES;
+            [self showLevelCompleteMenu];
+        } else {
+            if (self.ftTillGround < FEET_TILL_GROUND_ORANGE && self.ftTillGround > FEET_TILL_GROUND_RED) {
+                self.ftTillGroundLabel.color = ccORANGE;
+            } else if (self.ftTillGround < FEET_TILL_GROUND_RED) {
+                self.ftTillGroundLabel.color = ccRED;
+            }
+            self.ftTillGroundLabel.string = [NSString stringWithFormat:@"%d ft", self.ftTillGround];
         }
-        self.ftTillGroundLabel.string = [NSString stringWithFormat:@"%d ft", self.ftTillGround];
     }
 }
 
