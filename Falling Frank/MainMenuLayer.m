@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "LevelOneLayer.h"
 #import "CreditsLayer.h"
+#import "InstructionsLayer.h"
 
 #pragma mark - MainMenuLayer
 
@@ -276,12 +277,13 @@
         [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[LevelOneLayer scene]]];
     }];
     
-    CCMenuItem *itemContinueGame = [CCMenuItemFont itemWithString:@"Continue Game" block:^(id sender) {
-        // Do something
-    }];
+//    CCMenuItem *itemContinueGame = [CCMenuItemFont itemWithString:@"Continue Game" block:^(id sender) {
+//        // Do something
+//    }];
     
-    CCMenuItem *itemSettings = [CCMenuItemFont itemWithString:@"Settings" block:^(id sender) {
-        // Do something
+    CCMenuItem *itemInstructions = [CCMenuItemFont itemWithString:@"Instructions" block:^(id sender) {
+        [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[InstructionsLayer scene]]];
     }];
     
     CCMenuItem *itemCredits = [CCMenuItemFont itemWithString:@"Credits" block:^(id sender) {
@@ -305,7 +307,7 @@
         [leaderboardViewController release];
     }];
     
-    CCMenu *menu = [CCMenu menuWithItems:itemNewGame, itemContinueGame, itemSettings, itemCredits, itemAchievement, itemLeaderboard, nil];
+    CCMenu *menu = [CCMenu menuWithItems:itemNewGame, itemInstructions, itemCredits, itemAchievement, itemLeaderboard, nil];
     
     menu.color = ccBLACK;
     [menu alignItemsVerticallyWithPadding:12];

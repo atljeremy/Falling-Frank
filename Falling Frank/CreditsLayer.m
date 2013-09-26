@@ -7,6 +7,7 @@
 //
 
 #import "CreditsLayer.h"
+#import "MainMenuLayer.h"
 
 @implementation CreditsLayer
 
@@ -79,8 +80,25 @@
         [self addChild:soundsCredits2];
         [self addChild:soundsCredits3];
         [self addChild:soundsCredits4];
+        
+        [self constructMenu];
     }
     return self;
 }
+
+- (void)constructMenu
+{
+    CGSize size = [[CCDirector sharedDirector] winSize];
+    CCMenuItem *menuItem = [CCMenuItemFont itemWithString:@"Main Menu" block:^(id sender) {
+        [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[MainMenuLayer scene]]];
+    }];
+    menuItem.position = CGPointZero;
+    CCMenu* menu = [CCMenu menuWithItems:menuItem, nil];
+    menu.color = ccBLACK;
+    menu.position = ccp(size.width/2, 20);
+    [self addChild:menu];
+}
+
 
 @end
