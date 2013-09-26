@@ -9,6 +9,7 @@
 #import "MainMenuLayer.h"
 #import "AppDelegate.h"
 #import "LevelOneLayer.h"
+#import "CreditsLayer.h"
 
 #pragma mark - MainMenuLayer
 
@@ -283,6 +284,11 @@
         // Do something
     }];
     
+    CCMenuItem *itemCredits = [CCMenuItemFont itemWithString:@"Credits" block:^(id sender) {
+        [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[CreditsLayer scene]]];
+    }];
+    
     CCMenuItem *itemAchievement = [CCMenuItemFont itemWithString:@"Achievements" block:^(id sender) {
         GKAchievementViewController *achivementViewController = [[GKAchievementViewController alloc] init];
         achivementViewController.achievementDelegate = copy_self;
@@ -299,7 +305,7 @@
         [leaderboardViewController release];
     }];
     
-    CCMenu *menu = [CCMenu menuWithItems:itemNewGame, itemContinueGame, itemSettings, itemAchievement, itemLeaderboard, nil];
+    CCMenu *menu = [CCMenu menuWithItems:itemNewGame, itemContinueGame, itemSettings, itemCredits, itemAchievement, itemLeaderboard, nil];
     
     menu.color = ccBLACK;
     [menu alignItemsVerticallyWithPadding:12];

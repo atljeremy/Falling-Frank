@@ -12,6 +12,7 @@
 		1A312CCE17DCE138007E0D16 /* frank.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1A312CCC17DCE138007E0D16 /* frank.plist */; };
 		1A312CCF17DCE138007E0D16 /* frank.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A312CCD17DCE138007E0D16 /* frank.png */; };
 		1A312CD117DCEDEB007E0D16 /* wind-strong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1A312CD017DCEDEB007E0D16 /* wind-strong.mp3 */; };
+		1A99C8B817F3B6B500CBC375 /* CreditsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A99C8B717F3B6B500CBC375 /* CreditsLayer.m */; };
 		1AB270E417E00B4900EE476B /* context_menu_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AB270E217E00B4900EE476B /* context_menu_bg.png */; };
 		1AB270E517E00B4900EE476B /* context_menu_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AB270E317E00B4900EE476B /* context_menu_bg@2x.png */; };
 		1AC7701317D6C54D00DEF7AA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC7701217D6C54D00DEF7AA /* QuartzCore.framework */; };
@@ -174,6 +175,8 @@
 		1A312CCC17DCE138007E0D16 /* frank.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = frank.plist; path = Resources/frank.plist; sourceTree = "<group>"; };
 		1A312CCD17DCE138007E0D16 /* frank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = frank.png; path = Resources/frank.png; sourceTree = "<group>"; };
 		1A312CD017DCEDEB007E0D16 /* wind-strong.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "wind-strong.mp3"; path = "Resources/wind-strong.mp3"; sourceTree = "<group>"; };
+		1A99C8B617F3B6B500CBC375 /* CreditsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditsLayer.h; sourceTree = "<group>"; };
+		1A99C8B717F3B6B500CBC375 /* CreditsLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditsLayer.m; sourceTree = "<group>"; };
 		1AB270E217E00B4900EE476B /* context_menu_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = context_menu_bg.png; path = Resources/context_menu_bg.png; sourceTree = "<group>"; };
 		1AB270E317E00B4900EE476B /* context_menu_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "context_menu_bg@2x.png"; path = "Resources/context_menu_bg@2x.png"; sourceTree = "<group>"; };
 		1AC7700F17D6C54D00DEF7AA /* Falling Frank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Falling Frank.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -501,6 +504,7 @@
 		1A312CC117DCC356007E0D16 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				1A99C8B517F3B63E00CBC375 /* Credits */,
 				1A312CC417DCC37B007E0D16 /* Level 1 */,
 				1A312CC317DCC371007E0D16 /* Main Menu */,
 				1A312CC217DCC369007E0D16 /* Intro */,
@@ -533,6 +537,15 @@
 				1A312CC617DCC3AD007E0D16 /* LevelOneLayer.m */,
 			);
 			name = "Level 1";
+			sourceTree = "<group>";
+		};
+		1A99C8B517F3B63E00CBC375 /* Credits */ = {
+			isa = PBXGroup;
+			children = (
+				1A99C8B617F3B6B500CBC375 /* CreditsLayer.h */,
+				1A99C8B717F3B6B500CBC375 /* CreditsLayer.m */,
+			);
+			name = Credits;
 			sourceTree = "<group>";
 		};
 		1AC7700617D6C54D00DEF7AA = {
@@ -1095,6 +1108,7 @@
 				1AC7706717D6C54D00DEF7AA /* CCActionTween.m in Sources */,
 				1AC7706A17D6C54E00DEF7AA /* CCAnimation.m in Sources */,
 				1AC7706D17D6C54E00DEF7AA /* CCAnimationCache.m in Sources */,
+				1A99C8B817F3B6B500CBC375 /* CreditsLayer.m in Sources */,
 				1AC7707017D6C54E00DEF7AA /* CCAtlasNode.m in Sources */,
 				1AC7707317D6C54E00DEF7AA /* CCCamera.m in Sources */,
 				1AC7707617D6C54E00DEF7AA /* CCClippingNode.m in Sources */,
@@ -1250,9 +1264,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Falling Frank/Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"\"Falling Frank/libs/kazmath/include\"",
-				);
+				HEADER_SEARCH_PATHS = "\"Falling Frank/libs/kazmath/include\"";
 				INFOPLIST_FILE = "Falling Frank/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_LDFLAGS = (
@@ -1273,9 +1285,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Falling Frank/Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"\"Falling Frank/libs/kazmath/include\"",
-				);
+				HEADER_SEARCH_PATHS = "\"Falling Frank/libs/kazmath/include\"";
 				INFOPLIST_FILE = "Falling Frank/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_LDFLAGS = (
