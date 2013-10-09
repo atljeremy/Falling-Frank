@@ -132,7 +132,7 @@
 }
 
 #pragma mark -----------------------------
-#pragma mark Sound Effects
+#pragma mark Sprite Selectors / Sound Effects
 #pragma mark -----------------------------
 
 - (void)frankTapped

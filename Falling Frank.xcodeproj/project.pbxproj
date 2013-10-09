@@ -12,6 +12,12 @@
 		1A312CCE17DCE138007E0D16 /* frank.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1A312CCC17DCE138007E0D16 /* frank.plist */; };
 		1A312CCF17DCE138007E0D16 /* frank.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A312CCD17DCE138007E0D16 /* frank.png */; };
 		1A312CD117DCEDEB007E0D16 /* wind-strong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1A312CD017DCEDEB007E0D16 /* wind-strong.mp3 */; };
+		1A7260281802E512007F92FC /* add_life.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A7260221802E512007F92FC /* add_life.png */; };
+		1A7260291802E512007F92FC /* add_life@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A7260231802E512007F92FC /* add_life@2x.png */; };
+		1A72602A1802E512007F92FC /* invinc.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A7260241802E512007F92FC /* invinc.png */; };
+		1A72602B1802E512007F92FC /* invinc@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A7260251802E512007F92FC /* invinc@2x.png */; };
+		1A72602C1802E512007F92FC /* slow_mo.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A7260261802E512007F92FC /* slow_mo.png */; };
+		1A72602D1802E512007F92FC /* slow_mo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A7260271802E512007F92FC /* slow_mo@2x.png */; };
 		1A99C8B817F3B6B500CBC375 /* CreditsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A99C8B717F3B6B500CBC375 /* CreditsLayer.m */; };
 		1A9A121617F3C382003C6C9B /* Icon-@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A9A121517F3C382003C6C9B /* Icon-@2x.png */; };
 		1A9A121A17F3C426003C6C9B /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A9A121717F3C426003C6C9B /* Icon-76.png */; };
@@ -178,6 +184,12 @@
 		1A312CCC17DCE138007E0D16 /* frank.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = frank.plist; path = Resources/frank.plist; sourceTree = "<group>"; };
 		1A312CCD17DCE138007E0D16 /* frank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = frank.png; path = Resources/frank.png; sourceTree = "<group>"; };
 		1A312CD017DCEDEB007E0D16 /* wind-strong.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "wind-strong.mp3"; path = "Resources/wind-strong.mp3"; sourceTree = "<group>"; };
+		1A7260221802E512007F92FC /* add_life.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = add_life.png; path = Resources/add_life.png; sourceTree = "<group>"; };
+		1A7260231802E512007F92FC /* add_life@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "add_life@2x.png"; path = "Resources/add_life@2x.png"; sourceTree = "<group>"; };
+		1A7260241802E512007F92FC /* invinc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = invinc.png; path = Resources/invinc.png; sourceTree = "<group>"; };
+		1A7260251802E512007F92FC /* invinc@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "invinc@2x.png"; path = "Resources/invinc@2x.png"; sourceTree = "<group>"; };
+		1A7260261802E512007F92FC /* slow_mo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = slow_mo.png; path = Resources/slow_mo.png; sourceTree = "<group>"; };
+		1A7260271802E512007F92FC /* slow_mo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "slow_mo@2x.png"; path = "Resources/slow_mo@2x.png"; sourceTree = "<group>"; };
 		1A99C8B617F3B6B500CBC375 /* CreditsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditsLayer.h; sourceTree = "<group>"; };
 		1A99C8B717F3B6B500CBC375 /* CreditsLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditsLayer.m; sourceTree = "<group>"; };
 		1A9A121517F3C382003C6C9B /* Icon-@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-@2x.png"; path = "Resources/Icon-@2x.png"; sourceTree = "<group>"; };
@@ -606,6 +618,12 @@
 		1AC7702717D6C54D00DEF7AA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1A7260221802E512007F92FC /* add_life.png */,
+				1A7260231802E512007F92FC /* add_life@2x.png */,
+				1A7260241802E512007F92FC /* invinc.png */,
+				1A7260251802E512007F92FC /* invinc@2x.png */,
+				1A7260261802E512007F92FC /* slow_mo.png */,
+				1A7260271802E512007F92FC /* slow_mo@2x.png */,
 				1AE361F417F4FA90003F66CE /* instructions.png */,
 				1A9A121717F3C426003C6C9B /* Icon-76.png */,
 				1A9A121817F3C426003C6C9B /* Icon-144@2x.png */,
@@ -1071,13 +1089,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A7260291802E512007F92FC /* add_life@2x.png in Resources */,
 				1AC7702917D6C54D00DEF7AA /* Default.png in Resources */,
 				1AC7702B17D6C54D00DEF7AA /* Default@2x.png in Resources */,
 				1AC7702D17D6C54D00DEF7AA /* Default-568h@2x.png in Resources */,
 				1AC7702F17D6C54D00DEF7AA /* Default-Landscape~ipad.png in Resources */,
 				1AC7703117D6C54D00DEF7AA /* Icon-72.png in Resources */,
 				1AC7703917D6C54D00DEF7AA /* Icon.png in Resources */,
+				1A72602B1802E512007F92FC /* invinc@2x.png in Resources */,
 				1AC7703B17D6C54D00DEF7AA /* Icon@2x.png in Resources */,
+				1A72602A1802E512007F92FC /* invinc.png in Resources */,
 				1AE361F517F4FA90003F66CE /* instructions.png in Resources */,
 				1AC7703E17D6C54D00DEF7AA /* iTunesArtwork in Resources */,
 				1AC7719717D6C54F00DEF7AA /* ChangeLog in Resources */,
@@ -1088,6 +1109,7 @@
 				1AE8E5B917D94F2200854703 /* cloud2@2x.png in Resources */,
 				1AE8E5BA17D94F2200854703 /* sky-568h@2x.jpg in Resources */,
 				1A9A121A17F3C426003C6C9B /* Icon-76.png in Resources */,
+				1A72602C1802E512007F92FC /* slow_mo.png in Resources */,
 				1AE8E5BB17D94F2200854703 /* sky.jpg in Resources */,
 				1AE8E5BC17D94F2200854703 /* sky@2x.jpg in Resources */,
 				1AE8E5C817D9688600854703 /* frank_yell.mp3 in Resources */,
@@ -1099,9 +1121,11 @@
 				1A9A121C17F3C426003C6C9B /* Icon-152@2x.png in Resources */,
 				1AE8E5D417DA473A00854703 /* 8_Bit_Adventurer.mp3 in Resources */,
 				1A312CCE17DCE138007E0D16 /* frank.plist in Resources */,
+				1A72602D1802E512007F92FC /* slow_mo@2x.png in Resources */,
 				1A312CCF17DCE138007E0D16 /* frank.png in Resources */,
 				1A312CD117DCEDEB007E0D16 /* wind-strong.mp3 in Resources */,
 				1AB270E417E00B4900EE476B /* context_menu_bg.png in Resources */,
+				1A7260281802E512007F92FC /* add_life.png in Resources */,
 				1AB270E517E00B4900EE476B /* context_menu_bg@2x.png in Resources */,
 				1A9A121617F3C382003C6C9B /* Icon-@2x.png in Resources */,
 			);
