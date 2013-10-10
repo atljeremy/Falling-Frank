@@ -10,9 +10,10 @@
 #import "CCTouchDispatcher.h"
 #import "ContextMenu.h"
 #import "MainMenuLayer.h"
+#import "LevelTwoLayer.h"
 
 static const int MAX_HIT_COUNT = 20;
-static const int FEET_TILL_GROUND = 5000;
+static const int FEET_TILL_GROUND = 200;
 static const int FEET_TILL_GROUND_ORANGE = 2000;
 static const int FEET_TILL_GROUND_RED = 1000;
 static const int FEET_TILL_GROUND_SUCCEEDED = 100;
@@ -166,11 +167,16 @@ static NSString* const kGameLivesKey = @"kGameLivesKey";
         _hitCountNumLabel.color = ccBLACK;
         
         NSString* ftTillGrndString = [NSString stringWithFormat:@"%d ft", _ftTillGround];
-        CGSize labelSize = CGSizeMake((IS_IPAD) ? 90 : 80, 26.5);
+        CGSize labelSize = CGSizeMake(90, 26.5);
         _ftTillGroundLabel =[CCLabelTTF labelWithString:ftTillGrndString fontName:@"Marker Felt" fontSize:24 dimensions:labelSize hAlignment:NSTextAlignmentRight];
         float x = size.width - CGRectGetWidth(_ftTillGroundLabel.boundingBox);
         _ftTillGroundLabel.position = ccp((IS_IPAD) ? x+20 : x+35, size.height-24);
         _ftTillGroundLabel.color = ccBLACK;
+        
+        CCLabelTTF* levelLabel = [CCLabelTTF labelWithString:@"Level 1" fontName:@"Marker Felt" fontSize:18 dimensions:labelSize hAlignment:NSTextAlignmentRight];
+        x = size.width - CGRectGetWidth(levelLabel.boundingBox);
+        levelLabel.position = ccp((IS_IPAD) ? x+20 : x+35, size.height-48);
+        levelLabel.color = ccBLACK;
         
         NSNumber* gameLives = [[NSUserDefaults standardUserDefaults] objectForKey:kGameLivesKey];
         if (!gameLives) {
@@ -179,8 +185,8 @@ static NSString* const kGameLivesKey = @"kGameLivesKey";
         }
         CCLabelTTF *gameLivesLabel = [CCLabelTTF labelWithString:@"Lives Left: " fontName:@"Marker Felt" fontSize:18];
         _gameLivesCountLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", [gameLives integerValue]] fontName:@"Marker Felt" fontSize:18];
-        gameLivesLabel.position = ccp(CGRectGetWidth(gameLivesLabel.boundingBox) - 29, size.height-42);
-        _gameLivesCountLabel.position = ccp(CGRectGetMaxX(gameLivesLabel.boundingBox) + 8, size.height-42);
+        gameLivesLabel.position = ccp(CGRectGetWidth(gameLivesLabel.boundingBox) - 29, size.height-48);
+        _gameLivesCountLabel.position = ccp(CGRectGetMaxX(gameLivesLabel.boundingBox) + 8, size.height-48);
         gameLivesLabel.color = ccBLACK;
         _gameLivesCountLabel.color = ccBLACK;
         
@@ -191,6 +197,7 @@ static NSString* const kGameLivesKey = @"kGameLivesKey";
         [self addChild: hitCountLabel];
         [self addChild: _hitCountNumLabel];
         [self addChild: _ftTillGroundLabel];
+        [self addChild: levelLabel];
         [self addChild: gameLivesLabel];
         [self addChild: _gameLivesCountLabel];
         [self addChild: _addLife];
@@ -205,7 +212,7 @@ static NSString* const kGameLivesKey = @"kGameLivesKey";
         
         // Schedule selectors to handle animations, collison checks and timers
         [self schedule:@selector(nextFrame:)];
-        [self schedule:@selector(checkForCollision) interval:0.2];
+        [self schedule:@selector(checkForCollision) interval:0.15];
         [self schedule:@selector(incrementTime) interval:1.0];
         [self schedule:@selector(decrementFtTillGround) interval:0.01];
         
@@ -445,15 +452,15 @@ static NSString* const kGameLivesKey = @"kGameLivesKey";
         self.showBirdThree = YES;
     }
     
-    if (self.time == 35 || self.time == 110) {
+    if (self.time == 35 || self.time == 90) {
         [self showTempInvincibility];
     }
     
-    if (self.time == 75 || self.time == 130) {
+    if (self.time == 65 || self.time == 130) {
         [self showTempSlowMo];
     }
     
-    if (self.time == 111) {
+    if (self.time == 91) {
         [self showAddLife];
     }
 }
@@ -487,12 +494,12 @@ static NSString* const kGameLivesKey = @"kGameLivesKey";
     CGSize size = [[CCDirector sharedDirector] winSize];
     self.cloudOne.position = ccp( self.cloudOne.position.x, self.cloudOne.position.y + cloudOneSpeed*dt );
     if (self.cloudOne.position.y > size.height+400) {
-        self.cloudOne.position = ccp( self.cloudOne.position.x, -300 );
+        self.cloudOne.position = ccp( [self randomFloatBetween:50.0 and:size.width - 50], -300 );
     }
     
     self.cloudTwo.position = ccp( self.cloudTwo.position.x, self.cloudTwo.position.y + cloudTwoSpeed*dt );
     if (self.cloudTwo.position.y > size.height+300) {
-        self.cloudTwo.position = ccp( self.cloudTwo.position.x, -300 );
+        self.cloudTwo.position = ccp( [self randomFloatBetween:50.0 and:size.width - 50], -300 );
     }
     
     // Bird 1 animation
@@ -722,6 +729,13 @@ static NSString* const kGameLivesKey = @"kGameLivesKey";
     [self.menu setMenuPosition:position];
     [self.menu setTitle:@"You Won!"];
     [self.menu setTitleColor:ccGREEN];
+    self.invincibilityActive = YES;
+    
+    [self.menu addLabel:@"Next Level" withBlock:^(id sender) {
+        [[SimpleAudioEngine sharedEngine] resumeBackgroundMusic];
+        [[CCDirector sharedDirector] resume];
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[LevelTwoLayer scene]]];
+    }];
     
     [self.menu addLabel:@"Start Over" withBlock:^(id sender) {
         [[SimpleAudioEngine sharedEngine] resumeBackgroundMusic];

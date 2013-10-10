@@ -156,6 +156,7 @@
 		1AC771B917D6C54F00DEF7AA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC771B817D6C54F00DEF7AA /* AppDelegate.m */; };
 		1AC771BC17D6C54F00DEF7AA /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC771BB17D6C54F00DEF7AA /* MainMenuLayer.m */; };
 		1AC771BF17D6C54F00DEF7AA /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC771BE17D6C54F00DEF7AA /* IntroLayer.m */; };
+		1AD48D99180750C1009AEBE8 /* LevelTwoLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD48D98180750C1009AEBE8 /* LevelTwoLayer.m */; };
 		1AE361F317F4E6CE003F66CE /* InstructionsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE361F217F4E6CE003F66CE /* InstructionsLayer.m */; };
 		1AE361F517F4FA90003F66CE /* instructions.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AE361F417F4FA90003F66CE /* instructions.png */; };
 		1AE8E5B617D94F2200854703 /* cloud1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AE8E5AF17D94F2200854703 /* cloud1.png */; };
@@ -476,6 +477,8 @@
 		1AC771BB17D6C54F00DEF7AA /* MainMenuLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainMenuLayer.m; sourceTree = "<group>"; };
 		1AC771BD17D6C54F00DEF7AA /* IntroLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntroLayer.h; sourceTree = "<group>"; };
 		1AC771BE17D6C54F00DEF7AA /* IntroLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntroLayer.m; sourceTree = "<group>"; };
+		1AD48D97180750C1009AEBE8 /* LevelTwoLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelTwoLayer.h; sourceTree = "<group>"; };
+		1AD48D98180750C1009AEBE8 /* LevelTwoLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelTwoLayer.m; sourceTree = "<group>"; };
 		1AE361F117F4E6CE003F66CE /* InstructionsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstructionsLayer.h; sourceTree = "<group>"; };
 		1AE361F217F4E6CE003F66CE /* InstructionsLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstructionsLayer.m; sourceTree = "<group>"; };
 		1AE361F417F4FA90003F66CE /* instructions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = instructions.png; path = Resources/instructions.png; sourceTree = "<group>"; };
@@ -526,6 +529,7 @@
 				1AE361F017F4E6B3003F66CE /* Instructions */,
 				1A99C8B517F3B63E00CBC375 /* Credits */,
 				1A312CC417DCC37B007E0D16 /* Level 1 */,
+				1AD48D961807508F009AEBE8 /* Level 2 */,
 				1A312CC317DCC371007E0D16 /* Main Menu */,
 				1A312CC217DCC369007E0D16 /* Intro */,
 			);
@@ -1029,6 +1033,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		1AD48D961807508F009AEBE8 /* Level 2 */ = {
+			isa = PBXGroup;
+			children = (
+				1AD48D97180750C1009AEBE8 /* LevelTwoLayer.h */,
+				1AD48D98180750C1009AEBE8 /* LevelTwoLayer.m */,
+			);
+			name = "Level 2";
+			sourceTree = "<group>";
+		};
 		1AE361F017F4E6B3003F66CE /* Instructions */ = {
 			isa = PBXGroup;
 			children = (
@@ -1181,6 +1194,7 @@
 				1AC770BA17D6C54E00DEF7AA /* CCParticleBatchNode.m in Sources */,
 				1AC770BD17D6C54E00DEF7AA /* CCParticleExamples.m in Sources */,
 				1AC770C017D6C54E00DEF7AA /* CCParticleSystem.m in Sources */,
+				1AD48D99180750C1009AEBE8 /* LevelTwoLayer.m in Sources */,
 				1AC770C317D6C54E00DEF7AA /* CCParticleSystemQuad.m in Sources */,
 				1AC770C617D6C54E00DEF7AA /* CCPhysicsDebugNode.m in Sources */,
 				1AC770C917D6C54E00DEF7AA /* CCPhysicsSprite.mm in Sources */,
