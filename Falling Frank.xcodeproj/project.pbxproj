@@ -18,6 +18,8 @@
 		1A72602B1802E512007F92FC /* invinc@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A7260251802E512007F92FC /* invinc@2x.png */; };
 		1A72602C1802E512007F92FC /* slow_mo.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A7260261802E512007F92FC /* slow_mo.png */; };
 		1A72602D1802E512007F92FC /* slow_mo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A7260271802E512007F92FC /* slow_mo@2x.png */; };
+		1A85AB97180A040F00A7BDD1 /* GameKitManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A85AB96180A040F00A7BDD1 /* GameKitManager.m */; };
+		1A85AB9B180B015C00A7BDD1 /* GameSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A85AB9A180B015C00A7BDD1 /* GameSettings.m */; };
 		1A99C8B817F3B6B500CBC375 /* CreditsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A99C8B717F3B6B500CBC375 /* CreditsLayer.m */; };
 		1A9A121617F3C382003C6C9B /* Icon-@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A9A121517F3C382003C6C9B /* Icon-@2x.png */; };
 		1A9A121A17F3C426003C6C9B /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A9A121717F3C426003C6C9B /* Icon-76.png */; };
@@ -191,6 +193,10 @@
 		1A7260251802E512007F92FC /* invinc@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "invinc@2x.png"; path = "Resources/invinc@2x.png"; sourceTree = "<group>"; };
 		1A7260261802E512007F92FC /* slow_mo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = slow_mo.png; path = Resources/slow_mo.png; sourceTree = "<group>"; };
 		1A7260271802E512007F92FC /* slow_mo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "slow_mo@2x.png"; path = "Resources/slow_mo@2x.png"; sourceTree = "<group>"; };
+		1A85AB95180A040F00A7BDD1 /* GameKitManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameKitManager.h; sourceTree = "<group>"; };
+		1A85AB96180A040F00A7BDD1 /* GameKitManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameKitManager.m; sourceTree = "<group>"; };
+		1A85AB99180B015C00A7BDD1 /* GameSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSettings.h; sourceTree = "<group>"; };
+		1A85AB9A180B015C00A7BDD1 /* GameSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameSettings.m; sourceTree = "<group>"; };
 		1A99C8B617F3B6B500CBC375 /* CreditsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditsLayer.h; sourceTree = "<group>"; };
 		1A99C8B717F3B6B500CBC375 /* CreditsLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditsLayer.m; sourceTree = "<group>"; };
 		1A9A121517F3C382003C6C9B /* Icon-@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-@2x.png"; path = "Resources/Icon-@2x.png"; sourceTree = "<group>"; };
@@ -563,6 +569,24 @@
 			name = "Level 1";
 			sourceTree = "<group>";
 		};
+		1A85AB94180A040100A7BDD1 /* GameKit Manager */ = {
+			isa = PBXGroup;
+			children = (
+				1A85AB95180A040F00A7BDD1 /* GameKitManager.h */,
+				1A85AB96180A040F00A7BDD1 /* GameKitManager.m */,
+			);
+			path = "GameKit Manager";
+			sourceTree = "<group>";
+		};
+		1A85AB98180B014A00A7BDD1 /* Game Settings */ = {
+			isa = PBXGroup;
+			children = (
+				1A85AB99180B015C00A7BDD1 /* GameSettings.h */,
+				1A85AB9A180B015C00A7BDD1 /* GameSettings.m */,
+			);
+			path = "Game Settings";
+			sourceTree = "<group>";
+		};
 		1A99C8B517F3B63E00CBC375 /* Credits */ = {
 			isa = PBXGroup;
 			children = (
@@ -609,6 +633,8 @@
 		1AC7702617D6C54D00DEF7AA /* Falling Frank */ = {
 			isa = PBXGroup;
 			children = (
+				1A85AB98180B014A00A7BDD1 /* Game Settings */,
+				1A85AB94180A040100A7BDD1 /* GameKit Manager */,
 				1A312CC117DCC356007E0D16 /* Scenes */,
 				1AC771B717D6C54F00DEF7AA /* AppDelegate.h */,
 				1AC771B817D6C54F00DEF7AA /* AppDelegate.m */,
@@ -1079,6 +1105,11 @@
 			attributes = {
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = jeremyfox;
+				TargetAttributes = {
+					1AC7700E17D6C54D00DEF7AA = {
+						DevelopmentTeam = ERTW5K73R4;
+					};
+				};
 			};
 			buildConfigurationList = 1AC7700A17D6C54D00DEF7AA /* Build configuration list for PBXProject "Falling Frank" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1160,6 +1191,7 @@
 				1AC7705517D6C54D00DEF7AA /* CCActionInstant.m in Sources */,
 				1AC7705817D6C54D00DEF7AA /* CCActionInterval.m in Sources */,
 				1AC7705B17D6C54D00DEF7AA /* CCActionManager.m in Sources */,
+				1A85AB9B180B015C00A7BDD1 /* GameSettings.m in Sources */,
 				1AC7705E17D6C54D00DEF7AA /* CCActionPageTurn3D.m in Sources */,
 				1AC7706117D6C54D00DEF7AA /* CCActionProgressTimer.m in Sources */,
 				1AC7706417D6C54D00DEF7AA /* CCActionTiledGrid.m in Sources */,
@@ -1247,6 +1279,7 @@
 				1AC7717217D6C54F00DEF7AA /* CDOpenALSupport.m in Sources */,
 				1AC7717517D6C54F00DEF7AA /* CDXMacOSXSupport.m in Sources */,
 				1AC7717817D6C54F00DEF7AA /* CDXPropertyModifierAction.m in Sources */,
+				1A85AB97180A040F00A7BDD1 /* GameKitManager.m in Sources */,
 				1AC7717B17D6C54F00DEF7AA /* CocosDenshion.m in Sources */,
 				1AC7717F17D6C54F00DEF7AA /* SimpleAudioEngine.m in Sources */,
 				1AC7719517D6C54F00DEF7AA /* aabb.c in Sources */,
@@ -1320,6 +1353,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1333,6 +1368,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1342,6 +1378,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Falling Frank/Prefix.pch";
@@ -1354,6 +1392,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

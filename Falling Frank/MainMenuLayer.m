@@ -11,6 +11,7 @@
 #import "LevelOneLayer.h"
 #import "CreditsLayer.h"
 #import "InstructionsLayer.h"
+#import "AppDelegate.h"
 
 #pragma mark - MainMenuLayer
 
@@ -270,9 +271,11 @@
     
     [CCMenuItemFont setFontSize:28];
     
-    __block id copy_self = self;
+    __block id _self = self;
     
     CCMenuItem *itemNewGame = [CCMenuItemFont itemWithString:@"New Game" block:^(id sender) {
+        [GameSettings resetGameScore];
+        [GameSettings resetGameLives];
         [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
         [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[LevelOneLayer scene]]];
     }];
@@ -292,19 +295,25 @@
     }];
     
     CCMenuItem *itemAchievement = [CCMenuItemFont itemWithString:@"Achievements" block:^(id sender) {
-        GKAchievementViewController *achivementViewController = [[GKAchievementViewController alloc] init];
-        achivementViewController.achievementDelegate = copy_self;
-        AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-        [[app navController] presentViewController:achivementViewController animated:YES completion:nil];
-        [achivementViewController release];
+        GKLocalPlayer* localPlayer = [GKLocalPlayer localPlayer];
+        if (localPlayer.isAuthenticated) {
+            GKAchievementViewController *achivementViewController = [[GKAchievementViewController alloc] init];
+            achivementViewController.achievementDelegate = _self;
+            AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
+            [[app navController] presentViewController:achivementViewController animated:YES completion:nil];
+            [achivementViewController release];
+        }
     }];
     
     CCMenuItem *itemLeaderboard = [CCMenuItemFont itemWithString:@"Leaderboard" block:^(id sender) {
-        GKLeaderboardViewController *leaderboardViewController = [[GKLeaderboardViewController alloc] init];
-        leaderboardViewController.leaderboardDelegate = copy_self;
-        AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-        [[app navController] presentViewController:leaderboardViewController animated:YES completion:nil];
-        [leaderboardViewController release];
+        GKLocalPlayer* localPlayer = [GKLocalPlayer localPlayer];
+        if (localPlayer.isAuthenticated) {
+            GKLeaderboardViewController *leaderboardViewController = [[GKLeaderboardViewController alloc] init];
+            leaderboardViewController.leaderboardDelegate = _self;
+            AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
+            [[app navController] presentViewController:leaderboardViewController animated:YES completion:nil];
+            [leaderboardViewController release];
+        }
     }];
     
     CCMenu *menu = [CCMenu menuWithItems:itemNewGame, itemInstructions, itemCredits, itemAchievement, itemLeaderboard, nil];

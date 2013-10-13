@@ -124,6 +124,19 @@
 	if ([navController_ visibleViewController] == director_) {
 		[director_ resume];
     }
+    
+    GKLocalPlayer* localPlayer = [GKLocalPlayer localPlayer];
+    if (!localPlayer.isAuthenticated) {
+        [GameKitManager authenticateLocalPlayerWithAuthenticateBlock:^(UIViewController *viewController) {
+            [navController_ presentViewController:viewController animated:YES completion:nil];
+        } authenticatedBlock:^(GKLocalPlayer *localPlayer) {
+            if (!localPlayer.isAuthenticated) {
+                [[[UIAlertView alloc] initWithTitle:@"Authentication Failed" message:@"You could not be logged into game center because authentication failed. Please authenticate using the Game Center App to enable Game Center for this game." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+            } else {
+                [[GameKitManager sharedInstance] loadLeaderboards];
+            }
+        }];
+    }
 }
 
 - (void)applicationDidEnterBackground:(UIApplication*)application

@@ -12,14 +12,7 @@
 #import "MainMenuLayer.h"
 #import "LevelOneLayer.h"
 
-static const int MAX_HIT_COUNT = 20;
 static const int FEET_TILL_GROUND = 10000;
-static const int FEET_TILL_GROUND_ORANGE = 2000;
-static const int FEET_TILL_GROUND_RED = 1000;
-static const int FEET_TILL_GROUND_SUCCEEDED = 100;
-static const int DEFAULT_GAME_LIVES_COUNT = 2;
-static const int TEMP_POWER_UP_SECONDS = 10;
-static NSString* const kGameLivesKey = @"kGameLivesKey";
 
 @interface LevelTwoLayer()
 // Clouds 
@@ -51,11 +44,14 @@ static NSString* const kGameLivesKey = @"kGameLivesKey";
 @property (nonatomic, strong) CCLabelTTF *hitCountNumLabel;
 @property (nonatomic, strong) CCLabelTTF *ftTillGroundLabel;
 @property (nonatomic, strong) CCLabelTTF *gameLivesCountLabel;
+@property (nonatomic, strong) CCLabelTTF *gameScoreLabel;
 @property (nonatomic, strong) CCLabelTTF *powerUpTimeLabel;
 @property (nonatomic, strong) __block ContextMenu *menu;
 
 @property (nonatomic, assign) int hitCount;
 @property (nonatomic, assign) int ftTillGround;
+@property (nonatomic, assign) int scoreAtLevelStart;
+@property (nonatomic, assign) int livesAtLevelStart;
 @property (nonatomic, assign) float time;
 @property (nonatomic, assign) float powerUpTime;
 @property (nonatomic, assign) BOOL birdCollision;
@@ -173,7 +169,7 @@ static NSString* const kGameLivesKey = @"kGameLivesKey";
         _ftTillGroundLabel.position = ccp((IS_IPAD) ? x+20 : x+35, size.height-24);
         _ftTillGroundLabel.color = ccBLACK;
         
-        CCLabelTTF* levelLabel =[CCLabelTTF labelWithString:@"Level 2" fontName:@"Marker Felt" fontSize:18 dimensions:labelSize hAlignment:NSTextAlignmentRight];
+        CCLabelTTF* levelLabel = [CCLabelTTF labelWithString:@"Level 2" fontName:@"Marker Felt" fontSize:18 dimensions:labelSize hAlignment:NSTextAlignmentRight];
         x = size.width - CGRectGetWidth(levelLabel.boundingBox);
         levelLabel.position = ccp((IS_IPAD) ? x+20 : x+35, size.height-48);
         levelLabel.color = ccBLACK;
@@ -181,14 +177,28 @@ static NSString* const kGameLivesKey = @"kGameLivesKey";
         NSNumber* gameLives = [[NSUserDefaults standardUserDefaults] objectForKey:kGameLivesKey];
         if (!gameLives) {
             gameLives = @(DEFAULT_GAME_LIVES_COUNT);
-            [self setGameLives:[gameLives integerValue]];
+            [GameSettings resetGameLives];
         }
+        _livesAtLevelStart = [gameLives integerValue];
         CCLabelTTF *gameLivesLabel = [CCLabelTTF labelWithString:@"Lives Left: " fontName:@"Marker Felt" fontSize:18];
         _gameLivesCountLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", [gameLives integerValue]] fontName:@"Marker Felt" fontSize:18];
         gameLivesLabel.position = ccp(CGRectGetWidth(gameLivesLabel.boundingBox) - 29, size.height-48);
         _gameLivesCountLabel.position = ccp(CGRectGetMaxX(gameLivesLabel.boundingBox) + 8, size.height-48);
         gameLivesLabel.color = ccBLACK;
         _gameLivesCountLabel.color = ccBLACK;
+        
+        NSNumber* gameScore = [[NSUserDefaults standardUserDefaults] objectForKey:kGameScoreKey];
+        if (!gameScore) {
+            gameScore = @(DEFAULT_GAME_SCORE);
+            [GameSettings resetGameScore];
+        }
+        _scoreAtLevelStart = [gameScore integerValue];
+        CCLabelTTF *scoreLabel = [CCLabelTTF labelWithString:@"Score: " fontName:@"Marker Felt" fontSize:16];
+        _gameScoreLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", [gameScore integerValue]] fontName:@"Marker Felt" fontSize:16];
+        scoreLabel.position = ccp(CGRectGetWidth(scoreLabel.boundingBox) - 12, size.height-68);
+        _gameScoreLabel.position = ccp(CGRectGetMaxX(scoreLabel.boundingBox) + 14, size.height-68);
+        scoreLabel.color = ccBLACK;
+        _gameScoreLabel.color = ccBLACK;
         
         // Add Children
         [self addChild: background];
@@ -200,6 +210,8 @@ static NSString* const kGameLivesKey = @"kGameLivesKey";
         [self addChild: levelLabel];
         [self addChild: gameLivesLabel];
         [self addChild: _gameLivesCountLabel];
+        [self addChild: scoreLabel];
+        [self addChild: _gameScoreLabel];
         [self addChild: _addLife];
         [self addChild: _tempInvincibility];
         [self addChild: _tempSlowMo];
@@ -452,15 +464,15 @@ static NSString* const kGameLivesKey = @"kGameLivesKey";
         self.showBirdThree = YES;
     }
     
-    if (self.time == 26 || self.time == 96) {
+    if (self.time == 32 || self.time == 100) {
         [self showTempInvincibility];
     }
     
-    if (self.time == 52 || self.time == 140) {
+    if (self.time == 68 || self.time == 141) {
         [self showTempSlowMo];
     }
     
-    if (self.time == 53) {
+    if (self.time == 101) {
         [self showAddLife];
     }
 }
@@ -595,6 +607,7 @@ static NSString* const kGameLivesKey = @"kGameLivesKey";
                 ++self.hitCount;
                 NSString* newLabel = [NSString stringWithFormat:@"%d", self.hitCount];
                 [self.hitCountNumLabel setString:newLabel];
+                [GameSettings subtractGameScore:GAME_SCORE_HIT_BY_BIRD forLabel:self.gameScoreLabel];
             }
         }
         
@@ -605,6 +618,7 @@ static NSString* const kGameLivesKey = @"kGameLivesKey";
                 ++self.hitCount;
                 NSString* newLabel = [NSString stringWithFormat:@"%d", self.hitCount];
                 [self.hitCountNumLabel setString:newLabel];
+                [GameSettings subtractGameScore:GAME_SCORE_HIT_BY_BIRD forLabel:self.gameScoreLabel];
             }
         }
         
@@ -615,6 +629,7 @@ static NSString* const kGameLivesKey = @"kGameLivesKey";
                 ++self.hitCount;
                 NSString* newLabel = [NSString stringWithFormat:@"%d", self.hitCount];
                 [self.hitCountNumLabel setString:newLabel];
+                [GameSettings subtractGameScore:GAME_SCORE_HIT_BY_BIRD forLabel:self.gameScoreLabel];
             }
         }
     }
@@ -623,7 +638,8 @@ static NSString* const kGameLivesKey = @"kGameLivesKey";
         if (CGRectContainsRect(frankRect, self.addLife.boundingBox)) {
             self.addLifeCollision = YES;
             NSNumber* currentLives = [[NSUserDefaults standardUserDefaults] objectForKey:kGameLivesKey];
-            [self setGameLives:[currentLives integerValue] + 1];
+            [GameSettings addGameLives:[currentLives integerValue] + 1 forLabel:self.gameLivesCountLabel];
+            [GameSettings addGameScore:GAME_SCORE_COLLECTED_POWER_UP forLabel:self.gameScoreLabel];
             self.addLife.visible = NO;
         }
         self.addLifeCollision = NO;
@@ -683,13 +699,16 @@ static NSString* const kGameLivesKey = @"kGameLivesKey";
         [self.menu setTitleColor:ccRED];
         
         [self.menu addLabel:@"Start New Game" withBlock:^(id sender) {
-            [self setGameLives:DEFAULT_GAME_LIVES_COUNT];
+            [GameSettings resetGameLives];
+            [GameSettings resetGameScore];
             [[SimpleAudioEngine sharedEngine] resumeBackgroundMusic];
             [[CCDirector sharedDirector] resume];
             [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[LevelOneLayer scene]]];
         }];
         
         [self.menu addLabel:@"Main Menu" withBlock:^(id sender) {
+            [GameSettings resetGameLives];
+            [GameSettings resetGameScore];
             [[SimpleAudioEngine sharedEngine] resumeBackgroundMusic];
             [[CCDirector sharedDirector] resume];
             [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[MainMenuLayer scene]]];
@@ -699,14 +718,17 @@ static NSString* const kGameLivesKey = @"kGameLivesKey";
         [self.menu setTitleColor:ccRED];
         
         [self.menu addLabel:@"Retry Level" withBlock:^(id sender) {
-            [self setGameLives:([livesLeft integerValue] - 1)];
+            [GameSettings subtractGameLives:1 forLabel:self.gameLivesCountLabel];
+            [GameSettings setGameScore:self.scoreAtLevelStart];
+            [GameSettings setGameLives:self.livesAtLevelStart];
             [[SimpleAudioEngine sharedEngine] resumeBackgroundMusic];
             [[CCDirector sharedDirector] resume];
             [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[LevelTwoLayer scene]]];
         }];
         
         [self.menu addLabel:@"Quit Game" withBlock:^(id sender) {
-            [self setGameLives:DEFAULT_GAME_LIVES_COUNT];
+            [GameSettings resetGameLives];
+            [GameSettings resetGameScore];
             [[SimpleAudioEngine sharedEngine] resumeBackgroundMusic];
             [[CCDirector sharedDirector] resume];
             [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[MainMenuLayer scene]]];
@@ -729,11 +751,31 @@ static NSString* const kGameLivesKey = @"kGameLivesKey";
     [self.menu setMenuPosition:position];
     [self.menu setTitle:@"You Won!"];
     [self.menu setTitleColor:ccGREEN];
+    self.invincibilityActive = YES;
+    
+    if (self.hitCount == 0) {
+        [GameSettings addGameScore:GAME_SCORE_PERFECT_LEVEL forLabel:self.gameScoreLabel];
+    }
+    [GameSettings addGameScore:GAME_SCORE_COMPLETED_LEVEL forLabel:self.gameScoreLabel];
+    
+    GKLeaderboard* frankBoard = [GameKitManager sharedInstance].frankboard;
+    if (frankBoard) {
+        int gameScore = [[[NSUserDefaults standardUserDefaults] objectForKey:kGameScoreKey] integerValue];
+        [GameKitManager reportScore:gameScore forLeaderboardID:frankBoard.identifier];
+    }
+    
+//    [self.menu addLabel:@"Next Level" withBlock:^(id sender) {
+//        [[SimpleAudioEngine sharedEngine] resumeBackgroundMusic];
+//        [[CCDirector sharedDirector] resume];
+//        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[LevelThreeLayer scene]]];
+//    }];
     
     [self.menu addLabel:@"Start Over" withBlock:^(id sender) {
+        [GameSettings setGameScore:self.scoreAtLevelStart];
+        [GameSettings setGameLives:self.livesAtLevelStart];
         [[SimpleAudioEngine sharedEngine] resumeBackgroundMusic];
         [[CCDirector sharedDirector] resume];
-        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[LevelOneLayer scene]]];
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[LevelTwoLayer scene]]];
     }];
     
     [self.menu addLabel:@"Quit Game" withBlock:^(id sender) {
@@ -757,12 +799,16 @@ static NSString* const kGameLivesKey = @"kGameLivesKey";
     [self.menu setTitleColor:ccWHITE];
     
     [self.menu addLabel:@"Start Over" withBlock:^(id sender) {
+        [GameSettings setGameScore:self.scoreAtLevelStart];
+        [GameSettings setGameLives:self.livesAtLevelStart];
         [[SimpleAudioEngine sharedEngine] resumeBackgroundMusic];
         [[CCDirector sharedDirector] resume];
-        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[LevelOneLayer scene]]];
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[LevelTwoLayer scene]]];
     }];
     
     [self.menu addLabel:@"Quit Game" withBlock:^(id sender) {
+        [GameSettings resetGameLives];
+        [GameSettings resetGameScore];
         [[SimpleAudioEngine sharedEngine] resumeBackgroundMusic];
         [[CCDirector sharedDirector] resume];
         [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[MainMenuLayer scene]]];
@@ -806,17 +852,6 @@ static NSString* const kGameLivesKey = @"kGameLivesKey";
 }
 
 #pragma mark -----------------------------
-#pragma mark NSUSerDefaults
-#pragma mark -----------------------------
-
-- (void)setGameLives:(NSInteger)lives
-{
-    [[NSUserDefaults standardUserDefaults] setObject:@(lives) forKey:kGameLivesKey];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    [self.gameLivesCountLabel setString:[NSString stringWithFormat:@"%d", lives]];
-}
-
-#pragma mark -----------------------------
 #pragma mark Power Up Handlers
 #pragma mark -----------------------------
 
@@ -825,6 +860,7 @@ static NSString* const kGameLivesKey = @"kGameLivesKey";
     self.invincibilityActive = YES;
     self.tempInvincibility.visible = NO;
     [self showTempPowerUpTimer];
+    [GameSettings addGameScore:GAME_SCORE_COLLECTED_POWER_UP forLabel:self.gameScoreLabel];
 }
 
 - (void)disableInvincibility
@@ -837,6 +873,7 @@ static NSString* const kGameLivesKey = @"kGameLivesKey";
     self.slowMoActive = YES;
     self.tempSlowMo.visible = NO;
     [self showTempPowerUpTimer];
+    [GameSettings addGameScore:GAME_SCORE_COLLECTED_POWER_UP forLabel:self.gameScoreLabel];
 }
 
 - (void)disableSlowMo
