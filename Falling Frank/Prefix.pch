@@ -12,6 +12,8 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "Player.h"
+#import "SQLiteManager.h"
 #import "SimpleAudioEngine.h"
 #import "GameSettings.h"
 #import "GameKitManager.h"

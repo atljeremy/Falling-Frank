@@ -17,7 +17,7 @@
 + (instancetype)sharedInstance;
 + (void)authenticateLocalPlayerWithAuthenticateBlock:(void(^)(UIViewController* viewController))authenticateBlock authenticatedBlock:(void(^)(GKLocalPlayer* localPlayer))authenticatedBlock;
 + (void)reportScore:(int64_t)score forLeaderboardID:(NSString*)identifier;
-
++ (void)retrieveTopTenScores;
 - (void)loadLeaderboards;
 
 @end

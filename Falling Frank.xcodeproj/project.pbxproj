@@ -25,6 +25,45 @@
 		1A9A121A17F3C426003C6C9B /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A9A121717F3C426003C6C9B /* Icon-76.png */; };
 		1A9A121B17F3C426003C6C9B /* Icon-144@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A9A121817F3C426003C6C9B /* Icon-144@2x.png */; };
 		1A9A121C17F3C426003C6C9B /* Icon-152@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A9A121917F3C426003C6C9B /* Icon-152@2x.png */; };
+		1AA04D5E180CBFE900C3B2E2 /* ZIMDbMigration.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D08180CBFE900C3B2E2 /* ZIMDbMigration.m */; };
+		1AA04D5F180CBFE900C3B2E2 /* ZIMSqlMigrateTableStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D0A180CBFE900C3B2E2 /* ZIMSqlMigrateTableStatement.m */; };
+		1AA04D60180CBFE900C3B2E2 /* ZIMDbConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D0C180CBFE900C3B2E2 /* ZIMDbConnection.m */; };
+		1AA04D61180CBFE900C3B2E2 /* ZIMDbConnectionPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D0E180CBFE900C3B2E2 /* ZIMDbConnectionPool.m */; };
+		1AA04D62180CBFE900C3B2E2 /* NSString+ZIMString.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D12180CBFE900C3B2E2 /* NSString+ZIMString.m */; };
+		1AA04D63180CBFE900C3B2E2 /* ZIMOrmModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D15180CBFE900C3B2E2 /* ZIMOrmModel.m */; };
+		1AA04D64180CBFE900C3B2E2 /* ZIMOrmSelectStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D19180CBFE900C3B2E2 /* ZIMOrmSelectStatement.m */; };
+		1AA04D65180CBFE900C3B2E2 /* ZIMSqlAlterTableStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D1C180CBFE900C3B2E2 /* ZIMSqlAlterTableStatement.m */; };
+		1AA04D66180CBFE900C3B2E2 /* ZIMSqlAnalyzeStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D1E180CBFE900C3B2E2 /* ZIMSqlAnalyzeStatement.m */; };
+		1AA04D67180CBFE900C3B2E2 /* ZIMSqlAttachStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D20180CBFE900C3B2E2 /* ZIMSqlAttachStatement.m */; };
+		1AA04D68180CBFE900C3B2E2 /* ZIMSqlCreateIndexStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D22180CBFE900C3B2E2 /* ZIMSqlCreateIndexStatement.m */; };
+		1AA04D69180CBFE900C3B2E2 /* ZIMSqlCreateTableStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D24180CBFE900C3B2E2 /* ZIMSqlCreateTableStatement.m */; };
+		1AA04D6A180CBFE900C3B2E2 /* ZIMSqlCreateTriggerStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D26180CBFE900C3B2E2 /* ZIMSqlCreateTriggerStatement.m */; };
+		1AA04D6B180CBFE900C3B2E2 /* ZIMSqlCreateViewStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D28180CBFE900C3B2E2 /* ZIMSqlCreateViewStatement.m */; };
+		1AA04D6C180CBFE900C3B2E2 /* ZIMSqlDeleteStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D2D180CBFE900C3B2E2 /* ZIMSqlDeleteStatement.m */; };
+		1AA04D6D180CBFE900C3B2E2 /* ZIMSqlDetachStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D2F180CBFE900C3B2E2 /* ZIMSqlDetachStatement.m */; };
+		1AA04D6E180CBFE900C3B2E2 /* ZIMSqlDropIndexStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D31180CBFE900C3B2E2 /* ZIMSqlDropIndexStatement.m */; };
+		1AA04D6F180CBFE900C3B2E2 /* ZIMSqlDropTableStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D33180CBFE900C3B2E2 /* ZIMSqlDropTableStatement.m */; };
+		1AA04D70180CBFE900C3B2E2 /* ZIMSqlDropTriggerStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D35180CBFE900C3B2E2 /* ZIMSqlDropTriggerStatement.m */; };
+		1AA04D71180CBFE900C3B2E2 /* ZIMSqlDropViewStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D37180CBFE900C3B2E2 /* ZIMSqlDropViewStatement.m */; };
+		1AA04D72180CBFE900C3B2E2 /* ZIMSqlExplainStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D39180CBFE900C3B2E2 /* ZIMSqlExplainStatement.m */; };
+		1AA04D73180CBFE900C3B2E2 /* ZIMSqlExpression.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D3B180CBFE900C3B2E2 /* ZIMSqlExpression.m */; };
+		1AA04D74180CBFE900C3B2E2 /* ZIMSqlInsertStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D3D180CBFE900C3B2E2 /* ZIMSqlInsertStatement.m */; };
+		1AA04D75180CBFE900C3B2E2 /* ZIMSqlPreparedStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D3F180CBFE900C3B2E2 /* ZIMSqlPreparedStatement.m */; };
+		1AA04D76180CBFE900C3B2E2 /* ZIMSqlReindexStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D41180CBFE900C3B2E2 /* ZIMSqlReindexStatement.m */; };
+		1AA04D77180CBFE900C3B2E2 /* ZIMSqlSelectStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D44180CBFE900C3B2E2 /* ZIMSqlSelectStatement.m */; };
+		1AA04D78180CBFE900C3B2E2 /* ZIMSqlShowColumnsStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D46180CBFE900C3B2E2 /* ZIMSqlShowColumnsStatement.m */; };
+		1AA04D79180CBFE900C3B2E2 /* ZIMSqlShowGrantsStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D48180CBFE900C3B2E2 /* ZIMSqlShowGrantsStatement.m */; };
+		1AA04D7A180CBFE900C3B2E2 /* ZIMSqlShowTablesStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D4A180CBFE900C3B2E2 /* ZIMSqlShowTablesStatement.m */; };
+		1AA04D7B180CBFE900C3B2E2 /* ZIMSqlShowTriggersStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D4C180CBFE900C3B2E2 /* ZIMSqlShowTriggersStatement.m */; };
+		1AA04D7C180CBFE900C3B2E2 /* ZIMSqlShowViewsStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D4E180CBFE900C3B2E2 /* ZIMSqlShowViewsStatement.m */; };
+		1AA04D7D180CBFE900C3B2E2 /* ZIMSqlTokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D51180CBFE900C3B2E2 /* ZIMSqlTokenizer.m */; };
+		1AA04D7E180CBFE900C3B2E2 /* ZIMSqlTruncateTableStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D54180CBFE900C3B2E2 /* ZIMSqlTruncateTableStatement.m */; };
+		1AA04D7F180CBFE900C3B2E2 /* ZIMSqlUpdateStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D56180CBFE900C3B2E2 /* ZIMSqlUpdateStatement.m */; };
+		1AA04D80180CBFE900C3B2E2 /* ZIMSqlUpsertStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D58180CBFE900C3B2E2 /* ZIMSqlUpsertStatement.m */; };
+		1AA04D81180CBFE900C3B2E2 /* ZIMMessageDigest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D5B180CBFE900C3B2E2 /* ZIMMessageDigest.m */; };
+		1AA04D85180CC03F00C3B2E2 /* SQLiteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D84180CC03F00C3B2E2 /* SQLiteManager.m */; };
+		1AA04D89180CC10D00C3B2E2 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA04D88180CC10D00C3B2E2 /* Player.m */; };
+		1AA04D8B180CCFEF00C3B2E2 /* db.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1AA04D8A180CCFEF00C3B2E2 /* db.plist */; };
 		1AB270E417E00B4900EE476B /* context_menu_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AB270E217E00B4900EE476B /* context_menu_bg.png */; };
 		1AB270E517E00B4900EE476B /* context_menu_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AB270E317E00B4900EE476B /* context_menu_bg@2x.png */; };
 		1AC7701317D6C54D00DEF7AA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC7701217D6C54D00DEF7AA /* QuartzCore.framework */; };
@@ -203,6 +242,92 @@
 		1A9A121717F3C426003C6C9B /* Icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-76.png"; path = "Resources/Icon-76.png"; sourceTree = "<group>"; };
 		1A9A121817F3C426003C6C9B /* Icon-144@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-144@2x.png"; path = "Resources/Icon-144@2x.png"; sourceTree = "<group>"; };
 		1A9A121917F3C426003C6C9B /* Icon-152@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-152@2x.png"; path = "Resources/Icon-152@2x.png"; sourceTree = "<group>"; };
+		1AA04D07180CBFE900C3B2E2 /* ZIMDbMigration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMDbMigration.h; sourceTree = "<group>"; };
+		1AA04D08180CBFE900C3B2E2 /* ZIMDbMigration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMDbMigration.m; sourceTree = "<group>"; };
+		1AA04D09180CBFE900C3B2E2 /* ZIMSqlMigrateTableStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSqlMigrateTableStatement.h; sourceTree = "<group>"; };
+		1AA04D0A180CBFE900C3B2E2 /* ZIMSqlMigrateTableStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMSqlMigrateTableStatement.m; sourceTree = "<group>"; };
+		1AA04D0B180CBFE900C3B2E2 /* ZIMDbConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMDbConnection.h; sourceTree = "<group>"; };
+		1AA04D0C180CBFE900C3B2E2 /* ZIMDbConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMDbConnection.m; sourceTree = "<group>"; };
+		1AA04D0D180CBFE900C3B2E2 /* ZIMDbConnectionPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMDbConnectionPool.h; sourceTree = "<group>"; };
+		1AA04D0E180CBFE900C3B2E2 /* ZIMDbConnectionPool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMDbConnectionPool.m; sourceTree = "<group>"; };
+		1AA04D0F180CBFE900C3B2E2 /* ZIMDbSdk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMDbSdk.h; sourceTree = "<group>"; };
+		1AA04D11180CBFE900C3B2E2 /* NSString+ZIMString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ZIMString.h"; sourceTree = "<group>"; };
+		1AA04D12180CBFE900C3B2E2 /* NSString+ZIMString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ZIMString.m"; sourceTree = "<group>"; };
+		1AA04D14180CBFE900C3B2E2 /* ZIMOrmModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMOrmModel.h; sourceTree = "<group>"; };
+		1AA04D15180CBFE900C3B2E2 /* ZIMOrmModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMOrmModel.m; sourceTree = "<group>"; };
+		1AA04D16180CBFE900C3B2E2 /* ZIMOrmModelDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMOrmModelDelegate.h; sourceTree = "<group>"; };
+		1AA04D17180CBFE900C3B2E2 /* ZIMOrmSdk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMOrmSdk.h; sourceTree = "<group>"; };
+		1AA04D18180CBFE900C3B2E2 /* ZIMOrmSelectStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMOrmSelectStatement.h; sourceTree = "<group>"; };
+		1AA04D19180CBFE900C3B2E2 /* ZIMOrmSelectStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMOrmSelectStatement.m; sourceTree = "<group>"; };
+		1AA04D1B180CBFE900C3B2E2 /* ZIMSqlAlterTableStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSqlAlterTableStatement.h; sourceTree = "<group>"; };
+		1AA04D1C180CBFE900C3B2E2 /* ZIMSqlAlterTableStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMSqlAlterTableStatement.m; sourceTree = "<group>"; };
+		1AA04D1D180CBFE900C3B2E2 /* ZIMSqlAnalyzeStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSqlAnalyzeStatement.h; sourceTree = "<group>"; };
+		1AA04D1E180CBFE900C3B2E2 /* ZIMSqlAnalyzeStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMSqlAnalyzeStatement.m; sourceTree = "<group>"; };
+		1AA04D1F180CBFE900C3B2E2 /* ZIMSqlAttachStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSqlAttachStatement.h; sourceTree = "<group>"; };
+		1AA04D20180CBFE900C3B2E2 /* ZIMSqlAttachStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMSqlAttachStatement.m; sourceTree = "<group>"; };
+		1AA04D21180CBFE900C3B2E2 /* ZIMSqlCreateIndexStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSqlCreateIndexStatement.h; sourceTree = "<group>"; };
+		1AA04D22180CBFE900C3B2E2 /* ZIMSqlCreateIndexStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMSqlCreateIndexStatement.m; sourceTree = "<group>"; };
+		1AA04D23180CBFE900C3B2E2 /* ZIMSqlCreateTableStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSqlCreateTableStatement.h; sourceTree = "<group>"; };
+		1AA04D24180CBFE900C3B2E2 /* ZIMSqlCreateTableStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMSqlCreateTableStatement.m; sourceTree = "<group>"; };
+		1AA04D25180CBFE900C3B2E2 /* ZIMSqlCreateTriggerStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSqlCreateTriggerStatement.h; sourceTree = "<group>"; };
+		1AA04D26180CBFE900C3B2E2 /* ZIMSqlCreateTriggerStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMSqlCreateTriggerStatement.m; sourceTree = "<group>"; };
+		1AA04D27180CBFE900C3B2E2 /* ZIMSqlCreateViewStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSqlCreateViewStatement.h; sourceTree = "<group>"; };
+		1AA04D28180CBFE900C3B2E2 /* ZIMSqlCreateViewStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMSqlCreateViewStatement.m; sourceTree = "<group>"; };
+		1AA04D29180CBFE900C3B2E2 /* ZIMSqlDataControlCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSqlDataControlCommand.h; sourceTree = "<group>"; };
+		1AA04D2A180CBFE900C3B2E2 /* ZIMSqlDataDefinitionCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSqlDataDefinitionCommand.h; sourceTree = "<group>"; };
+		1AA04D2B180CBFE900C3B2E2 /* ZIMSqlDataManipulationCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSqlDataManipulationCommand.h; sourceTree = "<group>"; };
+		1AA04D2C180CBFE900C3B2E2 /* ZIMSqlDeleteStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSqlDeleteStatement.h; sourceTree = "<group>"; };
+		1AA04D2D180CBFE900C3B2E2 /* ZIMSqlDeleteStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMSqlDeleteStatement.m; sourceTree = "<group>"; };
+		1AA04D2E180CBFE900C3B2E2 /* ZIMSqlDetachStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSqlDetachStatement.h; sourceTree = "<group>"; };
+		1AA04D2F180CBFE900C3B2E2 /* ZIMSqlDetachStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMSqlDetachStatement.m; sourceTree = "<group>"; };
+		1AA04D30180CBFE900C3B2E2 /* ZIMSqlDropIndexStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSqlDropIndexStatement.h; sourceTree = "<group>"; };
+		1AA04D31180CBFE900C3B2E2 /* ZIMSqlDropIndexStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMSqlDropIndexStatement.m; sourceTree = "<group>"; };
+		1AA04D32180CBFE900C3B2E2 /* ZIMSqlDropTableStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSqlDropTableStatement.h; sourceTree = "<group>"; };
+		1AA04D33180CBFE900C3B2E2 /* ZIMSqlDropTableStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMSqlDropTableStatement.m; sourceTree = "<group>"; };
+		1AA04D34180CBFE900C3B2E2 /* ZIMSqlDropTriggerStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSqlDropTriggerStatement.h; sourceTree = "<group>"; };
+		1AA04D35180CBFE900C3B2E2 /* ZIMSqlDropTriggerStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMSqlDropTriggerStatement.m; sourceTree = "<group>"; };
+		1AA04D36180CBFE900C3B2E2 /* ZIMSqlDropViewStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSqlDropViewStatement.h; sourceTree = "<group>"; };
+		1AA04D37180CBFE900C3B2E2 /* ZIMSqlDropViewStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMSqlDropViewStatement.m; sourceTree = "<group>"; };
+		1AA04D38180CBFE900C3B2E2 /* ZIMSqlExplainStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSqlExplainStatement.h; sourceTree = "<group>"; };
+		1AA04D39180CBFE900C3B2E2 /* ZIMSqlExplainStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMSqlExplainStatement.m; sourceTree = "<group>"; };
+		1AA04D3A180CBFE900C3B2E2 /* ZIMSqlExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSqlExpression.h; sourceTree = "<group>"; };
+		1AA04D3B180CBFE900C3B2E2 /* ZIMSqlExpression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMSqlExpression.m; sourceTree = "<group>"; };
+		1AA04D3C180CBFE900C3B2E2 /* ZIMSqlInsertStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSqlInsertStatement.h; sourceTree = "<group>"; };
+		1AA04D3D180CBFE900C3B2E2 /* ZIMSqlInsertStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMSqlInsertStatement.m; sourceTree = "<group>"; };
+		1AA04D3E180CBFE900C3B2E2 /* ZIMSqlPreparedStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSqlPreparedStatement.h; sourceTree = "<group>"; };
+		1AA04D3F180CBFE900C3B2E2 /* ZIMSqlPreparedStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMSqlPreparedStatement.m; sourceTree = "<group>"; };
+		1AA04D40180CBFE900C3B2E2 /* ZIMSqlReindexStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSqlReindexStatement.h; sourceTree = "<group>"; };
+		1AA04D41180CBFE900C3B2E2 /* ZIMSqlReindexStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMSqlReindexStatement.m; sourceTree = "<group>"; };
+		1AA04D42180CBFE900C3B2E2 /* ZIMSqlSdk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSqlSdk.h; sourceTree = "<group>"; };
+		1AA04D43180CBFE900C3B2E2 /* ZIMSqlSelectStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSqlSelectStatement.h; sourceTree = "<group>"; };
+		1AA04D44180CBFE900C3B2E2 /* ZIMSqlSelectStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMSqlSelectStatement.m; sourceTree = "<group>"; };
+		1AA04D45180CBFE900C3B2E2 /* ZIMSqlShowColumnsStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSqlShowColumnsStatement.h; sourceTree = "<group>"; };
+		1AA04D46180CBFE900C3B2E2 /* ZIMSqlShowColumnsStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMSqlShowColumnsStatement.m; sourceTree = "<group>"; };
+		1AA04D47180CBFE900C3B2E2 /* ZIMSqlShowGrantsStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSqlShowGrantsStatement.h; sourceTree = "<group>"; };
+		1AA04D48180CBFE900C3B2E2 /* ZIMSqlShowGrantsStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMSqlShowGrantsStatement.m; sourceTree = "<group>"; };
+		1AA04D49180CBFE900C3B2E2 /* ZIMSqlShowTablesStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSqlShowTablesStatement.h; sourceTree = "<group>"; };
+		1AA04D4A180CBFE900C3B2E2 /* ZIMSqlShowTablesStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMSqlShowTablesStatement.m; sourceTree = "<group>"; };
+		1AA04D4B180CBFE900C3B2E2 /* ZIMSqlShowTriggersStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSqlShowTriggersStatement.h; sourceTree = "<group>"; };
+		1AA04D4C180CBFE900C3B2E2 /* ZIMSqlShowTriggersStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMSqlShowTriggersStatement.m; sourceTree = "<group>"; };
+		1AA04D4D180CBFE900C3B2E2 /* ZIMSqlShowViewsStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSqlShowViewsStatement.h; sourceTree = "<group>"; };
+		1AA04D4E180CBFE900C3B2E2 /* ZIMSqlShowViewsStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMSqlShowViewsStatement.m; sourceTree = "<group>"; };
+		1AA04D4F180CBFE900C3B2E2 /* ZIMSqlStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSqlStatement.h; sourceTree = "<group>"; };
+		1AA04D50180CBFE900C3B2E2 /* ZIMSqlTokenizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSqlTokenizer.h; sourceTree = "<group>"; };
+		1AA04D51180CBFE900C3B2E2 /* ZIMSqlTokenizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMSqlTokenizer.m; sourceTree = "<group>"; };
+		1AA04D52180CBFE900C3B2E2 /* ZIMSqlTransactionControlCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSqlTransactionControlCommand.h; sourceTree = "<group>"; };
+		1AA04D53180CBFE900C3B2E2 /* ZIMSqlTruncateTableStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSqlTruncateTableStatement.h; sourceTree = "<group>"; };
+		1AA04D54180CBFE900C3B2E2 /* ZIMSqlTruncateTableStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMSqlTruncateTableStatement.m; sourceTree = "<group>"; };
+		1AA04D55180CBFE900C3B2E2 /* ZIMSqlUpdateStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSqlUpdateStatement.h; sourceTree = "<group>"; };
+		1AA04D56180CBFE900C3B2E2 /* ZIMSqlUpdateStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMSqlUpdateStatement.m; sourceTree = "<group>"; };
+		1AA04D57180CBFE900C3B2E2 /* ZIMSqlUpsertStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSqlUpsertStatement.h; sourceTree = "<group>"; };
+		1AA04D58180CBFE900C3B2E2 /* ZIMSqlUpsertStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMSqlUpsertStatement.m; sourceTree = "<group>"; };
+		1AA04D5A180CBFE900C3B2E2 /* ZIMMessageDigest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMMessageDigest.h; sourceTree = "<group>"; };
+		1AA04D5B180CBFE900C3B2E2 /* ZIMMessageDigest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMMessageDigest.m; sourceTree = "<group>"; };
+		1AA04D83180CC03F00C3B2E2 /* SQLiteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLiteManager.h; sourceTree = "<group>"; };
+		1AA04D84180CC03F00C3B2E2 /* SQLiteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLiteManager.m; sourceTree = "<group>"; };
+		1AA04D87180CC10D00C3B2E2 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		1AA04D88180CC10D00C3B2E2 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
+		1AA04D8A180CCFEF00C3B2E2 /* db.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = db.plist; sourceTree = "<group>"; };
 		1AB270E217E00B4900EE476B /* context_menu_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = context_menu_bg.png; path = Resources/context_menu_bg.png; sourceTree = "<group>"; };
 		1AB270E317E00B4900EE476B /* context_menu_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "context_menu_bg@2x.png"; path = "Resources/context_menu_bg@2x.png"; sourceTree = "<group>"; };
 		1AC7700F17D6C54D00DEF7AA /* Falling Frank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Falling Frank.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -596,6 +721,170 @@
 			name = Credits;
 			sourceTree = "<group>";
 		};
+		1AA04D00180CBFE900C3B2E2 /* obj-c-sql-query-builder */ = {
+			isa = PBXGroup;
+			children = (
+				1AA04D04180CBFE900C3B2E2 /* src */,
+			);
+			name = "obj-c-sql-query-builder";
+			path = "libs/obj-c-sql-query-builder";
+			sourceTree = "<group>";
+		};
+		1AA04D04180CBFE900C3B2E2 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				1AA04D05180CBFE900C3B2E2 /* db */,
+				1AA04D10180CBFE900C3B2E2 /* ext */,
+				1AA04D13180CBFE900C3B2E2 /* orm */,
+				1AA04D1A180CBFE900C3B2E2 /* sql */,
+				1AA04D59180CBFE900C3B2E2 /* util */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		1AA04D05180CBFE900C3B2E2 /* db */ = {
+			isa = PBXGroup;
+			children = (
+				1AA04D06180CBFE900C3B2E2 /* migration */,
+				1AA04D0B180CBFE900C3B2E2 /* ZIMDbConnection.h */,
+				1AA04D0C180CBFE900C3B2E2 /* ZIMDbConnection.m */,
+				1AA04D0D180CBFE900C3B2E2 /* ZIMDbConnectionPool.h */,
+				1AA04D0E180CBFE900C3B2E2 /* ZIMDbConnectionPool.m */,
+				1AA04D0F180CBFE900C3B2E2 /* ZIMDbSdk.h */,
+			);
+			path = db;
+			sourceTree = "<group>";
+		};
+		1AA04D06180CBFE900C3B2E2 /* migration */ = {
+			isa = PBXGroup;
+			children = (
+				1AA04D07180CBFE900C3B2E2 /* ZIMDbMigration.h */,
+				1AA04D08180CBFE900C3B2E2 /* ZIMDbMigration.m */,
+				1AA04D09180CBFE900C3B2E2 /* ZIMSqlMigrateTableStatement.h */,
+				1AA04D0A180CBFE900C3B2E2 /* ZIMSqlMigrateTableStatement.m */,
+			);
+			path = migration;
+			sourceTree = "<group>";
+		};
+		1AA04D10180CBFE900C3B2E2 /* ext */ = {
+			isa = PBXGroup;
+			children = (
+				1AA04D11180CBFE900C3B2E2 /* NSString+ZIMString.h */,
+				1AA04D12180CBFE900C3B2E2 /* NSString+ZIMString.m */,
+			);
+			path = ext;
+			sourceTree = "<group>";
+		};
+		1AA04D13180CBFE900C3B2E2 /* orm */ = {
+			isa = PBXGroup;
+			children = (
+				1AA04D14180CBFE900C3B2E2 /* ZIMOrmModel.h */,
+				1AA04D15180CBFE900C3B2E2 /* ZIMOrmModel.m */,
+				1AA04D16180CBFE900C3B2E2 /* ZIMOrmModelDelegate.h */,
+				1AA04D17180CBFE900C3B2E2 /* ZIMOrmSdk.h */,
+				1AA04D18180CBFE900C3B2E2 /* ZIMOrmSelectStatement.h */,
+				1AA04D19180CBFE900C3B2E2 /* ZIMOrmSelectStatement.m */,
+			);
+			path = orm;
+			sourceTree = "<group>";
+		};
+		1AA04D1A180CBFE900C3B2E2 /* sql */ = {
+			isa = PBXGroup;
+			children = (
+				1AA04D1B180CBFE900C3B2E2 /* ZIMSqlAlterTableStatement.h */,
+				1AA04D1C180CBFE900C3B2E2 /* ZIMSqlAlterTableStatement.m */,
+				1AA04D1D180CBFE900C3B2E2 /* ZIMSqlAnalyzeStatement.h */,
+				1AA04D1E180CBFE900C3B2E2 /* ZIMSqlAnalyzeStatement.m */,
+				1AA04D1F180CBFE900C3B2E2 /* ZIMSqlAttachStatement.h */,
+				1AA04D20180CBFE900C3B2E2 /* ZIMSqlAttachStatement.m */,
+				1AA04D21180CBFE900C3B2E2 /* ZIMSqlCreateIndexStatement.h */,
+				1AA04D22180CBFE900C3B2E2 /* ZIMSqlCreateIndexStatement.m */,
+				1AA04D23180CBFE900C3B2E2 /* ZIMSqlCreateTableStatement.h */,
+				1AA04D24180CBFE900C3B2E2 /* ZIMSqlCreateTableStatement.m */,
+				1AA04D25180CBFE900C3B2E2 /* ZIMSqlCreateTriggerStatement.h */,
+				1AA04D26180CBFE900C3B2E2 /* ZIMSqlCreateTriggerStatement.m */,
+				1AA04D27180CBFE900C3B2E2 /* ZIMSqlCreateViewStatement.h */,
+				1AA04D28180CBFE900C3B2E2 /* ZIMSqlCreateViewStatement.m */,
+				1AA04D29180CBFE900C3B2E2 /* ZIMSqlDataControlCommand.h */,
+				1AA04D2A180CBFE900C3B2E2 /* ZIMSqlDataDefinitionCommand.h */,
+				1AA04D2B180CBFE900C3B2E2 /* ZIMSqlDataManipulationCommand.h */,
+				1AA04D2C180CBFE900C3B2E2 /* ZIMSqlDeleteStatement.h */,
+				1AA04D2D180CBFE900C3B2E2 /* ZIMSqlDeleteStatement.m */,
+				1AA04D2E180CBFE900C3B2E2 /* ZIMSqlDetachStatement.h */,
+				1AA04D2F180CBFE900C3B2E2 /* ZIMSqlDetachStatement.m */,
+				1AA04D30180CBFE900C3B2E2 /* ZIMSqlDropIndexStatement.h */,
+				1AA04D31180CBFE900C3B2E2 /* ZIMSqlDropIndexStatement.m */,
+				1AA04D32180CBFE900C3B2E2 /* ZIMSqlDropTableStatement.h */,
+				1AA04D33180CBFE900C3B2E2 /* ZIMSqlDropTableStatement.m */,
+				1AA04D34180CBFE900C3B2E2 /* ZIMSqlDropTriggerStatement.h */,
+				1AA04D35180CBFE900C3B2E2 /* ZIMSqlDropTriggerStatement.m */,
+				1AA04D36180CBFE900C3B2E2 /* ZIMSqlDropViewStatement.h */,
+				1AA04D37180CBFE900C3B2E2 /* ZIMSqlDropViewStatement.m */,
+				1AA04D38180CBFE900C3B2E2 /* ZIMSqlExplainStatement.h */,
+				1AA04D39180CBFE900C3B2E2 /* ZIMSqlExplainStatement.m */,
+				1AA04D3A180CBFE900C3B2E2 /* ZIMSqlExpression.h */,
+				1AA04D3B180CBFE900C3B2E2 /* ZIMSqlExpression.m */,
+				1AA04D3C180CBFE900C3B2E2 /* ZIMSqlInsertStatement.h */,
+				1AA04D3D180CBFE900C3B2E2 /* ZIMSqlInsertStatement.m */,
+				1AA04D3E180CBFE900C3B2E2 /* ZIMSqlPreparedStatement.h */,
+				1AA04D3F180CBFE900C3B2E2 /* ZIMSqlPreparedStatement.m */,
+				1AA04D40180CBFE900C3B2E2 /* ZIMSqlReindexStatement.h */,
+				1AA04D41180CBFE900C3B2E2 /* ZIMSqlReindexStatement.m */,
+				1AA04D42180CBFE900C3B2E2 /* ZIMSqlSdk.h */,
+				1AA04D43180CBFE900C3B2E2 /* ZIMSqlSelectStatement.h */,
+				1AA04D44180CBFE900C3B2E2 /* ZIMSqlSelectStatement.m */,
+				1AA04D45180CBFE900C3B2E2 /* ZIMSqlShowColumnsStatement.h */,
+				1AA04D46180CBFE900C3B2E2 /* ZIMSqlShowColumnsStatement.m */,
+				1AA04D47180CBFE900C3B2E2 /* ZIMSqlShowGrantsStatement.h */,
+				1AA04D48180CBFE900C3B2E2 /* ZIMSqlShowGrantsStatement.m */,
+				1AA04D49180CBFE900C3B2E2 /* ZIMSqlShowTablesStatement.h */,
+				1AA04D4A180CBFE900C3B2E2 /* ZIMSqlShowTablesStatement.m */,
+				1AA04D4B180CBFE900C3B2E2 /* ZIMSqlShowTriggersStatement.h */,
+				1AA04D4C180CBFE900C3B2E2 /* ZIMSqlShowTriggersStatement.m */,
+				1AA04D4D180CBFE900C3B2E2 /* ZIMSqlShowViewsStatement.h */,
+				1AA04D4E180CBFE900C3B2E2 /* ZIMSqlShowViewsStatement.m */,
+				1AA04D4F180CBFE900C3B2E2 /* ZIMSqlStatement.h */,
+				1AA04D50180CBFE900C3B2E2 /* ZIMSqlTokenizer.h */,
+				1AA04D51180CBFE900C3B2E2 /* ZIMSqlTokenizer.m */,
+				1AA04D52180CBFE900C3B2E2 /* ZIMSqlTransactionControlCommand.h */,
+				1AA04D53180CBFE900C3B2E2 /* ZIMSqlTruncateTableStatement.h */,
+				1AA04D54180CBFE900C3B2E2 /* ZIMSqlTruncateTableStatement.m */,
+				1AA04D55180CBFE900C3B2E2 /* ZIMSqlUpdateStatement.h */,
+				1AA04D56180CBFE900C3B2E2 /* ZIMSqlUpdateStatement.m */,
+				1AA04D57180CBFE900C3B2E2 /* ZIMSqlUpsertStatement.h */,
+				1AA04D58180CBFE900C3B2E2 /* ZIMSqlUpsertStatement.m */,
+			);
+			path = sql;
+			sourceTree = "<group>";
+		};
+		1AA04D59180CBFE900C3B2E2 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				1AA04D5A180CBFE900C3B2E2 /* ZIMMessageDigest.h */,
+				1AA04D5B180CBFE900C3B2E2 /* ZIMMessageDigest.m */,
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
+		1AA04D82180CC02D00C3B2E2 /* SQLiteManager */ = {
+			isa = PBXGroup;
+			children = (
+				1AA04D8A180CCFEF00C3B2E2 /* db.plist */,
+				1AA04D83180CC03F00C3B2E2 /* SQLiteManager.h */,
+				1AA04D84180CC03F00C3B2E2 /* SQLiteManager.m */,
+			);
+			path = SQLiteManager;
+			sourceTree = "<group>";
+		};
+		1AA04D86180CC0E300C3B2E2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1AA04D87180CC10D00C3B2E2 /* Player.h */,
+				1AA04D88180CC10D00C3B2E2 /* Player.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		1AC7700617D6C54D00DEF7AA = {
 			isa = PBXGroup;
 			children = (
@@ -633,6 +922,8 @@
 		1AC7702617D6C54D00DEF7AA /* Falling Frank */ = {
 			isa = PBXGroup;
 			children = (
+				1AA04D86180CC0E300C3B2E2 /* Models */,
+				1AA04D82180CC02D00C3B2E2 /* SQLiteManager */,
 				1A85AB98180B014A00A7BDD1 /* Game Settings */,
 				1A85AB94180A040100A7BDD1 /* GameKit Manager */,
 				1A312CC117DCC356007E0D16 /* Scenes */,
@@ -694,6 +985,7 @@
 		1AC7703F17D6C54D00DEF7AA /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				1AA04D00180CBFE900C3B2E2 /* obj-c-sql-query-builder */,
 				1AC7716A17D6C54F00DEF7AA /* LICENSE_cocos2d.txt */,
 				1AC7718017D6C54F00DEF7AA /* LICENSE_CocosDenshion.txt */,
 				1AC771B217D6C54F00DEF7AA /* LICENSE_Kazmath.txt */,
@@ -1141,6 +1433,7 @@
 				1AC7703117D6C54D00DEF7AA /* Icon-72.png in Resources */,
 				1AC7703917D6C54D00DEF7AA /* Icon.png in Resources */,
 				1A72602B1802E512007F92FC /* invinc@2x.png in Resources */,
+				1AA04D8B180CCFEF00C3B2E2 /* db.plist in Resources */,
 				1AC7703B17D6C54D00DEF7AA /* Icon@2x.png in Resources */,
 				1A72602A1802E512007F92FC /* invinc.png in Resources */,
 				1AE361F517F4FA90003F66CE /* instructions.png in Resources */,
@@ -1182,11 +1475,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AA04D68180CBFE900C3B2E2 /* ZIMSqlCreateIndexStatement.m in Sources */,
 				1AC7704317D6C54D00DEF7AA /* CCAction.m in Sources */,
 				1AC7704617D6C54D00DEF7AA /* CCActionCamera.m in Sources */,
 				1AC7704917D6C54D00DEF7AA /* CCActionCatmullRom.m in Sources */,
 				1AC7704C17D6C54D00DEF7AA /* CCActionEase.m in Sources */,
 				1AC7704F17D6C54D00DEF7AA /* CCActionGrid.m in Sources */,
+				1AA04D62180CBFE900C3B2E2 /* NSString+ZIMString.m in Sources */,
+				1AA04D6E180CBFE900C3B2E2 /* ZIMSqlDropIndexStatement.m in Sources */,
 				1AC7705217D6C54D00DEF7AA /* CCActionGrid3D.m in Sources */,
 				1AC7705517D6C54D00DEF7AA /* CCActionInstant.m in Sources */,
 				1AC7705817D6C54D00DEF7AA /* CCActionInterval.m in Sources */,
@@ -1204,7 +1500,10 @@
 				1AC7707617D6C54E00DEF7AA /* CCClippingNode.m in Sources */,
 				1AC7707A17D6C54E00DEF7AA /* CCConfiguration.m in Sources */,
 				1AC7707D17D6C54E00DEF7AA /* ccDeprecated.m in Sources */,
+				1AA04D69180CBFE900C3B2E2 /* ZIMSqlCreateTableStatement.m in Sources */,
+				1AA04D78180CBFE900C3B2E2 /* ZIMSqlShowColumnsStatement.m in Sources */,
 				1AC7708017D6C54E00DEF7AA /* CCDirector.m in Sources */,
+				1AA04D6C180CBFE900C3B2E2 /* ZIMSqlDeleteStatement.m in Sources */,
 				1AC7708317D6C54E00DEF7AA /* CCDrawingPrimitives.m in Sources */,
 				1AC7708617D6C54E00DEF7AA /* CCDrawNode.m in Sources */,
 				1AC7708917D6C54E00DEF7AA /* CCFontDefinition.m in Sources */,
@@ -1230,19 +1529,29 @@
 				1AC770C317D6C54E00DEF7AA /* CCParticleSystemQuad.m in Sources */,
 				1AC770C617D6C54E00DEF7AA /* CCPhysicsDebugNode.m in Sources */,
 				1AC770C917D6C54E00DEF7AA /* CCPhysicsSprite.mm in Sources */,
+				1AA04D67180CBFE900C3B2E2 /* ZIMSqlAttachStatement.m in Sources */,
 				1AC770CC17D6C54E00DEF7AA /* CCProgressTimer.m in Sources */,
 				1AC770D017D6C54E00DEF7AA /* CCRenderTexture.m in Sources */,
+				1AA04D81180CBFE900C3B2E2 /* ZIMMessageDigest.m in Sources */,
 				1AC770D317D6C54E00DEF7AA /* CCScene.m in Sources */,
+				1AA04D70180CBFE900C3B2E2 /* ZIMSqlDropTriggerStatement.m in Sources */,
 				1AC770D617D6C54E00DEF7AA /* CCScheduler.m in Sources */,
 				1AC770E817D6C54E00DEF7AA /* CCShaderCache.m in Sources */,
 				1AC770EB17D6C54E00DEF7AA /* ccShaders.m in Sources */,
+				1AA04D73180CBFE900C3B2E2 /* ZIMSqlExpression.m in Sources */,
+				1AA04D60180CBFE900C3B2E2 /* ZIMDbConnection.m in Sources */,
 				1AC770EE17D6C54E00DEF7AA /* CCSprite.m in Sources */,
 				1AC770F117D6C54E00DEF7AA /* CCSpriteBatchNode.m in Sources */,
 				1AC770F417D6C54E00DEF7AA /* CCSpriteFrame.m in Sources */,
 				1AC770F717D6C54E00DEF7AA /* CCSpriteFrameCache.m in Sources */,
 				1AC770FA17D6C54E00DEF7AA /* CCTexture2D.m in Sources */,
+				1AA04D5E180CBFE900C3B2E2 /* ZIMDbMigration.m in Sources */,
+				1AA04D80180CBFE900C3B2E2 /* ZIMSqlUpsertStatement.m in Sources */,
 				1AC770FD17D6C54E00DEF7AA /* CCTextureAtlas.m in Sources */,
+				1AA04D85180CC03F00C3B2E2 /* SQLiteManager.m in Sources */,
 				1AC7710017D6C54E00DEF7AA /* CCTextureCache.m in Sources */,
+				1AA04D5F180CBFE900C3B2E2 /* ZIMSqlMigrateTableStatement.m in Sources */,
+				1AA04D7C180CBFE900C3B2E2 /* ZIMSqlShowViewsStatement.m in Sources */,
 				1AC7710317D6C54F00DEF7AA /* CCTexturePVR.m in Sources */,
 				1AC7710617D6C54F00DEF7AA /* CCTileMapAtlas.m in Sources */,
 				1AC7710917D6C54F00DEF7AA /* CCTMXLayer.m in Sources */,
@@ -1251,14 +1560,23 @@
 				1AC7711217D6C54F00DEF7AA /* CCTMXXMLParser.m in Sources */,
 				1AC7711517D6C54F00DEF7AA /* CCTransition.m in Sources */,
 				1AC7711817D6C54F00DEF7AA /* CCTransitionPageTurn.m in Sources */,
+				1AA04D6A180CBFE900C3B2E2 /* ZIMSqlCreateTriggerStatement.m in Sources */,
 				1AC7711B17D6C54F00DEF7AA /* CCTransitionProgress.m in Sources */,
+				1AA04D7E180CBFE900C3B2E2 /* ZIMSqlTruncateTableStatement.m in Sources */,
 				1AC7711F17D6C54F00DEF7AA /* cocos2d.m in Sources */,
+				1AA04D71180CBFE900C3B2E2 /* ZIMSqlDropViewStatement.m in Sources */,
 				1AC7712617D6C54F00DEF7AA /* CCDirectorIOS.m in Sources */,
+				1AA04D89180CC10D00C3B2E2 /* Player.m in Sources */,
+				1AA04D6B180CBFE900C3B2E2 /* ZIMSqlCreateViewStatement.m in Sources */,
 				1AC7712917D6C54F00DEF7AA /* CCES2Renderer.m in Sources */,
 				1AC7712D17D6C54F00DEF7AA /* CCGLView.m in Sources */,
+				1AA04D65180CBFE900C3B2E2 /* ZIMSqlAlterTableStatement.m in Sources */,
 				1AC7713117D6C54F00DEF7AA /* CCTouchDispatcher.m in Sources */,
+				1AA04D79180CBFE900C3B2E2 /* ZIMSqlShowGrantsStatement.m in Sources */,
 				1AC7713417D6C54F00DEF7AA /* CCTouchHandler.m in Sources */,
+				1AA04D75180CBFE900C3B2E2 /* ZIMSqlPreparedStatement.m in Sources */,
 				1AC7713817D6C54F00DEF7AA /* CCDirectorMac.m in Sources */,
+				1AA04D72180CBFE900C3B2E2 /* ZIMSqlExplainStatement.m in Sources */,
 				1AC7713B17D6C54F00DEF7AA /* CCEventDispatcher.m in Sources */,
 				1AC7713E17D6C54F00DEF7AA /* CCGLView.m in Sources */,
 				1AC7714117D6C54F00DEF7AA /* CCWindow.m in Sources */,
@@ -1268,33 +1586,45 @@
 				1AC7714E17D6C54F00DEF7AA /* CCFileUtils.m in Sources */,
 				1AC7715117D6C54F00DEF7AA /* CCProfiling.m in Sources */,
 				1AC7715317D6C54F00DEF7AA /* ccUtils.c in Sources */,
+				1AA04D6D180CBFE900C3B2E2 /* ZIMSqlDetachStatement.m in Sources */,
 				1AC7715717D6C54F00DEF7AA /* CCVertex.m in Sources */,
 				1AC7715A17D6C54F00DEF7AA /* CGPointExtension.m in Sources */,
 				1AE361F317F4E6CE003F66CE /* InstructionsLayer.m in Sources */,
+				1AA04D7F180CBFE900C3B2E2 /* ZIMSqlUpdateStatement.m in Sources */,
 				1AC7715D17D6C54F00DEF7AA /* NSThread+performBlock.m in Sources */,
 				1AC7716117D6C54F00DEF7AA /* TGAlib.m in Sources */,
 				1AC7716417D6C54F00DEF7AA /* TransformUtils.m in Sources */,
 				1AC7716917D6C54F00DEF7AA /* ZipUtils.m in Sources */,
+				1AA04D7B180CBFE900C3B2E2 /* ZIMSqlShowTriggersStatement.m in Sources */,
 				1AC7716E17D6C54F00DEF7AA /* CDAudioManager.m in Sources */,
 				1AC7717217D6C54F00DEF7AA /* CDOpenALSupport.m in Sources */,
+				1AA04D66180CBFE900C3B2E2 /* ZIMSqlAnalyzeStatement.m in Sources */,
 				1AC7717517D6C54F00DEF7AA /* CDXMacOSXSupport.m in Sources */,
 				1AC7717817D6C54F00DEF7AA /* CDXPropertyModifierAction.m in Sources */,
+				1AA04D64180CBFE900C3B2E2 /* ZIMOrmSelectStatement.m in Sources */,
 				1A85AB97180A040F00A7BDD1 /* GameKitManager.m in Sources */,
+				1AA04D63180CBFE900C3B2E2 /* ZIMOrmModel.m in Sources */,
 				1AC7717B17D6C54F00DEF7AA /* CocosDenshion.m in Sources */,
 				1AC7717F17D6C54F00DEF7AA /* SimpleAudioEngine.m in Sources */,
 				1AC7719517D6C54F00DEF7AA /* aabb.c in Sources */,
 				1AC7719B17D6C54F00DEF7AA /* mat4stack.c in Sources */,
+				1AA04D7D180CBFE900C3B2E2 /* ZIMSqlTokenizer.m in Sources */,
 				1AC7719D17D6C54F00DEF7AA /* matrix.c in Sources */,
 				1AC7719F17D6C54F00DEF7AA /* mat3.c in Sources */,
+				1AA04D74180CBFE900C3B2E2 /* ZIMSqlInsertStatement.m in Sources */,
 				1AC771A117D6C54F00DEF7AA /* mat4.c in Sources */,
 				1AC771A317D6C54F00DEF7AA /* neon_matrix_impl.c in Sources */,
 				1AC771A517D6C54F00DEF7AA /* plane.c in Sources */,
 				1AC771A717D6C54F00DEF7AA /* quaternion.c in Sources */,
 				1AC771A917D6C54F00DEF7AA /* ray2.c in Sources */,
+				1AA04D61180CBFE900C3B2E2 /* ZIMDbConnectionPool.m in Sources */,
 				1AC771AB17D6C54F00DEF7AA /* utility.c in Sources */,
+				1AA04D7A180CBFE900C3B2E2 /* ZIMSqlShowTablesStatement.m in Sources */,
 				1AC771AD17D6C54F00DEF7AA /* vec2.c in Sources */,
 				1AC771AF17D6C54F00DEF7AA /* vec3.c in Sources */,
 				1AC771B117D6C54F00DEF7AA /* vec4.c in Sources */,
+				1AA04D6F180CBFE900C3B2E2 /* ZIMSqlDropTableStatement.m in Sources */,
+				1AA04D76180CBFE900C3B2E2 /* ZIMSqlReindexStatement.m in Sources */,
 				1AC771B617D6C54F00DEF7AA /* main.m in Sources */,
 				1AC771B917D6C54F00DEF7AA /* AppDelegate.m in Sources */,
 				1AC771BC17D6C54F00DEF7AA /* MainMenuLayer.m in Sources */,
@@ -1302,6 +1632,7 @@
 				1AE8E5C317D95CEA00854703 /* CCShake.m in Sources */,
 				1AE8E5C617D9619500854703 /* ClickableSprite.m in Sources */,
 				1A312CC717DCC3AD007E0D16 /* LevelOneLayer.m in Sources */,
+				1AA04D77180CBFE900C3B2E2 /* ZIMSqlSelectStatement.m in Sources */,
 				1A0E31C517DFEFDC004DB907 /* ContextMenu.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

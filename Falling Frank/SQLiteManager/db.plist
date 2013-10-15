@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>leaderboard</key>
+	<dict>
+		<key>privileges</key>
+		<array>
+			<string>ALTER</string>
+			<string>PRAGMA</string>
+			<string>DROP</string>
+			<string>CREATE</string>
+			<string>SELECT</string>
+			<string>INSERT</string>
+			<string>UPDATE</string>
+			<string>DELETE</string>
+		</array>
+		<key>database</key>
+		<string>leaderboard.sqlite</string>
+		<key>readonly</key>
+		<false/>
+		<key>type</key>
+		<string>SQLite</string>
+	</dict>
+</dict>
+</plist>

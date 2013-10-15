@@ -316,7 +316,22 @@
         }
     }];
     
-    CCMenu *menu = [CCMenu menuWithItems:itemNewGame, itemInstructions, itemCredits, itemAchievement, itemLeaderboard, nil];
+    CCMenuItem *itemLocalLeaderboard = [CCMenuItemFont itemWithString:@"Local Leaderboard" block:^(id sender) {
+        NSArray* allPlayers = [Player allPlayers];
+        NSMutableArray* playerUsernames = [@[] mutableCopy];
+        for (Player* player in allPlayers) {
+            [playerUsernames addObject:player.name];
+            [playerUsernames addObject:player.username];
+            [playerUsernames addObject:player.score];
+        }
+        NSString* players = [playerUsernames componentsJoinedByString:@", "];
+        [[[UIAlertView alloc] initWithTitle:@"Players" message:players delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+        
+#warning TODO: Implement a UI to show local players at this point
+        
+    }];
+    
+    CCMenu *menu = [CCMenu menuWithItems:itemNewGame, itemInstructions, itemCredits, itemAchievement, itemLeaderboard, itemLocalLeaderboard, nil];
     
     menu.color = ccBLACK;
     [menu alignItemsVerticallyWithPadding:12];

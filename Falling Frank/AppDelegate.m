@@ -24,6 +24,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // Initialize the SQLiteManager
+    [SQLiteManager sharedInstance];
+    
 	window_ = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	
 	
@@ -134,6 +137,7 @@
                 [[[UIAlertView alloc] initWithTitle:@"Authentication Failed" message:@"You could not be logged into game center because authentication failed. Please authenticate using the Game Center App to enable Game Center for this game." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
             } else {
                 [[GameKitManager sharedInstance] loadLeaderboards];
+                [GameKitManager retrieveTopTenScores];
             }
         }];
     }
