@@ -41,10 +41,6 @@ static NSString* const kFrankBoard = @"frank_board";
 
 + (void)reportScore:(int64_t)score forLeaderboardID:(NSString*)identifier
 {
-    NSNumberFormatter* formatter = [[NSNumberFormatter alloc] init];
-    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    NSString* formattedScore = [[formatter stringFromNumber:@(score)] stringByAppendingString:@"points"];
-    [[Player playerWithName:@"Me" username:@"Me" score:formattedScore] save];
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7")) {
         GKScore *scoreReporter = [[GKScore alloc] initWithLeaderboardIdentifier: identifier];
         scoreReporter.value = score;
@@ -89,7 +85,7 @@ static NSString* const kFrankBoard = @"frank_board";
                     if (players && players.count > 0) {
                         [Player purgeAllPlayers];
                         for (GKPlayer* currentPlayer in players) {
-                            NSString* score = [self getPlayerScoreFromScores:scores forPlayerID:currentPlayer.playerID];
+                            NSNumber* score = [self getPlayerScoreFromScores:scores forPlayerID:currentPlayer.playerID];
                             Player* player = [Player playerWithName:currentPlayer.displayName username:currentPlayer.alias score:score];
                             [player save];
                         }
@@ -100,14 +96,14 @@ static NSString* const kFrankBoard = @"frank_board";
     }
 }
 
-+ (NSString*)getPlayerScoreFromScores:(NSArray*)scores forPlayerID:(NSString*)playerID
++ (NSNumber*)getPlayerScoreFromScores:(NSArray*)scores forPlayerID:(NSString*)playerID
 {
     for (GKScore* score in scores) {
         if ([score.playerID isEqualToString:playerID]) {
-            return score.formattedValue;
+            return @(score.value);
         }
     }
-    return @"";
+    return @(0);
 }
 
 + (void)loadPlayerData:(NSArray*)identifiers withCompletionHandler:(void(^)(NSArray* players, NSError *error))completionHandler

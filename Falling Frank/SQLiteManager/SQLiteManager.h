@@ -15,7 +15,7 @@ extern NSString* const LEADERBOARD_DB;
 @interface SQLiteManager : NSObject
 
 + (instancetype)sharedInstance;
-- (NSArray*)getPlayersByScoreDesc:(BOOL)desc withRange:(NSRange)range;
+- (NSArray*)getPlayersWithOrderBy:(NSString*)order desc:(BOOL)desc withRange:(NSRange)range;
 - (void)purgePlayersTable;
 
 @end

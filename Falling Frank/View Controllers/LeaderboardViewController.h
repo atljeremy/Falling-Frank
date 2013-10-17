@@ -11,5 +11,6 @@
 @interface LeaderboardViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (retain, nonatomic) IBOutlet UITableView *tableView;
+- (IBAction)valueChanged:(id)sender;
 
 @end

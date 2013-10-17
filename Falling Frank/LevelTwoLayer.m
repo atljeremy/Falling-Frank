@@ -759,8 +759,9 @@ static const int FEET_TILL_GROUND = 10000;
     [GameSettings addGameScore:GAME_SCORE_COMPLETED_LEVEL forLabel:self.gameScoreLabel];
     
     GKLeaderboard* frankBoard = [GameKitManager sharedInstance].frankboard;
+    int gameScore = [[[NSUserDefaults standardUserDefaults] objectForKey:kGameScoreKey] integerValue];
+    [[Player playerWithName:@"Me" username:@"Me" score:@(gameScore)] save];
     if (frankBoard) {
-        int gameScore = [[[NSUserDefaults standardUserDefaults] objectForKey:kGameScoreKey] integerValue];
         NSString* identifier = (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7")) ? frankBoard.identifier : frankBoard.category;
         [GameKitManager reportScore:gameScore forLeaderboardID:identifier];
     }

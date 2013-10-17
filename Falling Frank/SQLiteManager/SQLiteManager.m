@@ -60,12 +60,13 @@ NSString* const LEADERBOARD_DB = @"leaderboard";
         [self openConnection];
         ZIMSqlCreateTableStatement *create = [[ZIMSqlCreateTableStatement alloc] init];
         [create table:[Player table]];
-        [create column:PLAYER_ID            type:ZIMSqlDataTypeInteger defaultValue:ZIMSqlDefaultValueIsAutoIncremented];
-        [create column:PLAYER_NAME          type:ZIMSqlDataTypeVarChar(255)];
-        [create column:PLAYER_USERNAME      type:ZIMSqlDataTypeVarChar(255)];
-        [create column:PLAYER_SCORE         type:ZIMSqlDataTypeVarChar(255)];
-        [create column:PLAYER_UPDATED_AT    type:ZIMSqlDataTypeDateTime];
-        [create column:PLAYER_CREATED_AT    type:ZIMSqlDataTypeDateTime];
+        [create column:PLAYER_ID                type:ZIMSqlDataTypeInteger defaultValue:ZIMSqlDefaultValueIsAutoIncremented];
+        [create column:PLAYER_NAME              type:ZIMSqlDataTypeVarChar(255)];
+        [create column:PLAYER_USERNAME          type:ZIMSqlDataTypeVarChar(255)];
+        [create column:PLAYER_FORMATTED_SCORE   type:ZIMSqlDataTypeVarChar(255)];
+        [create column:PLAYER_SCORE             type:ZIMSqlDataTypeInteger];
+        [create column:PLAYER_UPDATED_AT        type:ZIMSqlDataTypeDateTime];
+        [create column:PLAYER_CREATED_AT        type:ZIMSqlDataTypeDateTime];
         NSString* statement = [create statement];
         SQLog(statement);
         NSNumber* result = [self.db execute:statement];
@@ -78,12 +79,12 @@ NSString* const LEADERBOARD_DB = @"leaderboard";
 #pragma mark SELECT STATEMENTS
 #pragma mark -------------------
 
-- (NSArray*)getPlayersByScoreDesc:(BOOL)desc withRange:(NSRange)range {
+- (NSArray*)getPlayersWithOrderBy:(NSString*)order desc:(BOOL)desc withRange:(NSRange)range {
     @synchronized (self) {
         [self openConnection];
         ZIMSqlSelectStatement* select = [[ZIMSqlSelectStatement alloc] init];
         [select from:[Player table]];
-        [select orderBy:PLAYER_SCORE descending:desc];
+        [select orderBy:order descending:desc];
         [select where:PLAYER_ID operator:ZIMSqlOperatorGreaterThanOrEqualTo value:@(range.location)];
         [select limit:range.length];
         NSString* statement = [select statement];

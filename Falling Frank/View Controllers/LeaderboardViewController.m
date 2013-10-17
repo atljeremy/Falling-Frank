@@ -21,7 +21,7 @@ static NSString* const kLeaderBoardCellID = @"LeaderboardCell";
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        _scores = [[SQLiteManager sharedInstance] getPlayersByScoreDesc:YES withRange:NSMakeRange(0, 10)];
+        _scores = [[SQLiteManager sharedInstance] getPlayersWithOrderBy:PLAYER_SCORE desc:YES withRange:NSMakeRange(0, 10)];
     }
     return self;
 }
@@ -66,7 +66,7 @@ static NSString* const kLeaderBoardCellID = @"LeaderboardCell";
     Player* player = [self.scores objectAtIndex:indexPath.row];
     if (player) {
         cell.username.text = player.username;
-        cell.score.text = player.score;
+        cell.score.text = player.formattedScore;
     }
     return cell;
 }
@@ -74,6 +74,27 @@ static NSString* const kLeaderBoardCellID = @"LeaderboardCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+}
+
+- (IBAction)valueChanged:(id)sender
+{
+    switch (((UISegmentedControl*)sender).selectedSegmentIndex) {
+        case 0:
+            self.scores = [[SQLiteManager sharedInstance] getPlayersWithOrderBy:PLAYER_SCORE desc:YES withRange:NSMakeRange(0, 10)];
+            break;
+            
+        case 1:
+            self.scores = [[SQLiteManager sharedInstance] getPlayersWithOrderBy:PLAYER_SCORE desc:NO withRange:NSMakeRange(0, 10)];
+            break;
+            
+        case 2:
+            self.scores = [[SQLiteManager sharedInstance] getPlayersWithOrderBy:PLAYER_UPDATED_AT desc:YES withRange:NSMakeRange(0, 10)];
+            break;
+            
+        default:
+            break;
+    }
+    [self.tableView reloadData];
 }
 
 @end

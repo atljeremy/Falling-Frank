@@ -10,13 +10,14 @@
 #import "ZIMOrmSelectStatement.h"
 
 // Player DB
-NSString* const PLAYERS_TABLE     = @"players";
-NSString* const PLAYER_ID         = @"id";
-NSString* const PLAYER_NAME       = @"name";
-NSString* const PLAYER_USERNAME   = @"username";
-NSString* const PLAYER_SCORE      = @"score";
-NSString* const PLAYER_UPDATED_AT = @"updatedAt";
-NSString* const PLAYER_CREATED_AT = @"createdAt";
+NSString* const PLAYERS_TABLE           = @"players";
+NSString* const PLAYER_ID               = @"id";
+NSString* const PLAYER_NAME             = @"name";
+NSString* const PLAYER_USERNAME         = @"username";
+NSString* const PLAYER_FORMATTED_SCORE  = @"formattedScore";
+NSString* const PLAYER_SCORE            = @"score";
+NSString* const PLAYER_UPDATED_AT       = @"updatedAt";
+NSString* const PLAYER_CREATED_AT       = @"createdAt";
 
 @implementation Player
 
@@ -29,30 +30,33 @@ NSString* const PLAYER_CREATED_AT = @"createdAt";
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeObject:self.name      forKey:PLAYER_NAME];
-    [aCoder encodeObject:self.username  forKey:PLAYER_USERNAME];
-    [aCoder encodeObject:self.score     forKey:PLAYER_SCORE];
-    [aCoder encodeObject:self.updatedAt forKey:PLAYER_UPDATED_AT];
-    [aCoder encodeObject:self.createdAt forKey:PLAYER_CREATED_AT];
+    [aCoder encodeObject:self.name              forKey:PLAYER_NAME];
+    [aCoder encodeObject:self.username          forKey:PLAYER_USERNAME];
+    [aCoder encodeObject:self.score             forKey:PLAYER_SCORE];
+    [aCoder encodeObject:self.formattedScore    forKey:PLAYER_FORMATTED_SCORE];
+    [aCoder encodeObject:self.updatedAt         forKey:PLAYER_UPDATED_AT];
+    [aCoder encodeObject:self.createdAt         forKey:PLAYER_CREATED_AT];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super init]) {
-        _name       = [aDecoder decodeObjectForKey:PLAYER_NAME];
-        _username   = [aDecoder decodeObjectForKey:PLAYER_USERNAME];
-        _score      = [aDecoder decodeObjectForKey:PLAYER_SCORE];
-        _updatedAt  = [aDecoder decodeObjectForKey:PLAYER_UPDATED_AT];
-        _createdAt  = [aDecoder decodeObjectForKey:PLAYER_CREATED_AT];
+        _name           = [aDecoder decodeObjectForKey:PLAYER_NAME];
+        _username       = [aDecoder decodeObjectForKey:PLAYER_USERNAME];
+        _score          = [aDecoder decodeObjectForKey:PLAYER_SCORE];
+        _formattedScore = [aDecoder decodeObjectForKey:PLAYER_FORMATTED_SCORE];
+        _updatedAt      = [aDecoder decodeObjectForKey:PLAYER_UPDATED_AT];
+        _createdAt      = [aDecoder decodeObjectForKey:PLAYER_CREATED_AT];
     }
     return self;
 }
 
-- (instancetype)initWithName:(NSString*)name username:(NSString*)username score:(NSString*)score
+- (instancetype)initWithName:(NSString*)name username:(NSString*)username score:(NSNumber*)score
 {
     if (self = [super init]) {
         _name       = name;
         _username   = username;
         _score      = score;
+        _formattedScore = [self getFormattedScoreFromScore:score];
         NSDate* now = [NSDate date];
         _updatedAt  = now;
         _createdAt  = now;
@@ -60,7 +64,7 @@ NSString* const PLAYER_CREATED_AT = @"createdAt";
     return self;
 }
 
-+ (instancetype)playerWithName:(NSString*)name username:(NSString*)username score:(NSString*)score
++ (instancetype)playerWithName:(NSString*)name username:(NSString*)username score:(NSNumber*)score
 {
     if (!name || !username || !score) {
         return nil;
@@ -105,7 +109,7 @@ NSString* const PLAYER_CREATED_AT = @"createdAt";
 #pragma mark UPDATE
 #pragma mark -------------------
 
-- (void)updateName:(NSString*)name username:(NSString*)username score:(NSString*)score
+- (void)updateName:(NSString*)name username:(NSString*)username score:(NSNumber*)score
 {
     if (name) self.name = name;
     if (username) self.username = username;
@@ -116,6 +120,17 @@ NSString* const PLAYER_CREATED_AT = @"createdAt";
 + (void)purgeAllPlayers
 {
     [[SQLiteManager sharedInstance] purgePlayersTable];
+}
+
+#pragma mark -------------------
+#pragma mark UPDATE
+#pragma mark -------------------
+
+- (NSString*)getFormattedScoreFromScore:(NSNumber*)score
+{
+    NSNumberFormatter* formatter = [[NSNumberFormatter alloc] init];
+    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    return [[formatter stringFromNumber:score] stringByAppendingString:@"points"];
 }
 
 @end
