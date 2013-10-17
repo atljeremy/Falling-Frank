@@ -21,7 +21,7 @@ extern NSString* const PLAYER_CREATED_AT;
     NSString* _id;
     NSString* _name;
     NSString* _username;
-    NSNumber* _score;
+    NSString* _score;
     NSDate* _updatedAt;
     NSDate* _createdAt;
 }
@@ -29,13 +29,13 @@ extern NSString* const PLAYER_CREATED_AT;
 @property (nonatomic, strong) NSString* id;
 @property (nonatomic, strong) NSString* name;
 @property (nonatomic, strong) NSString* username;
-@property (nonatomic, strong) NSNumber* score;
+@property (nonatomic, strong) NSString* score;
 @property (nonatomic, strong) NSDate* updatedAt;
 @property (nonatomic, strong) NSDate* createdAt;
 
-+ (instancetype)playerWithName:(NSString*)name username:(NSString*)username score:(NSNumber*)score;
++ (instancetype)playerWithName:(NSString*)name username:(NSString*)username score:(NSString*)score;
 + (NSArray*)allPlayers;
-- (void)updateName:(NSString*)name username:(NSString*)username score:(NSNumber*)score;
+- (void)updateName:(NSString*)name username:(NSString*)username score:(NSString*)score;
 + (void)purgeAllPlayers;
 
 @end

@@ -63,7 +63,7 @@ NSString* const LEADERBOARD_DB = @"leaderboard";
         [create column:PLAYER_ID            type:ZIMSqlDataTypeInteger defaultValue:ZIMSqlDefaultValueIsAutoIncremented];
         [create column:PLAYER_NAME          type:ZIMSqlDataTypeVarChar(255)];
         [create column:PLAYER_USERNAME      type:ZIMSqlDataTypeVarChar(255)];
-        [create column:PLAYER_SCORE         type:ZIMSqlDataTypeInteger];
+        [create column:PLAYER_SCORE         type:ZIMSqlDataTypeVarChar(255)];
         [create column:PLAYER_UPDATED_AT    type:ZIMSqlDataTypeDateTime];
         [create column:PLAYER_CREATED_AT    type:ZIMSqlDataTypeDateTime];
         NSString* statement = [create statement];
@@ -71,6 +71,25 @@ NSString* const LEADERBOARD_DB = @"leaderboard";
         NSNumber* result = [self.db execute:statement];
         NSLog(@"Players Table %@ created!", ([result boolValue]) ? @"Was" : @"Was NOT");
         [self.db close];
+    }
+}
+
+#pragma mark -------------------
+#pragma mark SELECT STATEMENTS
+#pragma mark -------------------
+
+- (NSArray*)getPlayersByScoreDesc:(BOOL)desc withRange:(NSRange)range {
+    @synchronized (self) {
+        [self openConnection];
+        ZIMSqlSelectStatement* select = [[ZIMSqlSelectStatement alloc] init];
+        [select from:[Player table]];
+        [select orderBy:PLAYER_SCORE descending:desc];
+        [select where:PLAYER_ID operator:ZIMSqlOperatorGreaterThanOrEqualTo value:@(range.location)];
+        [select limit:range.length];
+        NSString* statement = [select statement];
+        SQLog(statement);
+        NSArray* players = [self.db query:statement asObject:[Player class]];
+        return players;
     }
 }
 

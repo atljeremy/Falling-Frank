@@ -216,6 +216,10 @@
 		1AE8E5D017DA41EF00854703 /* wind1-short.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1AE8E5CF17DA41EF00854703 /* wind1-short.mp3 */; };
 		1AE8E5D217DA43D100854703 /* crow1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1AE8E5D117DA43D100854703 /* crow1.mp3 */; };
 		1AE8E5D417DA473A00854703 /* 8_Bit_Adventurer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1AE8E5D317DA473A00854703 /* 8_Bit_Adventurer.mp3 */; };
+		3FEE5BA6180F36F100E6FA2A /* LeaderboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FEE5BA4180F36F100E6FA2A /* LeaderboardViewController.m */; };
+		3FEE5BA7180F36F100E6FA2A /* LeaderboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FEE5BA5180F36F100E6FA2A /* LeaderboardViewController.xib */; };
+		3FEE5BAB180F3A5800E6FA2A /* LeaderboardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FEE5BAA180F3A5800E6FA2A /* LeaderboardCell.m */; };
+		3FEE5BAD180F3A9300E6FA2A /* LeaderboardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FEE5BAC180F3A9300E6FA2A /* LeaderboardCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -631,6 +635,12 @@
 		1AE8E5CF17DA41EF00854703 /* wind1-short.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "wind1-short.mp3"; path = "Resources/wind1-short.mp3"; sourceTree = "<group>"; };
 		1AE8E5D117DA43D100854703 /* crow1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = crow1.mp3; path = Resources/crow1.mp3; sourceTree = "<group>"; };
 		1AE8E5D317DA473A00854703 /* 8_Bit_Adventurer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = 8_Bit_Adventurer.mp3; path = Resources/8_Bit_Adventurer.mp3; sourceTree = "<group>"; };
+		3FEE5BA3180F36F100E6FA2A /* LeaderboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaderboardViewController.h; sourceTree = "<group>"; };
+		3FEE5BA4180F36F100E6FA2A /* LeaderboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeaderboardViewController.m; sourceTree = "<group>"; };
+		3FEE5BA5180F36F100E6FA2A /* LeaderboardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeaderboardViewController.xib; sourceTree = "<group>"; };
+		3FEE5BA9180F3A5800E6FA2A /* LeaderboardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaderboardCell.h; sourceTree = "<group>"; };
+		3FEE5BAA180F3A5800E6FA2A /* LeaderboardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeaderboardCell.m; sourceTree = "<group>"; };
+		3FEE5BAC180F3A9300E6FA2A /* LeaderboardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeaderboardCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -922,16 +932,18 @@
 		1AC7702617D6C54D00DEF7AA /* Falling Frank */ = {
 			isa = PBXGroup;
 			children = (
-				1AA04D86180CC0E300C3B2E2 /* Models */,
-				1AA04D82180CC02D00C3B2E2 /* SQLiteManager */,
-				1A85AB98180B014A00A7BDD1 /* Game Settings */,
-				1A85AB94180A040100A7BDD1 /* GameKit Manager */,
-				1A312CC117DCC356007E0D16 /* Scenes */,
 				1AC771B717D6C54F00DEF7AA /* AppDelegate.h */,
 				1AC771B817D6C54F00DEF7AA /* AppDelegate.m */,
-				1AC7702717D6C54D00DEF7AA /* Resources */,
+				1A85AB98180B014A00A7BDD1 /* Game Settings */,
+				1A85AB94180A040100A7BDD1 /* GameKit Manager */,
 				1AC7703F17D6C54D00DEF7AA /* libs */,
+				1AA04D86180CC0E300C3B2E2 /* Models */,
+				1AC7702717D6C54D00DEF7AA /* Resources */,
+				1A312CC117DCC356007E0D16 /* Scenes */,
+				1AA04D82180CC02D00C3B2E2 /* SQLiteManager */,
 				1AC771B317D6C54F00DEF7AA /* Supporting Files */,
+				3FEE5BA8180F3A2300E6FA2A /* Table Cells */,
+				3FEE5BA2180F369800E6FA2A /* View Controllers */,
 			);
 			path = "Falling Frank";
 			sourceTree = "<group>";
@@ -1369,6 +1381,26 @@
 			name = Instructions;
 			sourceTree = "<group>";
 		};
+		3FEE5BA2180F369800E6FA2A /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3FEE5BA3180F36F100E6FA2A /* LeaderboardViewController.h */,
+				3FEE5BA4180F36F100E6FA2A /* LeaderboardViewController.m */,
+				3FEE5BA5180F36F100E6FA2A /* LeaderboardViewController.xib */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		3FEE5BA8180F3A2300E6FA2A /* Table Cells */ = {
+			isa = PBXGroup;
+			children = (
+				3FEE5BA9180F3A5800E6FA2A /* LeaderboardCell.h */,
+				3FEE5BAA180F3A5800E6FA2A /* LeaderboardCell.m */,
+				3FEE5BAC180F3A9300E6FA2A /* LeaderboardCell.xib */,
+			);
+			path = "Table Cells";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1430,6 +1462,8 @@
 				1AC7702B17D6C54D00DEF7AA /* Default@2x.png in Resources */,
 				1AC7702D17D6C54D00DEF7AA /* Default-568h@2x.png in Resources */,
 				1AC7702F17D6C54D00DEF7AA /* Default-Landscape~ipad.png in Resources */,
+				3FEE5BAD180F3A9300E6FA2A /* LeaderboardCell.xib in Resources */,
+				3FEE5BA7180F36F100E6FA2A /* LeaderboardViewController.xib in Resources */,
 				1AC7703117D6C54D00DEF7AA /* Icon-72.png in Resources */,
 				1AC7703917D6C54D00DEF7AA /* Icon.png in Resources */,
 				1A72602B1802E512007F92FC /* invinc@2x.png in Resources */,
@@ -1581,6 +1615,7 @@
 				1AC7713E17D6C54F00DEF7AA /* CCGLView.m in Sources */,
 				1AC7714117D6C54F00DEF7AA /* CCWindow.m in Sources */,
 				1AC7714417D6C54F00DEF7AA /* base64.c in Sources */,
+				3FEE5BA6180F36F100E6FA2A /* LeaderboardViewController.m in Sources */,
 				1AC7714817D6C54F00DEF7AA /* CCArray.m in Sources */,
 				1AC7714B17D6C54F00DEF7AA /* ccCArray.m in Sources */,
 				1AC7714E17D6C54F00DEF7AA /* CCFileUtils.m in Sources */,
@@ -1592,6 +1627,7 @@
 				1AE361F317F4E6CE003F66CE /* InstructionsLayer.m in Sources */,
 				1AA04D7F180CBFE900C3B2E2 /* ZIMSqlUpdateStatement.m in Sources */,
 				1AC7715D17D6C54F00DEF7AA /* NSThread+performBlock.m in Sources */,
+				3FEE5BAB180F3A5800E6FA2A /* LeaderboardCell.m in Sources */,
 				1AC7716117D6C54F00DEF7AA /* TGAlib.m in Sources */,
 				1AC7716417D6C54F00DEF7AA /* TransformUtils.m in Sources */,
 				1AC7716917D6C54F00DEF7AA /* ZipUtils.m in Sources */,

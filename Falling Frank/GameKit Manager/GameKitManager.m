@@ -41,6 +41,10 @@ static NSString* const kFrankBoard = @"frank_board";
 
 + (void)reportScore:(int64_t)score forLeaderboardID:(NSString*)identifier
 {
+    NSNumberFormatter* formatter = [[NSNumberFormatter alloc] init];
+    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    NSString* formattedScore = [[formatter stringFromNumber:@(score)] stringByAppendingString:@"points"];
+    [[Player playerWithName:@"Me" username:@"Me" score:formattedScore] save];
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7")) {
         GKScore *scoreReporter = [[GKScore alloc] initWithLeaderboardIdentifier: identifier];
         scoreReporter.value = score;
@@ -73,10 +77,10 @@ static NSString* const kFrankBoard = @"frank_board";
         }
         leaderboardRequest.range = NSMakeRange(1,10);
         [leaderboardRequest loadScoresWithCompletionHandler:^(NSArray *scores, NSError *error) {
-            if (error != nil) {
+            if (error) {
                 // Handle the error.
             }
-            if (scores != nil) {
+            if (scores) {
                 NSMutableArray* identifiers = [@[] mutableCopy];
                 for (GKScore* score in scores) {
                     [identifiers addObject:score.playerID];
@@ -85,7 +89,7 @@ static NSString* const kFrankBoard = @"frank_board";
                     if (players && players.count > 0) {
                         [Player purgeAllPlayers];
                         for (GKPlayer* currentPlayer in players) {
-                            NSNumber* score = [self getPlayerScoreFromScores:scores forPlayerID:currentPlayer.playerID];
+                            NSString* score = [self getPlayerScoreFromScores:scores forPlayerID:currentPlayer.playerID];
                             Player* player = [Player playerWithName:currentPlayer.displayName username:currentPlayer.alias score:score];
                             [player save];
                         }
@@ -96,14 +100,14 @@ static NSString* const kFrankBoard = @"frank_board";
     }
 }
 
-+ (NSNumber*)getPlayerScoreFromScores:(NSArray*)scores forPlayerID:(NSString*)playerID
++ (NSString*)getPlayerScoreFromScores:(NSArray*)scores forPlayerID:(NSString*)playerID
 {
     for (GKScore* score in scores) {
         if ([score.playerID isEqualToString:playerID]) {
-            return @(score.value);
+            return score.formattedValue;
         }
     }
-    return @(0);
+    return @"";
 }
 
 + (void)loadPlayerData:(NSArray*)identifiers withCompletionHandler:(void(^)(NSArray* players, NSError *error))completionHandler

@@ -12,6 +12,7 @@
 #import "CreditsLayer.h"
 #import "InstructionsLayer.h"
 #import "AppDelegate.h"
+#import "LeaderboardViewController.h"
 
 #pragma mark - MainMenuLayer
 
@@ -317,17 +318,13 @@
     }];
     
     CCMenuItem *itemLocalLeaderboard = [CCMenuItemFont itemWithString:@"Local Leaderboard" block:^(id sender) {
-        NSArray* allPlayers = [Player allPlayers];
-        NSMutableArray* playerUsernames = [@[] mutableCopy];
-        for (Player* player in allPlayers) {
-            [playerUsernames addObject:player.name];
-            [playerUsernames addObject:player.username];
-            [playerUsernames addObject:player.score];
-        }
-        NSString* players = [playerUsernames componentsJoinedByString:@", "];
-        [[[UIAlertView alloc] initWithTitle:@"Players" message:players delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
         
-#warning TODO: Implement a UI to show local players at this point
+        LeaderboardViewController* leaderboardVC = [[LeaderboardViewController alloc] initWithNibName:@"LeaderboardViewController" bundle:nil];
+        UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:leaderboardVC];
+        AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
+        [[app navController] presentViewController:navController animated:YES completion:nil];
+        [navController release];
+        [leaderboardVC release];
         
     }];
     

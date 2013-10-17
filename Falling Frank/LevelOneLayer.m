@@ -761,7 +761,8 @@ static const int FEET_TILL_GROUND = 1000;
     GKLeaderboard* frankBoard = [GameKitManager sharedInstance].frankboard;
     if (frankBoard) {
         int gameScore = [[[NSUserDefaults standardUserDefaults] objectForKey:kGameScoreKey] integerValue];
-        [GameKitManager reportScore:gameScore forLeaderboardID:frankBoard.identifier];
+        NSString* identifier = (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7")) ? frankBoard.identifier : frankBoard.category;
+        [GameKitManager reportScore:gameScore forLeaderboardID:identifier];
     }
     
     [self.menu addLabel:@"Next Level" withBlock:^(id sender) {

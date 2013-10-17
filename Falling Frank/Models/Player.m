@@ -47,7 +47,7 @@ NSString* const PLAYER_CREATED_AT = @"createdAt";
     return self;
 }
 
-- (instancetype)initWithName:(NSString*)name username:(NSString*)username score:(NSNumber*)score
+- (instancetype)initWithName:(NSString*)name username:(NSString*)username score:(NSString*)score
 {
     if (self = [super init]) {
         _name       = name;
@@ -60,7 +60,7 @@ NSString* const PLAYER_CREATED_AT = @"createdAt";
     return self;
 }
 
-+ (instancetype)playerWithName:(NSString*)name username:(NSString*)username score:(NSNumber*)score
++ (instancetype)playerWithName:(NSString*)name username:(NSString*)username score:(NSString*)score
 {
     if (!name || !username || !score) {
         return nil;
@@ -105,7 +105,7 @@ NSString* const PLAYER_CREATED_AT = @"createdAt";
 #pragma mark UPDATE
 #pragma mark -------------------
 
-- (void)updateName:(NSString*)name username:(NSString*)username score:(NSNumber*)score
+- (void)updateName:(NSString*)name username:(NSString*)username score:(NSString*)score
 {
     if (name) self.name = name;
     if (username) self.username = username;
