@@ -73,6 +73,9 @@ static NSString* const kLeaderBoardCellID = @"LeaderboardCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    Player* player = [self.scores objectAtIndex:indexPath.row];
+    UIActivityViewController* activityVC = [[UIActivityViewController alloc] initWithActivityItems:@[@"Check out my score in the iOS game Falling Frank", player.formattedScore] applicationActivities:nil];
+    [self presentViewController:activityVC animated:YES completion:nil];
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
