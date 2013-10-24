@@ -19,6 +19,8 @@ static const int GAME_SCORE_COLLECTED_POWER_UP  = 100;
 static const int GAME_SCORE_COMPLETED_LEVEL     = 500;
 static const int GAME_SCORE_PERFECT_LEVEL       = 1000;
 static const int TEMP_POWER_UP_SECONDS          = 10;
+static const float TOTAL_POWERUPS               = 5;
+static const int TOTAL_PERFECT_LEVEL_SCORE      = 100;
 
 static NSString* const kGameLivesKey = @"kGameLivesKey";
 static NSString* const kGameScoreKey = @"kGameScoreKey";

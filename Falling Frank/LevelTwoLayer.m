@@ -52,6 +52,7 @@ static const int FEET_TILL_GROUND = 10000;
 @property (nonatomic, assign) int ftTillGround;
 @property (nonatomic, assign) int scoreAtLevelStart;
 @property (nonatomic, assign) int livesAtLevelStart;
+@property (nonatomic, assign) int powerUpsCollected;
 @property (nonatomic, assign) float time;
 @property (nonatomic, assign) float powerUpTime;
 @property (nonatomic, assign) BOOL birdCollision;
@@ -765,6 +766,37 @@ static const int FEET_TILL_GROUND = 10000;
         NSString* identifier = (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7")) ? frankBoard.identifier : frankBoard.category;
         [GameKitManager reportScore:gameScore forLeaderboardID:identifier];
     }
+    
+    // Level 2 complete achievement
+    [GameKitManager reportAchievementIdentifier:kAchievementLevelTwoComplete percentComplete:100];
+    
+    // Power up ninja achievement
+    switch (self.powerUpsCollected) {
+        case 3:
+            [GameKitManager reportAchievementIdentifier:kAchievementPowerUpNinjaLevelThree percentComplete:100];
+            
+        case 2:
+            [GameKitManager reportAchievementIdentifier:kAchievementPowerUpNinjaLevelTwo percentComplete:100];
+            
+        case 1:
+            [GameKitManager reportAchievementIdentifier:kAchievementPowerUpNinjaLevelOne percentComplete:100];
+            
+        default:
+            break;
+    }
+    
+    // Bird magnet achievement
+    if (self.hitCount >= 5) {
+        [GameKitManager reportAchievementIdentifier:kAchievementBirdMagnet percentComplete:100];
+    }
+    
+    // Perfect level bonues achievement
+    if (self.hitCount == 0) {
+        float percent = (self.powerUpsCollected / TOTAL_POWERUPS) * 100;
+        percent = percent / TOTAL_PERFECT_LEVEL_SCORE;
+        [GameKitManager reportAchievementIdentifier:kAchievementPerfectLevelBonues percentComplete:percent];
+    }
+
     
 //    [self.menu addLabel:@"Next Level" withBlock:^(id sender) {
 //        [[SimpleAudioEngine sharedEngine] resumeBackgroundMusic];

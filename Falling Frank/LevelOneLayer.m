@@ -12,7 +12,7 @@
 #import "MainMenuLayer.h"
 #import "LevelTwoLayer.h"
 
-static const int FEET_TILL_GROUND = 1000;
+static const int FEET_TILL_GROUND = 8000;
 
 @interface LevelOneLayer()
 // Clouds 
@@ -52,6 +52,7 @@ static const int FEET_TILL_GROUND = 1000;
 @property (nonatomic, assign) int ftTillGround;
 @property (nonatomic, assign) int scoreAtLevelStart;
 @property (nonatomic, assign) int livesAtLevelStart;
+@property (nonatomic, assign) int powerUpsCollected;
 @property (nonatomic, assign) float time;
 @property (nonatomic, assign) float powerUpTime;
 @property (nonatomic, assign) BOOL birdCollision;
@@ -141,6 +142,7 @@ static const int FEET_TILL_GROUND = 1000;
         _touchEnabled        = YES;
         _time                = 0;
         _hitCount            = 0;
+        _powerUpsCollected   = 0;
         _ftTillGround        = FEET_TILL_GROUND;
         _birdCollision       = NO;
         _birdTwoCollision    = NO;
@@ -464,15 +466,15 @@ static const int FEET_TILL_GROUND = 1000;
         self.showBirdThree = YES;
     }
     
-    if (self.time == 35 || self.time == 90) {
+    if (self.time == 10 || self.time == 20) {
         [self showTempInvincibility];
     }
     
-    if (self.time == 65 || self.time == 130) {
+    if (self.time == 15 || self.time == 25) {
         [self showTempSlowMo];
     }
     
-    if (self.time == 91) {
+    if (self.time == 30) {
         [self showAddLife];
     }
 }
@@ -637,6 +639,7 @@ static const int FEET_TILL_GROUND = 1000;
     if (!self.addLifeCollision) {
         if (CGRectContainsRect(frankRect, self.addLife.boundingBox)) {
             self.addLifeCollision = YES;
+            ++self.powerUpsCollected;
             NSNumber* currentLives = [[NSUserDefaults standardUserDefaults] objectForKey:kGameLivesKey];
             [GameSettings addGameLives:[currentLives integerValue] + 1 forLabel:self.gameLivesCountLabel];
             [GameSettings addGameScore:GAME_SCORE_COLLECTED_POWER_UP forLabel:self.gameScoreLabel];
@@ -648,6 +651,7 @@ static const int FEET_TILL_GROUND = 1000;
     if (!self.tempSlowMoCollision) {
         if (CGRectContainsRect(frankRect, self.tempSlowMo.boundingBox)) {
             self.tempSlowMoCollision = YES;
+            ++self.powerUpsCollected;
             [self enableSlowMo];
         }
         self.tempSlowMoCollision = NO;
@@ -656,6 +660,7 @@ static const int FEET_TILL_GROUND = 1000;
     if (!self.tempInvincibilityCollision) {
         if (CGRectContainsRect(frankRect, self.tempInvincibility.boundingBox)) {
             self.tempInvincibilityCollision = YES;
+            ++self.powerUpsCollected;
             [self enableInvincibility];
         }
         self.tempInvincibilityCollision = NO;
@@ -764,6 +769,36 @@ static const int FEET_TILL_GROUND = 1000;
     if (frankBoard) {
         NSString* identifier = (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7")) ? frankBoard.identifier : frankBoard.category;
         [GameKitManager reportScore:gameScore forLeaderboardID:identifier];
+    }
+    
+    // Level 1 complete achievement
+    [GameKitManager reportAchievementIdentifier:kAchievementLevelOneComplete percentComplete:100];
+    
+    // Power up ninja achievement
+    switch (self.powerUpsCollected) {
+        case 3:
+            [GameKitManager reportAchievementIdentifier:kAchievementPowerUpNinjaLevelThree percentComplete:100];
+            
+        case 2:
+            [GameKitManager reportAchievementIdentifier:kAchievementPowerUpNinjaLevelTwo percentComplete:100];
+            
+        case 1:
+            [GameKitManager reportAchievementIdentifier:kAchievementPowerUpNinjaLevelOne percentComplete:100];
+            
+        default:
+            break;
+    }
+    
+    // Bird magnet achievement
+    if (self.hitCount >= 5) {
+        [GameKitManager reportAchievementIdentifier:kAchievementBirdMagnet percentComplete:100];
+    }
+    
+    // Perfect level bonues achievement
+    if (self.hitCount == 0) {
+        float percent = (self.powerUpsCollected / TOTAL_POWERUPS);
+        percent = (percent * 50) + 50;
+        [GameKitManager reportAchievementIdentifier:kAchievementPerfectLevelBonues percentComplete:percent];
     }
     
     [self.menu addLabel:@"Next Level" withBlock:^(id sender) {

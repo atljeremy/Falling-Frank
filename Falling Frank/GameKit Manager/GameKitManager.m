@@ -27,6 +27,8 @@ static NSString* const kFrankBoard = @"frank_board";
     return sharedManager;
 }
 
+#pragma mark - Authentication
+
 + (void)authenticateLocalPlayerWithAuthenticateBlock:(void(^)(UIViewController* viewController))authenticateBlock authenticatedBlock:(void(^)(GKLocalPlayer* localPlayer))authenticatedBlock
 {
     GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
@@ -38,6 +40,8 @@ static NSString* const kFrankBoard = @"frank_board";
         }
     };
 }
+
+#pragma mark - Leaderboards
 
 + (void)reportScore:(int64_t)score forLeaderboardID:(NSString*)identifier
 {
@@ -129,6 +133,21 @@ static NSString* const kFrankBoard = @"frank_board";
             }
         }
     }];
+}
+
+#pragma mark - Achievements
+
++ (void)reportAchievementIdentifier:(NSString*)identifier percentComplete:(float)percent
+{
+    GKAchievement *achievement = [[GKAchievement alloc] initWithIdentifier:identifier];
+    if (achievement) {
+        achievement.percentComplete = percent;
+        [achievement reportAchievementWithCompletionHandler:^(NSError *error) {
+             if (error) {
+                 NSLog(@"Error in reporting achievements: %@", error);
+             }
+         }];
+    }
 }
 
 @end
